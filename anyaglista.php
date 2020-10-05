@@ -10,7 +10,7 @@
   <div id="main">
     <main>
       <?php
-        require 'includes/dbh.inc.php';
+        require 'includes/dbh.inc.php'; 
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
             echo '<nav class="topnav">
@@ -19,12 +19,12 @@
                 <a href="projekt_anyaglista.php">Listázott anyagok</a>
                 <a href="osszehasonlitas.php">Összehasonlítás</a>
             </nav>
-            
+
             <p>A teljes alkatrész lista</p>
 
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Keresés..">';
 
-            $sql="SELECT * FROM alkatresz"; 
+            $sql="SELECT * FROM alkatresz";
             $sor=mysqli_query($conn, $sql);
 
             echo "<table id='AnyaglistaTable'>";
