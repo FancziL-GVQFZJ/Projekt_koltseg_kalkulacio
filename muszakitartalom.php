@@ -1,0 +1,57 @@
+<?php
+    $thisPage='Kalkulacioslap';
+    require "header.php";
+    session_start();
+?>
+<style><?php include 'css/navbar.css';?></style>
+<style><?php include 'css/table.css';?></style>
+
+<div id="container">
+  <div id="main">
+    <main>
+      <div>
+        <?php
+        require 'includes/dbh.inc.php';
+        //require 'includes/nyomtatas.inc.php';
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
+
+          $pid = $_SESSION['projektId'];
+          $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");
+          $row = mysqli_fetch_array($result);
+          $leiras=$row['tartalom'];?>
+
+          <nav class="topnav">
+            <ul>
+              <li><a href="munkadijkalkulacio.php">Munkadíj költség</a></li>
+              <li><a href="egyebkoltseg.php">Egyéb költség</a></li>
+              <li><a style="background-color: #ddd;" href="#">Műszaki tartalom</a></li>
+              <li><a href="kalkulacioslap.php">Kalkulációs Lap</a></li>
+              <li><a href="nyomtatasilap.php">Nyomtatási Lap</a></li>
+            </ul>
+          </nav>
+
+          <form method="post" action="includes/insertmt.inc.php">
+            <textarea id="mteditor" name="mteditor"><?php echo $leiras?></textarea>
+            <input type="submit" name="mtsubmit" value="Mentés">
+          </form>
+
+          <?php }
+        else {
+          echo '<p>You are logged out!</p>';
+        }
+        ?>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script type="text/javascript">
+ CKEDITOR.replace('mteditor',{
+   margin: "2%",
+ });
+
+</script>
+
+<?php
+    require "footer.php";
+?>

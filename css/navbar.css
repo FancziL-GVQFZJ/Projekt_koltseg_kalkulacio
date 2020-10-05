@@ -1,0 +1,148 @@
+* {box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body{
+  background: #F0FFF;
+  height: 100%;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #e9e9e9;
+  margin-bottom: 0px;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 17px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav p {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 17px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a.active {
+  background-color: #2196F3;
+  color: white;
+}
+
+.topnav .login-container  {
+  float: right;
+}
+
+.logout-container  {
+  float: right;
+}
+
+.topnav input {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+  width:140px;
+}
+
+.topnav .login-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background-color: #555;
+  color: white;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.logout-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background-color: #555;
+  color: white;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav .login-container button:hover {
+  background-color: green;
+}
+
+.logout-container button:hover {
+  background-color: green;
+}
+
+.topnav a:hover {
+  background-color: #dda;
+  color: black;
+}
+
+.topnav ul li a.selected {
+    background-color: #ddd;
+}
+
+.logout-container a:hover {
+  background-color: red;
+  color: black;
+}
+
+
+header {
+  background: #DCDCDC;
+}
+
+.logo {
+  float: left;
+  width: 20px;
+  display:block
+}
+
+nav ul {
+  margin:0;
+  padding:0;
+  list-style: none;
+}
+
+#container {
+  min-height: 95%;
+
+}
+
+#main {
+  overflow: auto;
+  padding-bottom: 100px;
+}
+
+#footer {
+  background-color: grey;
+  position: relative;
+  height: 50px;
+  margin-top: -50px;
+  clear: both;
+}
+
+.kezdolap:after {
+  display: table;
+  content: '';
+  clear: both;
+}
+
+.lap {
+  float: left;
+  width: 50%;
+}
