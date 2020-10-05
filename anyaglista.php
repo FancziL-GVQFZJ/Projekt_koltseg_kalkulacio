@@ -15,10 +15,11 @@
 
             echo '<nav class="topnav">
                 <a style="background-color: #ddd;" href="#">Villamos anyaglista</a>
-                <a href="belsoanyaglista.php">Belső villamos anyaglista</a> 
+                <a href="belsoanyaglista.php">Belső villamos anyaglista</a>
                 <a href="projekt_anyaglista.php">Listázott anyagok</a>
                 <a href="osszehasonlitas.php">Összehasonlítás</a>
             </nav>
+            
             <p>A teljes alkatrész lista</p>
 
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Keresés..">';
