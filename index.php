@@ -10,7 +10,7 @@
   <div id="main">
     <main>
       <?php
-        if (isset($_SESSION['userId'])) {
+        if (isset($_SESSION['userId'])) { 
           require 'includes/dbh.inc.php';
           echo '<nav class="topnav">
               <a style="background-color: #ddd;" href="#">Projektek</a>
@@ -59,7 +59,7 @@
 
                 <?php
                 echo "</tr>";
-              }              
+              }
               echo "</table>";
               ?>
               <form name="form1" action="includes/newprojekt.inc.php" method="post">
