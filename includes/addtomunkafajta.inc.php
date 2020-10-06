@@ -5,18 +5,18 @@ session_start();
 
 $pid = $_SESSION['projektId'];
 $megn = $_POST['name'];
-$szulo = $_POST['szulo'];
+$szulo = $_POST['csoport'];
 
-$sql = "SELECT * FROM munkafajta
-        WHERE Megnevezes = '$szulo' AND Mennyiseg IS NULL";
-$sor=mysqli_query($conn, $sql);
+// $sql = "SELECT * FROM munkafajta
+//         WHERE Megnevezes = '$szulo' AND Mennyiseg IS NULL";
+// $sor=mysqli_query($conn, $sql);
+//
+// $row=mysqli_fetch_array($sor);
+// $szulid=$row['Id'];
 
-$row=mysqli_fetch_array($sor);
-$szulid=$row['Id'];
 
 
-
-if (empty($szulo)) {
+if ($szulo == 0) {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO munkafajta (parent_id, project_id, Megnevezes, ME, Mennyiseg, munkadij_id)
                                               VALUES (NULL, '$pid','$megn','',NULL,2)");
@@ -29,11 +29,11 @@ if (empty($szulo)) {
 else {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO munkafajta (parent_id, project_id, Megnevezes, ME, Mennyiseg, munkadij_id)
-                                              VALUES ('$szulid', '$pid','$megn','',NULL,2)");
+                                              VALUES ('$szulo', '$pid','$megn','',NULL,2)");
   }
   else {
     $stmt = $conn->prepare("INSERT INTO munkafajta (parent_id, project_id, Megnevezes, ME, Mennyiseg, munkadij_id)
-                                              VALUES ('$szulid', '$pid','$megn','óra',1,2)");
+                                              VALUES ('$szulo', '$pid','$megn','óra',1,2)");
   }
 }
 

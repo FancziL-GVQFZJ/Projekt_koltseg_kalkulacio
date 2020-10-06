@@ -26,25 +26,36 @@
           </nav>
 
           <?php
-          echo "<select id='mv' name='munkavegzo' id='munkavegzo'>";
-          //$mf = mysqli_query($conn, "SELECT * FROM munkadij");
+          // echo "<select id='mv' name='munkavegzo' id='munkavegzo'>";
+          // $pid = $_SESSION['projektId'];
+          // $csoport = mysqli_query($conn,"SELECT * FROM munkafajta
+          //               WHERE project_id ='$pid' AND Mennyiseg IS NULL");
+          // echo "<option value='0' selected></option>";
+          // while ($row4 = $csoport->fetch_assoc()){ ?>
+          <!--    <option value="<?=$row4['Id'] ?> " > <?=$row4['Megnevezes'] ?></option> -->
+             <?php
+          // }
+          // echo "</select>";
+          //Csoport: <input type='text' name='csoport'>
+
           $pid = $_SESSION['projektId'];
           $csoport = mysqli_query($conn,"SELECT * FROM munkafajta
                         WHERE project_id ='$pid' AND Mennyiseg IS NULL");
-          //$row4=mysqli_fetch_array($munkadij);
-          echo "<option value='0' selected></option>";
-          while ($row4 = $csoport->fetch_assoc()){ ?>
-            <option value="<?=$row4['Id'] ?> " > <?=$row4['Megnevezes'] ?></option>
-            <?php
-          }
-          echo "</select>";
 
           echo "<p>Új adat felvétele</p>
           <form action='includes/addtomunkafajta.inc.php' method='post'>
-          Megnevezés: <input type='text' name='name'>
-          Csoport: <input type='text' name='szulo'>
-          Cím: <input type='checkbox' name='cim' value='value1'>
-          <input type='submit'>
+            Megnevezés: <input type='text' name='name'>
+
+            Csoport: <select name='csoport' id='csoport'>";
+            echo "<option value='0' selected>nincs</option>";
+            while ($row4 = $csoport->fetch_assoc()){ ?>
+              <option value="<?=$row4['Id'] ?> " > <?=$row4['Megnevezes'] ?></option>
+              <?php
+            }
+            echo "</select>
+
+            Cím: <input type='checkbox' name='cim' value='pipa'>
+            <input type='submit'>
           </form>";
 
           $mernokmido=0;
@@ -136,7 +147,8 @@ function show_children($parentID, $i, $depth=1){
     <tr id="<?php echo $row['Id']; ?>">
     <?php if ($row['Mennyiseg']==NULL) {
       echo "<td>".$row['Id']."</td>";
-      echo "<td></td><td><b>".str_repeat("&nbsp;", $depth * 5).$row['Megnevezes']."</b></td>";
+      echo "<td></td><td><b>".$row['Megnevezes']."</b></td>";
+      //.str_repeat("&nbsp;", $depth * 5).
       echo "<td></td><td></td><td></td><td></td>";?>
       <td id='del'><span class='deletemd' data-id='<?= $sorid; ?>'>Törlés</span></td>
       <?php echo "</tr>";
@@ -166,7 +178,8 @@ function show_children($parentID, $i, $depth=1){
       elseif ($row2['MunkaFajta']=='Műszerész'){
         $muszereszmido=$muszereszmido+$row['Mennyiseg'];
       }
-      echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['Megnevezes']."</td>";
+      echo "<td>".$row['Megnevezes']."</td>";
+      //.str_repeat("&nbsp;", $depth * 5).
       echo "<td>".$row["ME"]."</td>";
       echo "<td>".$row["Mennyiseg"]."</td>";
       echo "<td>".$row2["Oraber"]." Ft</td>";
