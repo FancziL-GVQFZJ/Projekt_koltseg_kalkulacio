@@ -13,8 +13,7 @@
       <div>
         <?php
         require 'includes/dbh.inc.php';
-        //require 'includes/nyomtatas.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) { ?> 
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) { ?>
           <nav class="topnav">
             <ul>
               <?php if ($jogosultsag == 'iras' || $jogosultsag == 'admin'){ ?>

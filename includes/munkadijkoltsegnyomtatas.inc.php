@@ -1,15 +1,10 @@
 <?php
 //call the FPDF library
 require ('../fpdf182/fpdf.php');
-//require ('../fpdf182/html_table.php');
-//require ('../fpdf182/TextNormalizerFPDF.php');
 
 //A4 width : 219mm
 //default margin : 10mm each side
 //writable horizontal : 219-(10*2)=189mm
-
-
-//require('../fpdf182/htmlparser.inc.php');
 
 class PDF extends FPDF
 {
@@ -50,7 +45,7 @@ $pdf->Cell(0 ,5,'Tárgy:',0,1,'L');//end of line
 $pdf->Cell(0 ,5,'Nyersvas keverő átépítés műszerszerelési és folyír. Munkái ',0,1,'C');//end of line
 
 //make a dummy empty cell as a vertical spacer
-$pdf->Cell(189 ,10,'',0,1);//end of line
+$pdf->Cell(189 ,5,'',0,1);//end of line
 
 $pdf->Cell(0 ,5,'Vállalkozó: IT Ig. Műszerszerelő és Mérlegkarbantartó üzem:',0,1,'L');//end of line
 
@@ -69,33 +64,33 @@ $rows=("SELECT * FROM munkafajta WHERE parent_id IS NULL AND project_id = '$pid'
 // Header starts ///
 //Second header column//
 
-$pdf->Cell($width_cell[0],10,'Megnevezés',1,0,'C');
+$pdf->Cell($width_cell[0],5,'Megnevezés',1,0,'C');
 //Fourth header column//
-$pdf->Cell($width_cell[1],10,'ME',1,0,'C');
+$pdf->Cell($width_cell[1],5,'ME',1,0,'C');
 //Third header column//
-$pdf->Cell($width_cell[2],10,'Mennyiség',1,0,'C');
-$pdf->Cell($width_cell[3],10,'Órabér',1,0,'C');
-$pdf->Cell($width_cell[4],10,'Összeg',1,1,'C');
+$pdf->Cell($width_cell[2],5,'Mennyiség',1,0,'C');
+$pdf->Cell($width_cell[3],5,'Órabér',1,0,'C');
+$pdf->Cell($width_cell[4],5,'Összeg',1,1,'C');
 
 $fill=false;
 foreach ($conn->query($rows) as $row){
-  $pdf->Cell($width_cell[0],10,$row['Megnevezes'],1,0,'L',$fill);
-  $pdf->Cell($width_cell[1],10,$row['ME'],1,0,'L',$fill);
-  $pdf->Cell($width_cell[2],10,$row['Mennyiseg'],1,0,'C',$fill);
-  $pdf->Cell($width_cell[3],10,'',1,0,'C',$fill);
-  $pdf->Cell($width_cell[4],10,'',1,1,'C',$fill);
+  $pdf->Cell($width_cell[0],5,$row['Megnevezes'],1,0,'L',$fill);
+  $pdf->Cell($width_cell[1],5,$row['ME'],1,0,'L',$fill);
+  $pdf->Cell($width_cell[2],5,$row['Mennyiseg'],1,0,'C',$fill);
+  $pdf->Cell($width_cell[3],5,'',1,0,'C',$fill);
+  $pdf->Cell($width_cell[4],5,'',1,1,'C',$fill);
   $arresz = show_children($row['Id']);
   $teljesar=$teljesar+$arresz;
 
 }
 
 
-$pdf->Cell(154,10,'Összesen:',1,0,'R',$fill);
-$pdf->Cell(35,10,$teljesar.' Ft',1,1,'C',$fill);
+$pdf->Cell(154,5,'Összesen:',1,0,'R',$fill);
+$pdf->Cell(35,5,$teljesar.' Ft',1,1,'C',$fill);
 
 
 //make a dummy empty cell as a vertical spacer
-$pdf->Cell(189 ,10,'',0,1);//end of line
+$pdf->Cell(189 ,5,'',0,1);//end of line
 
 $ma = date("Y.m.d");
 $pdf->Cell(0 ,5,$ma,0,1,'L');//end of line
@@ -128,7 +123,7 @@ function show_children($parentID, $depth=1){
     $sorid=$row['Id'];
 
     if ($row['Mennyiseg']==NULL) {
-      $pdf->Cell(189,10,str_repeat("&nbsp;", $depth * 5).$row['Megnevezes'],1,1,'L',$fill);
+      $pdf->Cell(189,5,str_repeat("&nbsp;", $depth * 5).$row['Megnevezes'],1,1,'L',$fill);
 
       $arresz = show_children($row['Id'], $depth+1);
       $osszegar=$osszegar+$arresz;
@@ -139,22 +134,22 @@ function show_children($parentID, $depth=1){
                     ON munkadij.Id = munkafajta.munkadij_id
                     WHERE munkafajta.Id ='$sorid'");
       $row2=mysqli_fetch_array($munkadij);
-      $pdf->Cell($width_cell[0],10,str_repeat(" ", $depth * 5).$row['Megnevezes'],1,0,'L',$fill);
-      $pdf->Cell($width_cell[1],10,$row['ME'],1,0,'C',$fill);
-      $pdf->Cell($width_cell[2],10,$row['Mennyiseg'],1,0,'C',$fill);
-      $pdf->Cell($width_cell[3],10,$row2['Oraber'],1,0,'C',$fill);
+      $pdf->Cell($width_cell[0],5,str_repeat(" ", $depth * 5).$row['Megnevezes'],1,0,'L',$fill);
+      $pdf->Cell($width_cell[1],5,$row['ME'],1,0,'C',$fill);
+      $pdf->Cell($width_cell[2],5,$row['Mennyiseg'],1,0,'C',$fill);
+      $pdf->Cell($width_cell[3],5,$row2['Oraber'],1,0,'C',$fill);
       if ($row['Mennyiseg']!=NULL) {
         $sorar=$row['Mennyiseg']*$row2['Oraber'];
-        $pdf->Cell($width_cell[4],10,$sorar.' Ft',1,1,'C',$fill);
+        $pdf->Cell($width_cell[4],5,$sorar.' Ft',1,1,'C',$fill);
         $osszegar=$osszegar+$sorar;
       }
       else {
-        $pdf->Cell($width_cell[4],10,'',1,1,'C',$fill);
+        $pdf->Cell($width_cell[4],5,'',1,1,'C',$fill);
       }
     }
     }
-    $pdf->Cell(154,10,'Összegzett ár:',1,0,'R',$fill);
-    $pdf->Cell(35,10,$osszegar. 'Ft',1,1,'C',$fill);
+    $pdf->Cell(154,5,'Összegzett ár:',1,0,'R',$fill);
+    $pdf->Cell(35,5,$osszegar. 'Ft',1,1,'C',$fill);
 
     return $osszegar;
 }
