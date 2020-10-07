@@ -25,35 +25,6 @@
               <li><a href="nyomtatasilap.php">Nyomtatási Lap</a></li>
             </ul>
           </nav>
-          <!-- <a href="#" class="btn btn-warning" id="print" onclick="printContent('nyomtatas')">Nyomtatás PDF-ben</a> -->
-
-          <!-- <p>Nyomtatási adatok</p> -->
-          <form action='includes/anyaglistanyomtatas.inc.php' method='post'><br>
-          <!-- Tárgy: <input type='text' name='name'> -->
-          Anyaglista
-          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
-          </form>
-          <form action='includes/munkadijkoltsegnyomtatas.inc.php' method='post'><br>
-          <!-- Tárgy: <input type='text' name='name'> -->
-          Munkadíj költség
-          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
-          </form>
-          <form action='includes/egyebkoltsegnyomtatas.inc.php' method='post'><br>
-          <!-- Tárgy: <input type='text' name='name'> -->
-          Egyéb költség
-          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
-          </form>
-          <form action='includes/muszakitartalomnyomtatas.inc.php' method='post'><br>
-          <!-- Tárgy: <input type='text' name='name'> -->
-          Műszaki tartalom
-          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
-          </form>
-          <form action='includes/nyomtatas.inc.php' method='post'><br>
-          <!-- Tárgy: <input type='text' name='name'> -->
-          Műszaki tartalom
-          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
-          </form>
-
 
           <?php
           $pid = $_SESSION['projektId'];
@@ -192,11 +163,7 @@
              echo '<div style="border:solid 1px #000"; id="mszt";>';
               echo htmlspecialchars_decode($leiras);
              echo "</div>";
-            echo "</div>";
-            ?>
-
-          <!-- <a href="#" class="btn btn-warning" id="print" onclick="printContent('nyomtatas')">Nyomtatás PDF-ben</a> -->
-         <?php
+            echo "</div>";           
 
         }
         else {

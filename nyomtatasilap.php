@@ -29,9 +29,6 @@
             </ul>
           </nav>
 
-          <!-- <a href="#" class="btn btn-warning" id="print" onclick="printContent('nyomtatas')">Nyomtatás PDF-ben</a> -->
-
-
           <p>Nyomtatási adatok</p>
           <form action='includes/nyomtatas.inc.php' method='post'><br>
           Tárgy: <input type='text' name='name'><br>
