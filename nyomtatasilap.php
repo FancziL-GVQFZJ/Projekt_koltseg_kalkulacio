@@ -12,7 +12,7 @@
       <div>
         <?php
         require 'includes/dbh.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) {
 
           $pid = $_SESSION['projektId'];
           $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");
@@ -31,19 +31,18 @@
 
           <!-- <a href="#" class="btn btn-warning" id="print" onclick="printContent('nyomtatas')">Nyomtatás PDF-ben</a> -->
 
-          <?php
 
-          echo "<p>Nyomtatási adatok</p>
+          <p>Nyomtatási adatok</p>
           <form action='includes/nyomtatas.inc.php' method='post'><br>
           Tárgy: <input type='text' name='name'><br>
-          <input type='checkbox' name='cim' value='value1'>Anyaglista<br>
-          <input type='checkbox' name='cim' value='value1'>Munkadíj költség<br>
-          <input type='checkbox' name='cim' value='value1'>Egyéb költség<br>
-          <input type='checkbox' name='cim' value='value1'>Műszaki tartalom<br>
-          <input type='submit' value='Nyomtatás'>
-          </form>";
+          <input type='checkbox' name='Anyaglista' value='1'>Anyaglista<br>
+          <input type='checkbox' name='Munkadíj' value='2'>Munkadíj költség<br>
+          <input type='checkbox' name='Egyéb' value='3'>Egyéb költség<br>
+          <input type='checkbox' name='Műszaki' value='4'>Műszaki tartalom<br>
+          <input type='submit' value='Nyomtatás'  onclick="$('form').attr('target', '_blank');">
+          </form>
 
-
+          <?php
 
         }
         else {

@@ -31,23 +31,29 @@
           <form action='includes/anyaglistanyomtatas.inc.php' method='post'><br>
           <!-- Tárgy: <input type='text' name='name'> -->
           Anyaglista
-          <input type='submit' value='Nyomtatás'>
+          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
           </form>
           <form action='includes/munkadijkoltsegnyomtatas.inc.php' method='post'><br>
           <!-- Tárgy: <input type='text' name='name'> -->
           Munkadíj költség
-          <input type='submit' value='Nyomtatás'>
+          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
           </form>
           <form action='includes/egyebkoltsegnyomtatas.inc.php' method='post'><br>
           <!-- Tárgy: <input type='text' name='name'> -->
           Egyéb költség
-          <input type='submit' value='Nyomtatás'>
+          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
           </form>
           <form action='includes/muszakitartalomnyomtatas.inc.php' method='post'><br>
           <!-- Tárgy: <input type='text' name='name'> -->
           Műszaki tartalom
-          <input type='submit' value='Nyomtatás'>
+          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
           </form>
+          <form action='includes/nyomtatas.inc.php' method='post'><br>
+          <!-- Tárgy: <input type='text' name='name'> -->
+          Műszaki tartalom
+          <input type='submit' value='Nyomtatás' onclick="$('form').attr('target', '_blank');">
+          </form>
+
 
           <?php
           $pid = $_SESSION['projektId'];
@@ -98,7 +104,8 @@
             echo  "</table>";
 
 
-
+            $mernokmido=0;
+            $muszereszmido=0;
 
             echo "<p style='font-size: large;'><b><u>Munkadíj költség</u></b></p>";
             echo "<table border=1; style='border-collapse: collapse;' id='Munkadijkalkulacio'>";
@@ -124,6 +131,18 @@
               $arresz = show_children($row['Id']);
               $teljesar=$teljesar+$arresz;
             }
+            echo  "<tr>";
+            echo  "<td align='left'>Mérnöki munkaidő:</td>";
+            echo  "<td>óra</td>";
+            echo  "<td align='left'>$mernokmido</td>";
+            echo  "<td></td><td></td>";
+            echo  "</tr>";
+            echo  "<tr>";
+            echo  "<td align='left'>Szerelői minkaidő:</td>";
+            echo  "<td>óra</td>";
+            echo  "<td align='left'>$muszereszmido</td>";
+            echo  "<td></td><td></td>";
+            echo  "</tr>";
             echo  "<tr>";
             echo  "<td></td>";
             echo  "<td colspan='3' align='right'>Teljes ár:</td>";
@@ -193,6 +212,8 @@
 
 function show_children($parentID, $depth=1){
   require 'includes/dbh.inc.php';
+  global $mernokmido,$muszereszmido;
+
   $children = mysqli_query($conn,"SELECT * FROM munkafajta WHERE parent_id=$parentID");
   /*$munkadij = mysqli_query($conn,"SELECT Oraber FROM munkadij
                 INNER JOIN munkafajta
@@ -213,11 +234,17 @@ function show_children($parentID, $depth=1){
       $osszegar=$osszegar+$arresz;
     }
     else {
-      $munkadij = mysqli_query($conn,"SELECT Oraber FROM munkadij
+      $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
                     INNER JOIN munkafajta
                     ON munkadij.Id = munkafajta.munkadij_id
                     WHERE munkafajta.Id ='$sorid'");
       $row2=mysqli_fetch_array($munkadij);
+      if ($row2['MunkaFajta']=='Mérnök') {
+        $mernokmido=$mernokmido+$row['Mennyiseg'];
+      }
+      elseif ($row2['MunkaFajta']=='Műszerész'){
+        $muszereszmido=$muszereszmido+$row['Mennyiseg'];
+      }
       echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['Megnevezes']."</td>";
       echo "<td>".$row["ME"]."</td>";
       echo "<td>".$row["Mennyiseg"]."</td>";
