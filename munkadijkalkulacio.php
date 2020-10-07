@@ -12,7 +12,6 @@
       <div>
         <?php
         require 'includes/dbh.inc.php';
-        //require 'includes/nyomtatas.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
           <nav class="topnav">
             <ul>
@@ -26,17 +25,6 @@
           </nav>
 
           <?php
-          // echo "<select id='mv' name='munkavegzo' id='munkavegzo'>";
-          // $pid = $_SESSION['projektId'];
-          // $csoport = mysqli_query($conn,"SELECT * FROM munkafajta
-          //               WHERE project_id ='$pid' AND Mennyiseg IS NULL");
-          // echo "<option value='0' selected></option>";
-          // while ($row4 = $csoport->fetch_assoc()){ ?>
-          <!--    <option value="<?=$row4['Id'] ?> " > <?=$row4['Megnevezes'] ?></option> -->
-             <?php
-          // }
-          // echo "</select>";
-          //Csoport: <input type='text' name='csoport'>
 
           $pid = $_SESSION['projektId'];
           $csoport = mysqli_query($conn,"SELECT * FROM munkafajta
@@ -130,11 +118,6 @@ function show_children($parentID, $i, $depth=1){
   global $mernokmido,$muszereszmido;
 
   $children = mysqli_query($conn,"SELECT * FROM munkafajta WHERE parent_id=$parentID");
-  /*$munkadij = mysqli_query($conn,"SELECT Oraber FROM munkadij
-                INNER JOIN munkafajta
-                ON munkadij.MunkaFajta = munkafajta.Megnevezes
-                WHERE munkafajta.Id ='$parentID'");
-  $row2=mysqli_fetch_array($munkadij);*/
   $totalrows = mysqli_num_rows($children);
   if ($totalrows > 1) {
     $i=1;

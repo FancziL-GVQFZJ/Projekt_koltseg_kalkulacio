@@ -12,12 +12,7 @@
       <div>
         <?php
         require 'includes/dbh.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) {
-
-          $pid = $_SESSION['projektId'];
-          $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");
-          $row = mysqli_fetch_array($result);
-          $leiras=$row['tartalom'];?>
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) { ?>
 
           <nav class="topnav">
             <ul>
@@ -29,13 +24,34 @@
             </ul>
           </nav>
 
+          <?php
+          $pid = $_SESSION['projektId'];
+          $checkRecord1 = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE projekt_id = '$pid'");
+          $totalrows1 = mysqli_num_rows($checkRecord1);
+          $checkRecord2 = mysqli_query($conn,"SELECT * FROM munkafajta WHERE project_id = '$pid'");
+          $totalrows2 = mysqli_num_rows($checkRecord2);
+          $checkRecord3 = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE project_id = '$pid'");
+          $totalrows3 = mysqli_num_rows($checkRecord3);
+          $checkRecord4 = mysqli_query($conn,"SELECT * FROM muszakitartalom WHERE projekt_id = '$pid'");
+          $totalrows4 = mysqli_num_rows($checkRecord4);
+          ?>
+
+
           <p>Nyomtatási adatok</p>
           <form action='includes/nyomtatas.inc.php' method='post'><br>
           Tárgy: <input type='text' name='name'><br>
-          <input type='checkbox' name='Anyaglista' value='1'>Anyaglista<br>
-          <input type='checkbox' name='Munkadíj' value='2'>Munkadíj költség<br>
-          <input type='checkbox' name='Egyéb' value='3'>Egyéb költség<br>
-          <input type='checkbox' name='Műszaki' value='4'>Műszaki tartalom<br>
+          <?php if ($totalrows1 > 0) { ?>
+            <input type='checkbox' name='Anyaglista' value='1'>Anyaglista<br>
+          <?php } ?>
+          <?php if ($totalrows2 > 0) { ?>
+            <input type='checkbox' name='Munkadíj' value='2'>Munkadíj költség<br>
+          <?php } ?>
+          <?php if ($totalrows3 > 0) { ?>
+            <input type='checkbox' name='Egyéb' value='3'>Egyéb költség<br>
+          <?php } ?>
+          <?php if ($totalrows4 > 0) { ?>
+            <input type='checkbox' name='Műszaki' value='4'>Műszaki tartalom<br>
+          <?php } ?>          
           <input type='submit' value='Nyomtatás'  onclick="$('form').attr('target', '_blank');">
           </form>
 

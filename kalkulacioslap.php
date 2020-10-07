@@ -38,43 +38,50 @@
 
           $sor=mysqli_query($conn, $sql);
 
+          $checkRecord1 = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE projekt_id = '$pid'");
+          $totalrows1 = mysqli_num_rows($checkRecord1);
 
-          echo "<div align= \"center\" id=\"nyomtatas\">";
-            echo "<p style='font-size: large;'><b><u>Villamos anyaglista</u></b></p>";
-            echo "<table border=1; style='border-collapse: collapse;' id='KosarTable'>";
-            echo "<tr class='fejlec'>";
-            echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
-            /*for($i=0;$i<10;$i++)
-            {
-              echo "<td>".mysqli_fetch_field_direct($sor, $i)->name."</td>";
-            }*/
-            echo "<td><p>ÁR összesen</p></td>";
-            $i=1;
-            while ($row=mysqli_fetch_array($sor))
-            {
-              $sorid=$row['alkatresz_id'];
-              echo "<tr>";
-              echo "<td>".$i."</td>";
-              echo "<td>".$row['Megnevezes']."</td>";
-              echo "<td>".$row['SAPSzam']."</td>";
-              echo "<td>".$row['ME']."</td>";
-              echo "<td>".$row['Egysegar']."</td>";
-              echo "<td>".$row['DBszam']."</td>";
-              $sorar=$row['Egysegar']*$row['DBszam'];
-              echo "<td>".$sorar."</td>";
-              $osszegar=$osszegar+$sorar;
-              echo "</tr>";
-              $i++;
+          if ($totalrows1 > 0) {
+            echo "<div align= \"center\" id=\"nyomtatas\">";
+              echo "<p style='font-size: large;'><b><u>Villamos anyaglista</u></b></p>";
+              echo "<table border=1; style='border-collapse: collapse;' id='KosarTable'>";
+              echo "<tr class='fejlec'>";
+              echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
+              /*for($i=0;$i<10;$i++)
+              {
+                echo "<td>".mysqli_fetch_field_direct($sor, $i)->name."</td>";
+              }*/
+              echo "<td><p>ÁR összesen</p></td>";
+              $i=1;
+              while ($row=mysqli_fetch_array($sor))
+              {
+                $sorid=$row['alkatresz_id'];
+                echo "<tr>";
+                echo "<td>".$i."</td>";
+                echo "<td>".$row['Megnevezes']."</td>";
+                echo "<td>".$row['SAPSzam']."</td>";
+                echo "<td>".$row['ME']."</td>";
+                echo "<td>".$row['Egysegar']."</td>";
+                echo "<td>".$row['DBszam']."</td>";
+                $sorar=$row['Egysegar']*$row['DBszam'];
+                echo "<td>".$sorar."</td>";
+                $osszegar=$osszegar+$sorar;
+                echo "</tr>";
+                $i++;
 
-            }
-            echo  "<tr>";
-            echo  "<td></td>";
-            echo  "<td colspan='5' align='right'>Teljes ár:</td>";
-            echo  "<td align='left'>$osszegar</td>";
-            echo  "</tr>";
-            echo  "</table>";
+              }
+              echo  "<tr>";
+              echo  "<td></td>";
+              echo  "<td colspan='5' align='right'>Teljes ár:</td>";
+              echo  "<td align='left'>$osszegar</td>";
+              echo  "</tr>";
+              echo  "</table>";
+          }
+          
+          $checkRecord2 = mysqli_query($conn,"SELECT * FROM munkafajta WHERE project_id = '$pid'");
+          $totalrows2 = mysqli_num_rows($checkRecord2);
 
-
+          if ($totalrows2 > 0) {
             $mernokmido=0;
             $muszereszmido=0;
 
@@ -82,9 +89,6 @@
             echo "<table border=1; style='border-collapse: collapse;' id='Munkadijkalkulacio'>";
             echo "<tr class='fejlec'>";
             echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
-
-
-            $pid = $_SESSION['projektId'];
             $query="SELECT * FROM munkafajta WHERE parent_id IS NULL AND project_id = '$pid'";
             $parents=mysqli_query($conn,$query);
 
@@ -126,9 +130,12 @@
             echo "<table border=1; style='border-collapse: collapse;' id='Egyebkoltsegkalkulacio'>";
             echo "<tr class='fejlec'>";
             echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
+          }
 
+          $checkRecord3 = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE project_id = '$pid'");
+          $totalrows3 = mysqli_num_rows($checkRecord3);
 
-            $pid = $_SESSION['projektId'];
+          if ($totalrows3 > 0) {
             $query="SELECT * FROM egyebkoltseg WHERE parent_id IS NULL AND project_id = '$pid'";
             $parents=mysqli_query($conn,$query);
 
@@ -153,9 +160,12 @@
             echo  "<td align='left'>$teljesar</td>";
             echo  "</tr>";
             print "</table>";
+          }
 
+          $checkRecord4 = mysqli_query($conn,"SELECT * FROM muszakitartalom WHERE projekt_id = '$pid'");
+          $totalrows4 = mysqli_num_rows($checkRecord4);
 
-            $pid = $_SESSION['projektId'];
+          if ($totalrows4 > 0) {
             $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");
             $row = mysqli_fetch_array($result);
             $leiras=$row['tartalom'];
@@ -163,8 +173,8 @@
              echo '<div style="border:solid 1px #000"; id="mszt";>';
               echo htmlspecialchars_decode($leiras);
              echo "</div>";
-            echo "</div>";           
-
+            echo "</div>";
+          }
         }
         else {
           echo '<p>You are logged out!</p>';
@@ -182,11 +192,6 @@ function show_children($parentID, $depth=1){
   global $mernokmido,$muszereszmido;
 
   $children = mysqli_query($conn,"SELECT * FROM munkafajta WHERE parent_id=$parentID");
-  /*$munkadij = mysqli_query($conn,"SELECT Oraber FROM munkadij
-                INNER JOIN munkafajta
-                ON munkadij.MunkaFajta = munkafajta.Megnevezes
-                WHERE munkafajta.Id ='$parentID'");
-  $row2=mysqli_fetch_array($munkadij);*/
 
   while ($row = mysqli_fetch_array($children)){
     $sorid=$row['Id'];?>

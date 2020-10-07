@@ -37,48 +37,45 @@ $pdf->SetFont('Arial','B',14);
 $pdf->Cell(0,5,'KALKULÁCIÓS ADATLAP',0,1,'C');
 
 //make a dummy empty cell as a vertical spacer
-$pdf->Cell(189 ,10,'',0,1);//end of line
+$pdf->Cell(189 ,5,'',0,1);//end of line
 
 //set font to arial, regular, 12pt
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',10);
 
 $pdf->Cell(0 ,5,'Tárgy:',0,1,'L');//end of line
 
+$pdf->SetFont('Arial','',12);
+
 $pdf->Cell(0 ,5,$focim,0,1,'C');//end of line
 
-//make a dummy empty cell as a vertical spacer
-$pdf->Cell(189 ,10,'',0,1);//end of line
+$pdf->SetFont('Arial','',10);
+
+$pdf->Cell(189 ,5,'',0,1);//end of line
 
 $pdf->Cell(0 ,5,'Vállalkozó: IT Ig. Műszerszerelő és Mérlegkarbantartó üzem:',0,1,'L');//end of line
 
-//make a dummy empty cell as a vertical spacer
-$pdf->Cell(189 ,5,'',0,1);//end of line
+$pdf->SetFont('Arial','',10);
 
 if (isset($_POST['Anyaglista'])) {
   printanyaglista();
+  $pdf->Cell(189 ,5,'',0,1);//end of line
 }
-
-$pdf->Cell(189 ,5,'',0,1);//end of line
 
 if (isset($_POST['Munkadíj'])) {
   printmunkadijkoltseg();
+  $pdf->Cell(189 ,5,'',0,1);//end of line
 }
-
-$pdf->Cell(189 ,5,'',0,1);//end of line
 
 if (isset($_POST['Egyéb'])) {
   printegyebkoltseg();
+  $pdf->Cell(189 ,5,'',0,1);//end of line
 }
-
-$pdf->Cell(189 ,5,'',0,1);//end of line
+$pdf->SetFont('Arial','',10);
 
 if (isset($_POST['Műszaki'])) {
   printmuszakitartalom();
 }
-
-//make a dummy empty cell as a vertical spacer
-$pdf->Cell(189 ,10,'',0,1);//end of line
-
+$pdf->Cell(189 ,5,'',0,1);//end of line
 $ma = date("Y.m.d");
 $pdf->Cell(0 ,5,$ma,0,1,'L');//end of line
 
