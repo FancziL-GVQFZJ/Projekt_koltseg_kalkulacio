@@ -37,7 +37,9 @@ if($id > 0){
     $successfullyCopied2 = $stmt->execute();
 
     require_once 'naplo.inc.php';
-    $szoveg = ("insert pa_kapcsolat alkatresz_id= ". $id ." DBszam= 1");
+    $query = mysqli_query($conn,"SELECT * FROM belsoalkatresz WHERE Id=".$id);
+    $row = mysqli_fetch_array($query);
+    $szoveg = ("insert pa_kapcsolat alkatresz= ". $row['Megnevezes'] ." DBszam= 1");
     naplozas($szoveg);
 
 

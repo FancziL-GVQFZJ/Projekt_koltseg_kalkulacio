@@ -18,6 +18,29 @@ class PDF extends PDF_HTML
 
     parent::Cell( $w, $h, iconv( 'UTF-8', 'ISO-8859-2', $t ), $b, $l, $a, $f, $y );
   }
+
+  function Header()
+  {
+    // Arial bold 15
+    $this->SetFont('Arial','B',15);
+    // Move to the right
+    $this->Cell(80);
+    // Title
+    $this->Cell(30,10,'KALKULÁCIÓS ADATLAP',0,0,'C');
+    // Line break
+    $this->Ln(20);
+  }
+
+// Page footer
+  function Footer()
+  {
+      // Position at 1.5 cm from bottom
+      $this->SetY(-15);
+      // Arial italic 8
+      $this->SetFont('Arial','I',8);
+      // Page number
+      $this->Cell(0,10,'oldal '.$this->PageNo().'/{nb}',0,0,'C');
+  }
 }
 
 session_start();
@@ -34,10 +57,10 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','B',14);
 
 //Cell(width , height , text , border , end line , [align] )
-$pdf->Cell(0,5,'KALKULÁCIÓS ADATLAP',0,1,'C');
+//$pdf->Cell(0,5,'KALKULÁCIÓS ADATLAP',0,1,'C');
 
 //make a dummy empty cell as a vertical spacer
-$pdf->Cell(189 ,5,'',0,1);//end of line
+//$pdf->Cell(189 ,5,'',0,1);//end of line
 
 //set font to arial, regular, 12pt
 $pdf->SetFont('Arial','',10);
@@ -76,11 +99,12 @@ if (isset($_POST['Műszaki'])) {
   printmuszakitartalom();
 }
 $pdf->Cell(189 ,5,'',0,1);//end of line
+
 $ma = date("Y.m.d");
 $pdf->Cell(0 ,5,$ma,0,1,'L');//end of line
 
-//make a dummy empty cell as a vertical spacer
-$pdf->Cell(189 ,10,'',0,1);//end of line
+//a lap tetejétől ekkor távolságban kezdődik
+$pdf->SetY(260);
 
 $pdf->Cell(9 ,5,'',0,0);
 $pdf->Cell(110 ,5,'......................................................................................',0,0);

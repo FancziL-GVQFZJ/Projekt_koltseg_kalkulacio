@@ -28,6 +28,10 @@ if ($input['action'] == 'edit') {
   if($update_field && $input['Id']) {
     $sql_query = "UPDATE munkafajta SET $update_field WHERE Id='" . $input['Id'] . "'";
     mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
+
+    require_once 'naplo.inc.php';
+    $szoveg = ("update munkafajta  ". $update_field ." ");
+    naplozas($szoveg);
   }
 }
 ?>

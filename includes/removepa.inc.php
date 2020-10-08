@@ -19,8 +19,11 @@ if($id > 0){
 
     $successfullyCopied = $stmt->execute();
 
+
     require_once 'naplo.inc.php';
-    $szoveg = ("delete pa_kapcsolat alkatresz_id= ". $id ." ");
+    $query = mysqli_query($conn,"SELECT * FROM belsoalkatresz WHERE Id=".$id);
+    $row = mysqli_fetch_array($query);
+    $szoveg = ("delete alkatrészlista  ". $row['Megnevezes'] ." ");
     naplozas($szoveg);
 
     if ($successfullyCopied) {

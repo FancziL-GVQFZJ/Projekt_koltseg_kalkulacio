@@ -17,6 +17,12 @@ if ($input['action'] == 'edit') {
   if($update_field && $input['alkatresz_id']) {
     $sql_query = "UPDATE pa_kapcsolat SET $update_field WHERE alkatresz_id='" . $input['alkatresz_id'] . "'";
     mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
+
+    require_once 'naplo.inc.php';
+    $query = mysqli_query($conn,"SELECT * FROM belsoalkatresz WHERE Id=".$input['alkatresz_id']);
+    $row = mysqli_fetch_array($query);
+    $szoveg = ("update pa_kapcsolat  ".$row['Megnevezes']." ". $update_field ." ");
+    naplozas($szoveg);
   }
 }
 ?>
