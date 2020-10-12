@@ -13,10 +13,13 @@
         if (isset($_SESSION['userId'])) {
           require 'includes/dbh.inc.php';
           echo '<nav class="topnav">
-              <a href="index.php">Projektek</a>
-              <a style="background-color: #ddd;" href="#">Jogosultságok</a>
-              <a href="naplo.php">Naplo</a>
-          </nav>';          
+            <ul>
+              <li><a href="index.php">Projektek</a></li>
+              <li><a style="background-color: #ddd;" href="#">Jogosultságok</a></li>
+              <li><a href="munkadijak.php">Munkadíjak</a></li>
+              <li><a href="naplo.php">Naplo</a></li>
+            </ul>
+          </nav>';
 
           echo "<div class='kezdolap'>";
             echo "<div class='lap'>";

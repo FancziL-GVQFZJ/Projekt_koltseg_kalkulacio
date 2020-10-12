@@ -11,12 +11,14 @@
     <main>
       <?php
       require 'includes/dbh.inc.php';
-        if (isset($_SESSION['userId'])) {
-
+        if (isset($_SESSION['userId'])) {          
           echo '<nav class="topnav">
-              <a href="index.php">Projektek</a>
-              <a href="jogosultsagok.php">Jogosultságok</a>
-              <a style="background-color: #ddd;" href="#">Naplo</a>
+            <ul>
+              <li><a href="index.php">Projektek</a></li>
+              <li><a href="jogosultsagok.php">Jogosultságok</a></li>
+              <li><a href="munkadijak.php">Munkadíjak</a></li>
+              <li><a style="background-color: #ddd;" href="#">Naplo</a></li>
+            </ul>
           </nav>';
 
           echo "<input type='date' name='dateFrom' value='date('Y-m-d')'/>";

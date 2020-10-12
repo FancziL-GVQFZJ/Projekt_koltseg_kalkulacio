@@ -40,9 +40,9 @@
 
           $checkRecord1 = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE projekt_id = '$pid'");
           $totalrows1 = mysqli_num_rows($checkRecord1);
+          //echo "<div align= \"center\" id=\"nyomtatas\">";
 
           if ($totalrows1 > 0) {
-            echo "<div align= \"center\" id=\"nyomtatas\">";
               echo "<p style='font-size: large;'><b><u>Villamos anyaglista</u></b></p>";
               echo "<table border=1; style='border-collapse: collapse;' id='KosarTable'>";
               echo "<tr class='fejlec'>";
@@ -77,7 +77,7 @@
               echo  "</tr>";
               echo  "</table>";
           }
-          
+
           $checkRecord2 = mysqli_query($conn,"SELECT * FROM munkafajta WHERE project_id = '$pid'");
           $totalrows2 = mysqli_num_rows($checkRecord2);
 
@@ -124,18 +124,18 @@
             echo  "<td align='left'>$teljesar</td>";
             echo  "</tr>";
             print "</table>";
-
-
-            echo "<p style='font-size: large;'><b><u>Egyéb költség</u></b></p>";
-            echo "<table border=1; style='border-collapse: collapse;' id='Egyebkoltsegkalkulacio'>";
-            echo "<tr class='fejlec'>";
-            echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
           }
+
 
           $checkRecord3 = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE project_id = '$pid'");
           $totalrows3 = mysqli_num_rows($checkRecord3);
 
           if ($totalrows3 > 0) {
+
+            echo "<p style='font-size: large;'><b><u>Egyéb költség</u></b></p>";
+            echo "<table border=1; style='border-collapse: collapse;' id='Egyebkoltsegkalkulacio'>";
+            echo "<tr class='fejlec'>";
+            echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
             $query="SELECT * FROM egyebkoltseg WHERE parent_id IS NULL AND project_id = '$pid'";
             $parents=mysqli_query($conn,$query);
 
@@ -173,8 +173,9 @@
              echo '<div style="border:solid 1px #000"; id="mszt";>';
               echo htmlspecialchars_decode($leiras);
              echo "</div>";
-            echo "</div>";
           }
+
+         echo "</div>";
         }
         else {
           echo '<p>You are logged out!</p>';

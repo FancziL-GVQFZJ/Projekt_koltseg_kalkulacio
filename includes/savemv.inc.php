@@ -11,12 +11,12 @@ if ($id>0 && $munkadijId>0) {
   $successfullyCopied = $stmt->execute();
 
   require_once 'naplo.inc.php';
-  $query = mysqli_query($conn,"SELECT * FROM munkadij WHERE Id=".$munkadijId);
+  $query = mysqli_query($conn,"SELECT * FROM projektmunkadij WHERE Munkadij_id='$munkadijId'");
   $row = mysqli_fetch_array($query);
 
-  $query2 = mysqli_query($conn,"SELECT * FROM munkafajta WHERE Id=".$id);
+  $query2 = mysqli_query($conn,"SELECT * FROM munkafajta WHERE Id='$id'");
   $row2 = mysqli_fetch_array($query2);
-  $szoveg = ("update munkafajta: ".$row2['Megnevezes']." to ".$row['MunkaFajta']."");
+  $szoveg = ("update munkafajta: ".$row2['Megnevezes']." to ".$row['pm_MunkaFajta']."");
   naplozas($szoveg);
 
   if ($successfullyCopied) {

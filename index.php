@@ -10,12 +10,16 @@
   <div id="main">
     <main>
       <?php
-        if (isset($_SESSION['userId'])) { 
+        if (isset($_SESSION['userId'])) {
           require 'includes/dbh.inc.php';
+
           echo '<nav class="topnav">
-              <a style="background-color: #ddd;" href="#">Projektek</a>
-              <a href="jogosultsagok.php">Jogosultságok</a>
-              <a href="naplo.php">Naplo</a>
+            <ul>
+              <li><a style="background-color: #ddd;" href="#">Projektek</a></li>
+              <li><a href="jogosultsagok.php">Jogosultságok</a></li>
+              <li><a href="munkadijak.php">Munkadíjak</a></li>
+              <li><a href="naplo.php">Naplo</a></li>
+            </ul>
           </nav>';
 
           echo "<div class='kezdolap'>";

@@ -15,8 +15,10 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
           echo '<nav class="topnav">
             <ul>
+              <li><a href="index.php">Projektek</a></li>
+              <li><a href="jogosultsagok.php">Jogosultságok</a></li>
               <li><a style="background-color: #ddd;" href="#">Munkadíjak</a></li>
-              <li><a href="munkadijkalkulacio.php">Munkadíj költség</a></li>
+              <li><a href="naplo.php">Naplo</a></li>
             </ul>
           </nav>';
 
@@ -32,8 +34,7 @@
           echo "<th>Id</th><th>Munkafajta</th><th>Órabér</th>";
 
           $pid = $_SESSION['projektId'];
-          $query="SELECT * FROM munkadij";
-          $dij=mysqli_query($conn,$query);
+          $dij=mysqli_query($conn,"SELECT * FROM munkadij");
 
           while ($row=mysqli_fetch_array($dij))
           {?>

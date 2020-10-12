@@ -15,7 +15,6 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
           <nav class="topnav">
             <ul>
-              <li><a href="munkadijak.php">Munkadíjak</a></li>
               <li><a style="background-color: #ddd;" href="#">Munkadíj költség</a></li>
               <li><a href="egyebkoltseg.php">Egyéb költség</a></li>
               <li><a href="muszakitartalom.php">Műszaki tartalom</a></li>
@@ -114,10 +113,10 @@
 <?php
 function show_children($parentID, $i, $depth=1){
   require 'includes/dbh.inc.php';
-
+  $pid = $_SESSION['projektId'];
   global $mernokmido,$muszereszmido;
 
-  $children = mysqli_query($conn,"SELECT * FROM munkafajta WHERE parent_id=$parentID");
+  $children = mysqli_query($conn,"SELECT * FROM munkafajta WHERE parent_id='$parentID'");
   $totalrows = mysqli_num_rows($children);
   if ($totalrows > 1) {
     $i=1;
@@ -140,34 +139,40 @@ function show_children($parentID, $i, $depth=1){
       $osszegkiiras = 1;
     }
     else {
-      $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
+      // $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
+      //               INNER JOIN munkafajta
+      //               ON munkadij.Id = munkafajta.munkadij_id
+      //               WHERE munkafajta.Id ='$sorid'");
+      // $row2=mysqli_fetch_array($munkadij);
+
+      $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
                     INNER JOIN munkafajta
-                    ON munkadij.Id = munkafajta.munkadij_id
-                    WHERE munkafajta.Id ='$sorid'");
+                    ON projektmunkadij.Munkadij_id = munkafajta.munkadij_id
+                    WHERE munkafajta.Id ='$sorid' AND projektmunkadij.Projekt_id='$pid'");
       $row2=mysqli_fetch_array($munkadij);
 
       echo "<td>".$row['Id']."</td>";
       echo "<td id='mv'><select name='munkavegzo' id='munkavegzo'>";
-      $mf = mysqli_query($conn, "SELECT * FROM munkadij");
+      $mf = mysqli_query($conn, "SELECT * FROM projektmunkadij WHERE Projekt_id = '$pid'");
       while ($row5 = $mf->fetch_assoc()){ ?>
-        <option value="<?=$row5['Id'] ?> " <?=$row5['Id'] == $row['munkadij_id'] ? ' selected="selected"' : '';?>> <?=$row5['MunkaFajta'] ?></option>
+        <option value="<?=$row5['Munkadij_id'] ?> " <?=$row5['Munkadij_id'] == $row['munkadij_id'] ? ' selected="selected"' : '';?>> <?=$row5['pm_MunkaFajta'] ?></option>
         <?php
 
        }
       echo "</select></td>";
-      if ($row2['MunkaFajta']=='Mérnök') {
+      if ($row2['pm_MunkaFajta']=='Mérnök') {
         $mernokmido=$mernokmido+$row['Mennyiseg'];
       }
-      elseif ($row2['MunkaFajta']=='Műszerész'){
+      elseif ($row2['pm_MunkaFajta']=='Műszerész'){
         $muszereszmido=$muszereszmido+$row['Mennyiseg'];
       }
       echo "<td>".$row['Megnevezes']."</td>";
       //.str_repeat("&nbsp;", $depth * 5).
       echo "<td>".$row["ME"]."</td>";
       echo "<td>".$row["Mennyiseg"]."</td>";
-      echo "<td>".$row2["Oraber"]." Ft</td>";
+      echo "<td>".$row2["pm_Oraber"]." Ft</td>";
       if ($row['Mennyiseg']!=NULL) {
-        $sorar=$row['Mennyiseg']*$row2['Oraber'];
+        $sorar=$row['Mennyiseg']*$row2['pm_Oraber'];
         echo "<td>".$sorar." Ft</td>";
         $osszegar=$osszegar+$sorar;
       }
@@ -219,6 +224,7 @@ $('td#mv').on('change', function() {
       {
         if(response == 1){
           alert('Sikeres változtatás.');
+          window.location.reload();
         }else if(response == 0){
             alert('Nem megfelelő id.');
         }else{
