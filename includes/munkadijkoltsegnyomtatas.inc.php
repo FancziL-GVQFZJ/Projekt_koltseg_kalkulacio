@@ -16,7 +16,8 @@ function printmunkadijkoltseg(){
 
   $pdf->SetFont('Arial','',10);
   $rows=("SELECT * FROM munkafajta WHERE parent_id IS NULL AND project_id = '$pid'");
-  $totalrows = mysqli_num_rows($rows);
+  $query=mysqli_query($conn,$rows);
+  $totalrows = mysqli_num_rows($query);
   if ($totalrows > 1) {
     $i=1;
   }else {
@@ -83,6 +84,7 @@ function show_children($parentID, $i, $depth=1){
       $osszegkiiras = 1;
     }
     else {
+      $osszegkiiras = 0;
       $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
                     INNER JOIN munkafajta
                     ON projektmunkadij.Munkadij_id = munkafajta.munkadij_id
@@ -106,7 +108,7 @@ function show_children($parentID, $i, $depth=1){
           $muszereszmido=$muszereszmido+$row['Mennyiseg'];
         }
       }
-      $osszegkiiras = 0;
+
     }
     }
     if ($osszegkiiras == 0 && $i == 1) {
