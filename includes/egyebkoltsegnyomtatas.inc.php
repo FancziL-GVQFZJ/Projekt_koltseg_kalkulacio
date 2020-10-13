@@ -6,7 +6,7 @@ function printegyebkoltseg(){
   $pid = $_SESSION['projektId'];
   $cellaszelesseg=array(84,30,20,20,35);
   $cellamagassag=5;
-  
+
   $pdf->Cell(0 ,5,'3.Egyéb költség:',0,1,'L');
   //$pdf->Cell(59 ,5,'',0,1);//end of line
 
@@ -53,7 +53,7 @@ function show_children2($parentID, $depth=1){
     $sorid=$row['Id'];
 
     if ($row['Mennyiseg']==NULL) {
-      $pdf->Cell(189,$cellamagassag,str_repeat("&nbsp;", $depth * 5).$row['Megnevezes'],1,1,'L',$fill);
+      $pdf->Cell(189,$cellamagassag,str_repeat(" ", $depth * 5).$row['Megnevezes'],1,1,'L',$fill);
 
       $arresz = show_children($row['Id'], $depth+1);
       $osszegar=$osszegar+$arresz;

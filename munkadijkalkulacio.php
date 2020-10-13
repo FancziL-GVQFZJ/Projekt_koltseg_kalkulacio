@@ -117,34 +117,28 @@ function show_children($parentID, $i, $depth=1){
   global $mernokmido,$muszereszmido;
 
   $children = mysqli_query($conn,"SELECT * FROM munkafajta WHERE parent_id='$parentID'");
-  $totalrows = mysqli_num_rows($children);
-  if ($totalrows > 1) {
-    $i=1;
-  }else {
-    $i=0;
-  }
 
   while ($row = mysqli_fetch_array($children)){
     $sorid=$row['Id'];?>
     <tr id="<?php echo $row['Id']; ?>">
-    <?php if ($row['Mennyiseg']==NULL) {
+    <?php
+    if ($row['Mennyiseg']==NULL) {
       echo "<td>".$row['Id']."</td>";
       echo "<td></td><td><b>".$row['Megnevezes']."</b></td>";
-      //.str_repeat("&nbsp;", $depth * 5).
       echo "<td></td><td></td><td></td><td></td>";?>
       <td id='del'><span class='deletemd' data-id='<?= $sorid; ?>'>Törlés</span></td>
       <?php echo "</tr>";
+      $totalrows = mysqli_num_rows($children);
+      if ($totalrows > 1) {
+        $i=1;
+      }else {
+        $i=0;
+      }
       $arresz = show_children($row['Id'], $i, $depth+1);
       $osszegar=$osszegar+$arresz;
       $osszegkiiras = 1;
     }
     else {
-      // $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
-      //               INNER JOIN munkafajta
-      //               ON munkadij.Id = munkafajta.munkadij_id
-      //               WHERE munkafajta.Id ='$sorid'");
-      // $row2=mysqli_fetch_array($munkadij);
-
       $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
                     INNER JOIN munkafajta
                     ON projektmunkadij.Munkadij_id = munkafajta.munkadij_id
@@ -160,14 +154,13 @@ function show_children($parentID, $i, $depth=1){
 
        }
       echo "</select></td>";
-      if ($row2['pm_MunkaFajta']=='Mérnök') {
+      if ($row2['Munkadij_id']==1) {
         $mernokmido=$mernokmido+$row['Mennyiseg'];
       }
-      elseif ($row2['pm_MunkaFajta']=='Műszerész'){
+      elseif ($row2['Munkadij_id']==2){
         $muszereszmido=$muszereszmido+$row['Mennyiseg'];
       }
       echo "<td>".$row['Megnevezes']."</td>";
-      //.str_repeat("&nbsp;", $depth * 5).
       echo "<td>".$row["ME"]."</td>";
       echo "<td>".$row["Mennyiseg"]."</td>";
       echo "<td>".$row2["pm_Oraber"]." Ft</td>";

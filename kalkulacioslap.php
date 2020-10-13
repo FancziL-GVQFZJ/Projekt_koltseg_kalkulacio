@@ -38,11 +38,11 @@
 
           $sor=mysqli_query($conn, $sql);
 
-          $checkRecord1 = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE projekt_id = '$pid'");
-          $totalrows1 = mysqli_num_rows($checkRecord1);
-          //echo "<div align= \"center\" id=\"nyomtatas\">";
+          echo "<div align= \"center\" id=\"nyomtatas\">";
+            $checkRecord1 = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE projekt_id = '$pid'");
+            $totalrows1 = mysqli_num_rows($checkRecord1);
 
-          if ($totalrows1 > 0) {
+            if ($totalrows1 > 0) {
               echo "<p style='font-size: large;'><b><u>Villamos anyaglista</u></b></p>";
               echo "<table border=1; style='border-collapse: collapse;' id='KosarTable'>";
               echo "<tr class='fejlec'>";
@@ -91,6 +91,12 @@
             echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
             $query="SELECT * FROM munkafajta WHERE parent_id IS NULL AND project_id = '$pid'";
             $parents=mysqli_query($conn,$query);
+            $totalrows = mysqli_num_rows($parents);
+            if ($totalrows > 1) {
+              $i=1;
+            }else {
+              $i=0;
+            }
 
             while ($row=mysqli_fetch_array($parents))
             {?>
@@ -103,7 +109,7 @@
               $sorid=$row['Id'];?>
               </tr>
               <?php
-              $arresz = show_children($row['Id']);
+              $arresz = show_children($row['Id'], $i);
               $teljesar=$teljesar+$arresz;
             }
             echo  "<tr>";
@@ -141,7 +147,6 @@
 
             while ($row=mysqli_fetch_array($parents))
             { ?>
-
               <tr>
               <?php
               echo "<td><b>".$row['Megnevezes']."</b></td>";
@@ -188,9 +193,10 @@
 </div>
 <?php
 
-function show_children($parentID, $depth=1){
+function show_children($parentID, $i, $depth=1){
   require 'includes/dbh.inc.php';
   global $mernokmido,$muszereszmido;
+  $pid = $_SESSION['projektId'];
 
   $children = mysqli_query($conn,"SELECT * FROM munkafajta WHERE parent_id=$parentID");
 
@@ -200,30 +206,41 @@ function show_children($parentID, $depth=1){
     <?php if ($row['Mennyiseg']==NULL) {
 
       echo "<td><b>".str_repeat("&nbsp;", $depth * 5).$row['Megnevezes']."</b></td>";
-      echo "<td></td><td></td><td></td><td></td>";?>
-
-      <?php echo "</tr>";
-      $arresz = show_children($row['Id'], $depth+1);
+      echo "<td></td><td></td><td></td><td></td>";
+      echo "</tr>";
+      $totalrows = mysqli_num_rows($children);
+      if ($totalrows > 1) {
+        $i=1;
+      }else {
+        $i=0;
+      }
+      $arresz = show_children($row['Id'], $i, $depth+1);
       $osszegar=$osszegar+$arresz;
+      $osszegkiiras = 1;
     }
     else {
-      $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
+      // $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
+      //               INNER JOIN munkafajta
+      //               ON munkadij.Id = munkafajta.munkadij_id
+      //               WHERE munkafajta.Id ='$sorid'");
+      // $row2=mysqli_fetch_array($munkadij);
+      $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
                     INNER JOIN munkafajta
-                    ON munkadij.Id = munkafajta.munkadij_id
-                    WHERE munkafajta.Id ='$sorid'");
+                    ON projektmunkadij.Munkadij_id = munkafajta.munkadij_id
+                    WHERE munkafajta.Id ='$sorid' AND projektmunkadij.Projekt_id='$pid'");
       $row2=mysqli_fetch_array($munkadij);
-      if ($row2['MunkaFajta']=='Mérnök') {
+      if ($row2['Munkadij_id']==1) {
         $mernokmido=$mernokmido+$row['Mennyiseg'];
       }
-      elseif ($row2['MunkaFajta']=='Műszerész'){
+      elseif ($row2['Munkadij_id']==2){
         $muszereszmido=$muszereszmido+$row['Mennyiseg'];
       }
       echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['Megnevezes']."</td>";
       echo "<td>".$row["ME"]."</td>";
       echo "<td>".$row["Mennyiseg"]."</td>";
-      echo "<td>".$row2["Oraber"]."</td>";
+      echo "<td>".$row2["pm_Oraber"]."</td>";
       if ($row['Mennyiseg']!=NULL) {
-        $sorar=$row['Mennyiseg']*$row2['Oraber'];
+        $sorar=$row['Mennyiseg']*$row2['pm_Oraber'];
         echo "<td>".$sorar."</td>";
         $osszegar=$osszegar+$sorar;
       }
@@ -231,14 +248,16 @@ function show_children($parentID, $depth=1){
         echo "<td></td>";
       }
       echo "</tr>";
+      $osszegkiiras = 0;
     }
   }
-
-  echo  "<tr>";
-  echo  "<td></td>";
-  echo  "<td colspan='3' align='right'>Összegzett ár:</td>";
-  echo  "<td align='left'>$osszegar</td>";
-  echo  "</tr>";
+  if ($osszegkiiras == 0 && $i == 1) {
+    echo  "<tr>";
+    echo  "<td></td>";
+    echo  "<td colspan='3' align='right'>Összegzett ár:</td>";
+    echo  "<td align='left'>$osszegar</td>";
+    echo  "</tr>";
+  }
   return $osszegar;
 }
 

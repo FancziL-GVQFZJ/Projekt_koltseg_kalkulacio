@@ -44,7 +44,10 @@ class PDF extends PDF_HTML
 }
 
 session_start();
-
+$cellaszelesseg=array(84,30,20,20,35);
+$cellamagassag=5;
+$mernokmido=0;
+$muszereszmido=0;
 
 $focim = 'Nyersvas keverő átépítés műszerszerelési és folyír. Munkái ';
 
