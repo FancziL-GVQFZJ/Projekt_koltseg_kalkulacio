@@ -9,6 +9,7 @@ function printmuszakitartalom(){
   $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");
   $row = mysqli_fetch_array($result);
   $str=$row['tartalom'];
+  $str = str_replace(['<p>', '</p>'], ['', '<br>'], $str);
 
   $pdf->WriteHTML($str);
 }

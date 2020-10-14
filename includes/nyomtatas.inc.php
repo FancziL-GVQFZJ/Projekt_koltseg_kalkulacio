@@ -35,11 +35,22 @@ class PDF extends PDF_HTML
   function Footer()
   {
       // Position at 1.5 cm from bottom
-      $this->SetY(-15);
+      $this->SetY(-20);
+
+      $this->Cell(9 ,5,'',0,0);
+      $this->Cell(110 ,5,'......................................................................................',0,0);
+      $this->Cell(70 ,5,'........................................................',0,1);
+
+      $this->Cell(39 ,5,'',0,0);
+      $this->Cell(80 ,5,'Üzemvezető',0,0);
+      $this->Cell(20 ,5,'',0,0);
+      $this->Cell(60 ,5,'IT Főmérnök',0,1);
+
+
       // Arial italic 8
-      $this->SetFont('Arial','I',8);
+      //$this->SetFont('Arial','I',8);
       // Page number
-      $this->Cell(0,10,'oldal '.$this->PageNo().'/{nb}',0,0,'C');
+      //$this->Cell(0,10,'oldal '.$this->PageNo().'/{nb}',0,0,'C');
   }
 }
 
@@ -109,14 +120,6 @@ $pdf->Cell(0 ,5,$ma,0,1,'L');//end of line
 //a lap tetejétől ekkor távolságban kezdődik
 $pdf->SetY(260);
 
-$pdf->Cell(9 ,5,'',0,0);
-$pdf->Cell(110 ,5,'......................................................................................',0,0);
-$pdf->Cell(70 ,5,'........................................................',0,1);
-
-$pdf->Cell(39 ,5,'',0,0);
-$pdf->Cell(80 ,5,'Üzemvezető',0,0);
-$pdf->Cell(20 ,5,'',0,0);
-$pdf->Cell(60 ,5,'IT Főmérnök',0,1);
 
 $pdf->Output();
 

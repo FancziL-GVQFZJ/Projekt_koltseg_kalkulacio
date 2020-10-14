@@ -90,7 +90,7 @@ $(document).ready(function(){
     editable: [[6, 'DBszam']]
   },
   hideIdentifier: true,
-  url: '../includes/live_edit.inc.php',
+  url: 'includes/live_edit.inc.php',
   onAlways: function() {location.reload()}
 });
 });

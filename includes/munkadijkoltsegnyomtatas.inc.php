@@ -101,22 +101,19 @@ function show_children($parentID, $i, $depth=1){
       }
       else {
         $pdf->Cell($cellaszelesseg[4],$cellamagassag,'',1,1,'C',$fill);
-        if ($row2['Munkadij_id']==1) {
-          $mernokmido=$mernokmido+$row['Mennyiseg'];
-        }
-        elseif ($row2['Munkadij_id']==2){
-          $muszereszmido=$muszereszmido+$row['Mennyiseg'];
-        }
       }
-
+      if ($row2['Munkadij_id']==1) {
+        $mernokmido=$mernokmido+$row['Mennyiseg'];
+      }
+      elseif ($row2['Munkadij_id']==2){
+        $muszereszmido=$muszereszmido+$row['Mennyiseg'];
+      }
     }
     }
-    if ($osszegkiiras == 0 && $i == 1) {
+    if ($osszegkiiras == 0 && $i == 1) {      
       $pdf->Cell(154,$cellamagassag,'Összegzett ár:',1,0,'R',$fill);
       $pdf->Cell(35,$cellamagassag,$osszegar. 'Ft',1,1,'C',$fill);
     }
-
-
     return $osszegar;
 }
 ?>
