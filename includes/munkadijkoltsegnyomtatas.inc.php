@@ -80,11 +80,9 @@ function show_children($parentID, $i, $depth=1){
         $i=0;
       }
       $arresz = show_children($row['Id'], $i, $depth+1);
-      $osszegar=$osszegar+$arresz;
-      $osszegkiiras = 1;
+      $osszegar=$osszegar+$arresz;      $osszegkiiras = 1;
     }
     else {
-      $osszegkiiras = 0;
       $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
                     INNER JOIN munkafajta
                     ON projektmunkadij.Munkadij_id = munkafajta.munkadij_id
@@ -110,7 +108,7 @@ function show_children($parentID, $i, $depth=1){
       }
     }
     }
-    if ($osszegkiiras == 0 && $i == 1) {      
+    if ($i == 1) {
       $pdf->Cell(154,$cellamagassag,'Összegzett ár:',1,0,'R',$fill);
       $pdf->Cell(35,$cellamagassag,$osszegar. 'Ft',1,1,'C',$fill);
     }

@@ -216,7 +216,6 @@ function show_children($parentID, $i, $depth=1){
       }
       $arresz = show_children($row['Id'], $i, $depth+1);
       $osszegar=$osszegar+$arresz;
-      $osszegkiiras = 1;
     }
     else {
       // $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
@@ -248,10 +247,9 @@ function show_children($parentID, $i, $depth=1){
         echo "<td></td>";
       }
       echo "</tr>";
-      $osszegkiiras = 0;
     }
   }
-  if ($osszegkiiras == 0 && $i == 1) {
+  if ($i == 1) {
     echo  "<tr>";
     echo  "<td></td>";
     echo  "<td colspan='3' align='right'>Összegzett ár:</td>";

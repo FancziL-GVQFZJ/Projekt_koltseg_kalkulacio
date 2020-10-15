@@ -19,6 +19,7 @@
         <script src="/Projekt_koltseg_kalkulacio/js/filter_table.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/js/jquery-3.5.1.js"></script>
+        <script src="/Projekt_koltseg_kalkulacio/js/addmunka.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/ckeditor/ckeditor.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/ckeditor/ckeditor.js"></script>
         <title>Title</title>

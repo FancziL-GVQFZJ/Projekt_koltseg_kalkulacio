@@ -12,6 +12,7 @@
       <?php
         if (isset($_SESSION['userId'])) {
           require 'includes/dbh.inc.php';
+          $fid = $_SESSION['userId'];
 
           echo '<nav class="topnav">
             <ul>
@@ -26,14 +27,12 @@
             echo "<div class='lap'>";
               echo '<p>Projektjeid:</p>';
 
-              $fid = $_SESSION['userId'];
               $sql = "SELECT idProjekt, projektNev FROM projekt
                     INNER JOIN pf_kapcsolat
                       ON projekt.idProjekt = pf_kapcsolat.projektId
                     INNER JOIN users
                       ON pf_kapcsolat.userId = users.idUsers
                       WHERE users.idUsers = $fid";
-
               $sor=mysqli_query($conn, $sql);
 
               echo "<table id='AnyaglistaTable'>";
@@ -45,63 +44,54 @@
                 $pnev=$row['projektNev'];
                 echo "<tr>";
                 echo "<td>".$row['idProjekt']."</td>";
-                echo "<td>".$row['projektNev']."</td>";
-                ?>
-                <!-- <form action="includes/projektstart.inc.php" method="post">
-                <input type="hidden" name="projektid" value="<?php //echo htmlentities($pid); ?>">
-                <input type="hidden" name="projektnev" value="<?php //echo htmlentities($pnev); ?>">
-                <button type="submit" name="projektstart">Indítás</button>
-                </form> -->
+                echo "<td>".$row['projektNev']."</td>"; ?>
                 <td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Indítás</span></td>
-
-
-                <!-- <form action="includes/projektdelete.inc.php" method="post">
-                <input type="hidden" name="projektid" value="<?php //echo htmlentities($pid); ?>">
-                <button type="submit" name="projektdel">Törlés</button>
-                </form> -->
-                <td id='del'><span class='deleteprojekt' data-id='<?= $pid; ?>'>Törlés</span></td>
-
-                <?php
+                <td id='del'><span class='deleteprojekt' data-id='<?= $pid; ?>'>Törlés</span></td> <?php
                 echo "</tr>";
               }
-              echo "</table>";
-              ?>
+              echo "</table>"; ?>
               <form name="form1" action="includes/newprojekt.inc.php" method="post">
               <input type="hidden" name="projektnev" value="">
               <button type="submit" name="newprojekt" onclick="projektNevMegadas()">Új projekt létrehozása</button>
-              </form>
-              <?php
+              </form> <?php
             echo "</div>";
 
             echo "<div class='lap'>";
               echo '<p>Veled megosztott projektek:</p>';
 
-              $fid = $_SESSION['userId'];
-              $sql = "SELECT idProjekt, projektNev FROM projekt
-                    INNER JOIN jogosultsag
-                      ON projekt.idProjekt = jogosultsag.projekt_id
-                      WHERE jogosultsag.user_id = $fid";
+              $sql=mysqli_query($conn,"SELECT * FROM projekt
+                        INNER JOIN jogosultsag
+                          ON projekt.idProjekt = jogosultsag.projekt_id
+                          WHERE jogosultsag.user_id = '$fid'");
 
-              $sor=mysqli_query($conn, $sql);
 
               echo "<table id='AnyaglistaTable'>";
-              echo "<th>Id</th><th>Nev</th>";
+              echo "<th>Tulajdonos</th><th>Jogosultságom</th><th>Projektnév</th>";
               echo "<tr>";
-              while ($row=mysqli_fetch_array($sor))
+              while ($row=mysqli_fetch_array($sql))
               {
                 $pid=$row['idProjekt'];
-                $pnev=$row['projektNev'];
+
+                if ($row['iras'] == 1 ) {
+                  $jogosultsag = "iras";
+                }
+                elseif ($row['iras'] == 0 && $row['olvasas'] == 1) {
+                  $jogosultsag = "olvasas";
+                }
+
+                $sql1=mysqli_query($conn,"SELECT * FROM users
+                        INNER JOIN pf_kapcsolat
+                          ON users.idUsers = pf_kapcsolat.userId
+                        INNER JOIN projekt
+                          ON pf_kapcsolat.projektId = projekt.idProjekt
+                            WHERE projekt.idProjekt = '$pid'");
+                $row1=mysqli_fetch_array($sql1);
+
                 echo "<tr>";
-                echo "<td>".$row['idProjekt']."</td>";
-                echo "<td>".$row['projektNev']."</td>";
-                ?>
-                <td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Indítás</span></td>
-                <!-- <form action="includes/projektstart.inc.php" method="post">
-                <input type="hidden" name="projektid" value="<?php //echo htmlentities($pid); ?>">
-                <input type="hidden" name="projektnev" value="<?php //echo htmlentities($pnev); ?>">
-                <button type="submit" name="projektstart">Indítás</button>
-                </form> -->
-                <?php
+                echo "<td>".$row1['uidUsers']."</td>";
+                echo "<td>".$jogosultsag."</td>";
+                echo "<td>".$row['projektNev']."</td>"; ?>
+                <td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Indítás</span></td> <?php
                 echo "</tr>";
               }
               echo "</table>";

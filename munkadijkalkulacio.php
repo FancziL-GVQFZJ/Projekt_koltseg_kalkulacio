@@ -31,19 +31,19 @@
 
           echo "<p>Új adat felvétele</p>
           <form action='includes/addtomunkafajta.inc.php' method='post'>
-            Megnevezés: <input type='text' name='name'>
+            Megnevezés: <input type='text' name='name' id='megnevezesid'>
 
-            Csoport: <select name='csoport' id='csoport'>";
-            echo "<option value='0' selected>nincs</option>";
+            Csoport: <select style='display: none;' name='csoport' id='csoportid'>";
+            echo "<option  value='0' selected>nincs</option>";
             while ($row4 = $csoport->fetch_assoc()){ ?>
-              <option value="<?=$row4['Id'] ?> " > <?=$row4['Megnevezes'] ?></option>
-              <?php
+              <option value="<?=$row4['Id'] ?> " > <?=$row4['Megnevezes'] ?></option>  <?php
             }
             echo "</select>
 
-            Cím: <input type='checkbox' name='cim' value='pipa'>
-            <input type='submit'>
+            Cím: <input style='display: none;' type='checkbox' name='cim' value='pipa' id='checkboxid'>
+            <input type='submit' style='display: none;' value='Felvétel' id='felvetelid'></submit>
           </form>";
+
 
           $mernokmido=0;
           $muszereszmido=0;
@@ -126,8 +126,8 @@ function show_children($parentID, $i, $depth=1){
       echo "<td>".$row['Id']."</td>";
       echo "<td></td><td><b>".$row['Megnevezes']."</b></td>";
       echo "<td></td><td></td><td></td><td></td>";?>
-      <td id='del'><span class='deletemd' data-id='<?= $sorid; ?>'>Törlés</span></td>
-      <?php echo "</tr>";
+      <td id='del'><span class='deletemd' data-id='<?= $sorid; ?>'>Törlés</span></td> <?php
+      echo "</tr>";
       $totalrows = mysqli_num_rows($children);
       if ($totalrows > 1) {
         $i=1;
@@ -136,7 +136,6 @@ function show_children($parentID, $i, $depth=1){
       }
       $arresz = show_children($row['Id'], $i, $depth+1);
       $osszegar=$osszegar+$arresz;
-      $osszegkiiras = 1;
     }
     else {
       $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
@@ -174,10 +173,9 @@ function show_children($parentID, $i, $depth=1){
       }?>
       <td id='del'><span class='deletemd' data-id='<?= $sorid; ?>'>Törlés</span></td>
       <?php echo "</tr>";
-      $osszegkiiras = 0;
     }
   }
-  if ($osszegkiiras == 0 && $i == 1) {
+  if ($i == 1) {
     echo  "<tr>";
     echo  "<td></td>";
     echo  "<td colspan='5' align='right'>Összegzett ár:</td>";
@@ -227,6 +225,21 @@ $('td#mv').on('change', function() {
   });
   console.log(jogosultsag);
 });
+</script>
+
+<script type="text/javascript">
+$("#megnevezesid").keyup(function () {
+       if ($(this).val()) {
+          $("#csoportid").show();
+          $("#checkboxid").show();
+          $("#felvetelid").show();
+       }
+       else {
+          $("#csoportid").hide();
+          $("#checkboxid").hide();
+          $("#felvetelid").hide();
+       }
+    });
 </script>
 
 <?php
