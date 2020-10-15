@@ -19,7 +19,6 @@
         <script src="/Projekt_koltseg_kalkulacio/js/filter_table.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/js/jquery-3.5.1.js"></script>
-        <script src="/Projekt_koltseg_kalkulacio/js/addmunka.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/ckeditor/ckeditor.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/ckeditor/ckeditor.js"></script>
         <title>Title</title>
@@ -50,29 +49,28 @@
           <?php } elseif (isset($_SESSION['projektId']) && $jogosultsag == 'olvasas') { ?>
             <li><a <?php echo ($thisPage == 'Kalkulacioslap') ? ' class="selected"' : ''; ?> href="kalkulacioslap.php">Kalkulációs lap</a></li>
           <?php } ?>
-          </ul>
+          </ul>  <?php
 
-          <?php echo '<div class="logout-container">
+          echo '<div class="logout-container">
             <form action="includes/logout.inc.php" method="post">';
               if (isset($_SESSION['projektId'])) {
-              $projektneve = $_SESSION['projektNeve'];
-              echo '<p>Jelenlegi projekt: '.$projektneve.'('.$jogosultsag.')</p>';
+                $projektneve = $_SESSION['projektNeve'];
+                echo '<p>Jelenlegi projekt: '.$projektneve.'('.$jogosultsag.')</p>';
               }
-            echo '<p>Jelenlegi felhasználó: '.$fnev.'</p>
-                    <button type="submit" name="logout-submit">Kijelentkezés</button>
-                    </form>
+              echo '<p>Jelenlegi felhasználó: '.$fnev.'</p>
+              <button type="submit" name="logout-submit">Kijelentkezés</button>
+            </form>
           </div>';
 
         }else {
           echo '<div class="login-container">
-                    <form action="includes/login.inc.php" method="post">
-                    <input type="text" name="mailuid" placeholder="Felhasználónév...">
-                    <input type="password" name="pwd" placeholder="Jelszó...">
-                    <button type="submit" name="login-submit">Bejelentkezés</button>
-                    </form>
-                </div>';
-        }
-        ?>
+            <form action="includes/login.inc.php" method="post">
+              <input type="text" name="mailuid" placeholder="Felhasználónév...">
+              <input type="password" name="pwd" placeholder="Jelszó...">
+              <button type="submit" name="login-submit">Bejelentkezés</button>
+            </form>
+          </div>';
+        } ?>
       </div>
     </nav>
   </header>
