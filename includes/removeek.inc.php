@@ -6,10 +6,9 @@ $id = 0;
 if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);
 }
-  //amit éppen törölni akarok annak a szülőjére átírni a gyerekeit ha vannak
+
 if($id > 0){
 
-  // Check record exists
   $checkRecord = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE Id=".$id);
   $totalrows = mysqli_num_rows($checkRecord);
 

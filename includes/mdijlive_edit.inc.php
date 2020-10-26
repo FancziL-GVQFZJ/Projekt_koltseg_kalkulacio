@@ -19,6 +19,8 @@ if ($input['action'] == 'edit') {
     mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
 
     require_once 'naplo.inc.php';
+    $update_field = str_replace('"',"",$update_field);
+    $update_field = str_replace("'","",$update_field);
     $szoveg = ("update munkadij  ". $update_field ." ");
     naplozas($szoveg);
   }

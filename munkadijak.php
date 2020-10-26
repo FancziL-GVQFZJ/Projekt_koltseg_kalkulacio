@@ -1,5 +1,5 @@
 <?php
-  $thisPage='Kalkulacioslap';
+  $thisPage='Kezdooldal';
   require "header.php";
   session_start();
 ?>
@@ -12,7 +12,7 @@
       <div>
         <?php
         require 'includes/dbh.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
+        if (isset($_SESSION['userId'])) {
           echo '<nav class="topnav">
             <ul>
               <li><a href="index.php">Projektek</a></li>

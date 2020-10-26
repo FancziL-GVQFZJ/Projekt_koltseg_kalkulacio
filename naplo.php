@@ -11,7 +11,7 @@
     <main>
       <?php
       require 'includes/dbh.inc.php';
-        if (isset($_SESSION['userId'])) {          
+        if (isset($_SESSION['userId'])) {
           echo '<nav class="topnav">
             <ul>
               <li><a href="index.php">Projektek</a></li>

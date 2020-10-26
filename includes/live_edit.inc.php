@@ -21,6 +21,8 @@ if ($input['action'] == 'edit') {
     require_once 'naplo.inc.php';
     $query = mysqli_query($conn,"SELECT * FROM belsoalkatresz WHERE Id=".$input['alkatresz_id']);
     $row = mysqli_fetch_array($query);
+    $update_field = str_replace('"',"",$update_field);
+    $update_field = str_replace("'","",$update_field);
     $szoveg = ("update pa_kapcsolat  ".$row['Megnevezes']." ". $update_field ." ");
     naplozas($szoveg);
   }

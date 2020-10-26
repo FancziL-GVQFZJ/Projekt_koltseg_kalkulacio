@@ -9,13 +9,6 @@ if ($input['action'] == 'edit') {
   $update_field.= "SAPSzam='".$input['SAPSzam']."'";
   } else */
   if(isset($input['Megnevezes'])) {
-  // $megnevezes=$input['Megnevezes'];
-  // $teszt=str_replace("&nbsp;","",$megnevezes);
-  // echo "<script>
-  //   console.log($teszt);
-  //   console.log($megnevezes);
-  // </script>";
-
 
   $update_field.= "Megnevezes='".$input['Megnevezes']."'";
   }
@@ -30,7 +23,9 @@ if ($input['action'] == 'edit') {
     mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
 
     require_once 'naplo.inc.php';
-    $szoveg = ("update munkafajta  ". $update_field ." ");
+    $update_field = str_replace('"',"",$update_field);
+    $update_field = str_replace("'","",$update_field);
+    $szoveg = ("update munkafajta:  ". $update_field ." ");
     naplozas($szoveg);
   }
 }

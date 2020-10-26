@@ -12,7 +12,6 @@
       <div>
         <?php
         require 'includes/dbh.inc.php';
-        //require 'includes/nyomtatas.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
           $pid = $_SESSION['projektId'];

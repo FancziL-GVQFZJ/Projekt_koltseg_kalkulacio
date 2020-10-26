@@ -6,7 +6,7 @@ $id = 0;
 if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);
 }
-  //amit éppen törölni akarok annak a szülőjére átírni a gyerekeit ha vannak
+//ha törlöm az egyik alsót mi legyen a gyerekeivel
 if($id > 0){
 
   $checkRecord = mysqli_query($conn,"SELECT * FROM munkafajta WHERE Id=".$id);

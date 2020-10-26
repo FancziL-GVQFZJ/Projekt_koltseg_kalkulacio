@@ -6,6 +6,7 @@
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
 
+
 <div id="container">
   <div id="main">
     <main>
@@ -29,20 +30,41 @@
           $csoport = mysqli_query($conn,"SELECT * FROM munkafajta
                         WHERE project_id ='$pid' AND Mennyiseg IS NULL");
 
-          echo "<p>Új adat felvétele</p>
-          <form action='includes/addtomunkafajta.inc.php' method='post'>
-            Megnevezés: <input type='text' name='name' id='megnevezesid'>
+          echo '<p>Új adat felvétele</p>
+          <form action="includes/addtomunkafajta.inc.php" method="post">
+            Megnevezés: <input type="text" name="name" id="megnevezesid">
 
-            Csoport: <select style='display: none;' name='csoport' id='csoportid'>";
+            Csoport: <select style="display: none;" name="csoport" id="csoportid" onchange="OnSelectionChange(this.value)">';
             echo "<option  value='0' selected>nincs</option>";
-            while ($row4 = $csoport->fetch_assoc()){ ?>
-              <option value="<?=$row4['Id'] ?> " > <?=$row4['Megnevezes'] ?></option>  <?php
-            }
-            echo "</select>
-
-            Cím: <input style='display: none;' type='checkbox' name='cim' value='pipa' id='checkboxid'>
-            <input type='submit' style='display: none;' value='Felvétel' id='felvetelid'></submit>
+              while ($row4 = $csoport->fetch_assoc()){ ?>
+                <option value="<?=$row4['Id'] ?> " > <?=$row4['Megnevezes'] ?></option>  <?php
+              }
+            echo '</select>';
+            echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid'>";
+            echo "<input type='submit' style='display: none;' value='Felvétel' id='felvetelid'></submit>
           </form>";
+
+          function Cimlehetosegmegadas($id) {
+            if ($id>0) {
+              echo 'sas';
+            }
+            // require 'includes/dbh.inc.php';
+            // $query1 = mysqli_query($conn,"SELECT * FROM munkafajta
+            //               WHERE parent_id ='$id' AND Mennyiseg IS NOT NULL");
+            // $resurt1 = mysqli_num_rows($query1);
+            //
+            // $query2 = mysqli_query($conn,"SELECT * FROM munkafajta
+            //               WHERE Id = '$id' AND parent_id IS NOT NULL AND Mennyiseg IS NULL");
+            // $resurt2 = mysqli_num_rows($query2);
+            //
+            // if ($resurt1 < 1 || $resurt2 < 1) {
+            //
+            // }else {
+            //
+            // }
+            // echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid'>";
+
+          }
 
 
           $mernokmido=0;
@@ -231,12 +253,12 @@ $('td#mv').on('change', function() {
 $("#megnevezesid").keyup(function () {
        if ($(this).val()) {
           $("#csoportid").show();
-          $("#checkboxid").show();
+        //  $("#checkboxid").show();
           $("#felvetelid").show();
        }
        else {
           $("#csoportid").hide();
-          $("#checkboxid").hide();
+        //  $("#checkboxid").hide();
           $("#felvetelid").hide();
        }
     });
