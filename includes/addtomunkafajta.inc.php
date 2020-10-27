@@ -45,11 +45,11 @@ $szoveg = ("insert munkafajta ". $megn ."");
 naplozas($szoveg);
 
 if ($successfullyCopied) {
-  header("Location: ../munkadijkalkulacio.php");
+  header("Location: ../munkadijkoltseg.php");
   exit;
 }
 else {
-  header("Location: ../munkadijkalkulacio.php?sikertelenfelvetel");
+  header("Location: ../munkadijkoltseg.php?sikertelenfelvetel");
   exit;
 }
 ?>

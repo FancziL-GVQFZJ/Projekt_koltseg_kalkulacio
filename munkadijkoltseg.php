@@ -6,7 +6,6 @@
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
 
-
 <div id="container">
   <div id="main">
     <main>
@@ -16,6 +15,7 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
           <nav class="topnav">
             <ul>
+              <li><a href="anyagkoltseg.php">Anyagköltség</a></li>
               <li><a style="background-color: #ddd;" href="#">Munkadíj költség</a></li>
               <li><a href="egyebkoltseg.php">Egyéb költség</a></li>
               <li><a href="muszakitartalom.php">Műszaki tartalom</a></li>

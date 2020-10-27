@@ -4,6 +4,7 @@ require 'dbh.inc.php';
 require ('../fpdf182/writehtml.php');
 
 include 'anyaglistanyomtatas.inc.php';
+include 'anyagkoltsegnyomtatas.inc.php';
 include 'munkadijkoltsegnyomtatas.inc.php';
 include 'egyebkoltsegnyomtatas.inc.php';
 include 'muszakitartalomnyomtatas.inc.php';
@@ -95,6 +96,11 @@ $pdf->SetFont('Arial','',10);
 
 if (isset($_POST['Anyaglista'])) {
   printanyaglista();
+  $pdf->Cell(189 ,5,'',0,1);//end of line
+}
+
+if (isset($_POST['Anyagkoltseg'])) {
+  printanyagkoltseg();
   $pdf->Cell(189 ,5,'',0,1);//end of line
 }
 

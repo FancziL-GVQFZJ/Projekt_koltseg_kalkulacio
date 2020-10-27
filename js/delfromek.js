@@ -20,11 +20,11 @@ $(document).ready(function(){
             window.location.reload();
       	    });
           }else if(response == 0){
-	            alert('Invalid ID.');
+	            alert('Nem megfelelő id.');
           }else if(response == 2){
 	            alert('Nem megfelelő id.');
           }else{
-	            alert('Sikertelen törlés');
+	            alert('Sikertelen törlés.');
           }
         }
       });

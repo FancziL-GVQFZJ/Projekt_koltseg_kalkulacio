@@ -12,22 +12,24 @@
       <div>
         <?php
         require 'includes/dbh.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
-
-          $pid = $_SESSION['projektId'];
-          $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");
-          $row = mysqli_fetch_array($result);
-          $leiras=$row['tartalom'];?>
-
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
           <nav class="topnav">
             <ul>
-              <li><a href="munkadijkalkulacio.php">Munkadíj költség</a></li>
+              <li><a href="anyagkoltseg.php">Anyagköltség</a></li>
+              <li><a href="munkadijkoltseg.php">Munkadíj költség</a></li>
               <li><a href="egyebkoltseg.php">Egyéb költség</a></li>
               <li><a style="background-color: #ddd;" href="#">Műszaki tartalom</a></li>
               <li><a href="kalkulacioslap.php">Kalkulációs Lap</a></li>
               <li><a href="nyomtatasilap.php">Nyomtatási Lap</a></li>
             </ul>
           </nav>
+
+          <?php
+          $pid = $_SESSION['projektId'];
+          $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");
+          $row = mysqli_fetch_array($result);
+          $leiras=$row['tartalom'];
+          ?>
 
           <form method="post" action="includes/insertmt.inc.php">
             <textarea id="mteditor" name="mteditor"><?php echo $leiras?></textarea>

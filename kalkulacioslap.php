@@ -6,7 +6,6 @@
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
 
-
 <div id="container">
   <div id="main">
     <main>
@@ -17,7 +16,8 @@
           <nav class="topnav">
             <ul>
               <?php if ($jogosultsag == 'iras' || $jogosultsag == 'admin'){ ?>
-                <li><a href="munkadijkalkulacio.php">Munkadíj költség</a></li>
+                <li><a href="anyagkoltseg.php">Anyagköltség</a></li>
+                <li><a href="munkadijkoltseg.php">Munkadíj költség</a></li>
                 <li><a href="egyebkoltseg.php">Egyéb költség</a></li>
                 <li><a href="muszakitartalom.php">Műszaki tartalom</a></li>
               <?php } ?>
@@ -76,6 +76,61 @@
               echo  "<td align='left'>$osszegar</td>";
               echo  "</tr>";
               echo  "</table>";
+          }
+
+          $checkRecord5 = mysqli_query($conn,"SELECT * FROM anyagkoltseg WHERE projekt_id = '$pid'");
+          $totalrows5 = mysqli_num_rows($checkRecord5);
+
+          if ($totalrows5 >0) {
+            echo "<p style='font-size: large;'><b><u>Anyagköltség</u></b></p>";
+            echo "<table border=1; style='border-collapse: collapse;' id='Anyagkoltseg'>";
+            echo "<tr class='fejlec'>";
+
+            echo "<th>Anyagi megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Egységár</th><th>Összeg</th>";
+            $pid = $_SESSION['projektId'];
+
+            $query = "SELECT * FROM alkatresz
+                  INNER JOIN pa_kapcsolat
+                    ON alkatresz.id = pa_kapcsolat.alkatresz_id
+                  INNER JOIN projekt
+                    ON pa_kapcsolat.projekt_id = projekt.idProjekt
+                    WHERE projekt.idProjekt = '$pid'
+                    ORDER BY alkatresz.id";
+
+            $sor=mysqli_query($conn, $query);
+            while ($row=mysqli_fetch_array($sor))
+            {
+              $sorar=$row['Egysegar']*$row['DBszam'];
+              $anyaglistaar=$anyaglistaar+$sorar;
+            }
+            $query2="SELECT * FROM anyagkoltseg WHERE projekt_id = '$pid'";
+            $sor2=mysqli_query($conn,$query2);
+
+            while ($row=mysqli_fetch_array($sor2))
+            {
+              echo "<tr>";
+              echo "<td>".$row['Megnevezes']."</td>";
+              echo "<td>".$row["ME"]."</td>";
+              echo "<td>".$row["Mennyiseg"]."</td>";
+              echo "<td>".$row["Egysegar"]."</td>";
+              $sorar=$row["Mennyiseg"]*$row["Egysegar"];
+              echo "<td>".$sorar."</td>";
+              $teljesar=$teljesar+$sorar;
+              echo "</tr>";
+            }
+            echo  "<tr>";
+            echo  "<td>villamos szerelési anyag</td>";
+            echo  "<td>db</td>";
+            echo  "<td>1</td>";
+            echo  "<td align='left'>$anyaglistaar Ft</td>";
+            echo  "<td align='left'>$anyaglistaar Ft</td>";
+            echo  "</tr>";
+            echo  "<tr>";
+            echo  "<td colspan='4' align='center'>Összesen:</td>";
+            $teljesar=$teljesar+$anyaglistaar;
+            echo  "<td align='left'>$teljesar Ft</td>";
+            echo  "</tr>";
+            print "</table>";
           }
 
           $checkRecord2 = mysqli_query($conn,"SELECT * FROM munkafajta WHERE project_id = '$pid'");

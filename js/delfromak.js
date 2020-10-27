@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
- $('.deletemdij').click(function(){
+ $('.deleteak').click(function(){
    var el = this;
 
    var deleteid = $(this).data('id');
@@ -8,7 +8,7 @@ $(document).ready(function(){
    var confirmalert = confirm("Biztosan törlöd az elemet?");
    if (confirmalert == true) {
       $.ajax({
-        url: 'includes/removemdij.inc.php',
+        url: 'includes/removeak.inc.php',
         type: 'POST',
         data: { id:deleteid },
         success: function(response){
@@ -24,7 +24,7 @@ $(document).ready(function(){
           }else if(response == 2){
 	            alert('Nem megfelelő id.');
           }else{
-	            alert('Sikertelen törlés.');
+	            alert('Sikertelen törlés');
           }
         }
       });

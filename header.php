@@ -13,6 +13,7 @@
         <script src="/Projekt_koltseg_kalkulacio/js/delfrommd.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/js/delfrommdij.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/js/delfromek.js"></script>
+        <script src="/Projekt_koltseg_kalkulacio/js/delfromak.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/js/addtocart.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/js/startprojekt.js"></script>
         <script src="/Projekt_koltseg_kalkulacio/js/deleteprojekt.js"></script>

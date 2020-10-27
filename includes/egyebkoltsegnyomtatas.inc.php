@@ -1,5 +1,4 @@
 <?php
-
 function printegyebkoltseg(){
   require 'dbh.inc.php';
   global $pdf;
@@ -33,7 +32,7 @@ function printegyebkoltseg(){
   }
 
 
-  $pdf->Cell(154,$cellamagassag,'Összesen:',1,0,'R',$fill);
+  $pdf->Cell(154,$cellamagassag,'Összesen:',1,0,'C',$fill);
   $pdf->Cell(35,$cellamagassag,$teljesar.' Ft',1,1,'C',$fill);
 }
 

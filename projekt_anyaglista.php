@@ -44,7 +44,7 @@
               {
                 $sorid=$row['alkatresz_id'];
                 $sorar=$row['Egysegar']*$row['DBszam'];
-                $egeszar=$egeszar+$sorar;?>
+                $teljesar=$teljesar+$sorar;?>
                 <tr id="<?php echo $row['alkatresz_id']; ?>">
                 <?php echo "<td>".$row['alkatresz_id']."</td>";
                 echo "<td>".$i."</td>";
@@ -61,7 +61,7 @@
               echo  "<tr>";
               echo  "<td></td>";
               echo  "<td colspan='6' align='right'>A teljes ár:</td>";
-              echo  "<td align='left'>$egeszar</td>";
+              echo  "<td align='left'>$teljesar</td>";
               echo  "</tr>";
               echo  "</table>";
             echo  "</div>";?>

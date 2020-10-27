@@ -1,7 +1,7 @@
 <?php
-  $thisPage='Kalkulacioslap';
-  require "header.php";
-  session_start();
+    $thisPage='Kalkulacioslap';
+    require "header.php";
+    session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
@@ -15,7 +15,8 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
           <nav class="topnav">
             <ul>
-              <li><a href="munkadijkalkulacio.php">Munkadíj költség</a></li>
+              <li><a href="anyagkoltseg.php">Anyagköltség</a></li>
+              <li><a href="munkadijkoltseg.php">Munkadíj költség</a></li>
               <li><a style="background-color: #ddd;" href="#">Egyéb költség</a></li>
               <li><a href="muszakitartalom.php">Műszaki tartalom</a></li>
               <li><a href="kalkulacioslap.php">Kalkulációs Lap</a></li>
@@ -79,11 +80,6 @@
 function show_children($parentID, $depth=1){
   require 'includes/dbh.inc.php';
   $children = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE parent_id=$parentID");
-  /*$munkadij = mysqli_query($conn,"SELECT Oraber FROM munkadij
-                INNER JOIN egyebkoltseg
-                ON munkadij.MunkaFajta = egyebkoltseg.Megnevezes
-                WHERE egyebkoltseg.Id ='$parentID'");
-  $row2=mysqli_fetch_array($munkadij);*/
 
   while ($row = mysqli_fetch_array($children)){
     $sorid=$row['Id'];?>
