@@ -8,7 +8,7 @@ $megn = $_POST['name'];
 $szulo = $_POST['szulo'];
 
 $sql = "SELECT * FROM egyebkoltseg
-        WHERE Megnevezes = '$szulo' AND Mennyiseg IS NULL";
+        WHERE egyebkoltseg_megnevezes = '$szulo' AND egyebkoltseg_mennyiseg IS NULL";
 $sor=mysqli_query($conn, $sql);
 
 $row=mysqli_fetch_array($sor);
@@ -17,22 +17,26 @@ $szulid=$row['Id'];
 
 if (empty($szulo)) {
   if (isset($_POST['cim'])) {
-    $stmt = $conn->prepare("INSERT INTO egyebkoltseg (parent_id, project_id, Megnevezes, ME, Mennyiseg, munkadij_id)
-                                              VALUES (NULL, '$pid','$megn','',NULL,2)");
+    $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
+                                        egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
+                                              VALUES ('$pid',NULL,'$megn','',NULL,2)");
   }
   else {
-    $stmt = $conn->prepare("INSERT INTO egyebkoltseg (parent_id, project_id, Megnevezes, ME, Mennyiseg, munkadij_id)
-                                              VALUES (NULL, '$pid','$megn','óra',1,2)");
+    $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
+                                        egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
+                                              VALUES ('$pid',NULL,'$megn','óra',1,2)");
   }
 }
 else {
   if (isset($_POST['cim'])) {
-    $stmt = $conn->prepare("INSERT INTO egyebkoltseg (parent_id, project_id, Megnevezes, ME, Mennyiseg, munkadij_id)
-                                              VALUES ('$szulid', '$pid','$megn','',NULL,2)");
+    $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
+                                        egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
+                                              VALUES ('$pid','$szulid','$megn','',NULL,2)");
   }
   else {
-    $stmt = $conn->prepare("INSERT INTO egyebkoltseg (parent_id, project_id, Megnevezes, ME, Mennyiseg, munkadij_id)
-                                              VALUES ('$szulid', '$pid','$megn','óra',1,2)");
+    $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
+                                        egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
+                                              VALUES ('$pid','$szulid','$megn','óra',1,2)");
   }
 }
 

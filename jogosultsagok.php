@@ -26,12 +26,12 @@
               echo '<p>Projektjeid:</p>';
 
               $fid = $_SESSION['userId'];
-              $sql = "SELECT idProjekt, projektNev FROM projekt
+              $sql = "SELECT * FROM projekt
                     INNER JOIN pf_kapcsolat
-                      ON projekt.idProjekt = pf_kapcsolat.projektId
-                    INNER JOIN users
-                      ON pf_kapcsolat.userId = users.idUsers
-                      WHERE users.idUsers = $fid";
+                      ON projekt.projekt_id = pf_kapcsolat.projekt_id
+                    INNER JOIN felhasznalo
+                      ON pf_kapcsolat.felhasznalo_id = felhasznalo.felhasznalo_id
+                      WHERE felhasznalo.felhasznalo_id = $fid";
 
               $sor=mysqli_query($conn, $sql);
 
@@ -39,11 +39,11 @@
               echo "<tr>";
               while ($row=mysqli_fetch_array($sor))
               {
-                $sorid=$row['idProjekt'];
-                $pnev=$row['projektNev'];
+                $sorid=$row['projekt_id'];
+                $pnev=$row['projekt_nev'];
                 echo "<tr>";
-                echo "<td>".$row['idProjekt']."</td>";
-                echo "<td>".$row['projektNev']."</td>";
+                echo "<td>".$row['projekt_id']."</td>";
+                echo "<td>".$row['projekt_nev']."</td>";
                 ?>
                 <td>
                   <form action="" method="post">
@@ -63,7 +63,7 @@
                 $jpid = $_POST["projektid"];
 
 
-                $fnevek = "SELECT * FROM users WHERE NOT idUsers ='$fid'";
+                $fnevek = "SELECT * FROM felhasznalo WHERE NOT felhasznalo_id ='$fid'";
                 $sor2=mysqli_query($conn, $fnevek);
                 echo "<br><br>";
                 echo $jpnev." beállítása";
@@ -73,17 +73,17 @@
                 echo "<th>Id</th><th>ProjektId</th><th>Felhasználó</th><th>Jogosultság</th>";
                 while ($row2=mysqli_fetch_array($sor2))
                 {
-                  $fnev=$row2['idUsers'];
-                  $jogosultsagok = mysqli_query($conn,"SELECT iras, olvasas FROM jogosultsag
-                                INNER JOIN users
-                                ON jogosultsag.user_id = users.idUsers
-                                WHERE jogosultsag.user_id ='$fnev' AND jogosultsag.projekt_id ='$jpid'");
+                  $fnev=$row2['felhasznalo_id'];
+                  $jogosultsagok = mysqli_query($conn,"SELECT * FROM jogosultsag
+                                INNER JOIN felhasznalo
+                                ON jogosultsag.felhasznalo_id = felhasznalo.felhasznalo_id
+                                WHERE jogosultsag.felhasznalo_id ='$fnev' AND jogosultsag.projekt_id ='$jpid'");
                   $row3=mysqli_fetch_array($jogosultsagok);
                   echo "<tr>";
-                  echo "<td>".$row2['idUsers']."</td>";
+                  echo "<td>".$row2['felhasznalo_id']."</td>";
                   echo "<td>".$jpid."</td>";
-                  echo "<td>".$row2['uidUsers']."</td>";
-                  if ($row3['iras']==1 && $row3['olvasas']==1) {
+                  echo "<td>".$row2['felhasznalo_nev']."</td>";
+                  if ($row3['jogosultsag_iras']==1 && $row3['jogosultsag_olvasas']==1) {
                     echo "<td><select name='jogosultsagok' id='jogosultsagok'>
                       <option value='0' ></option>
                       <option value='1' selected>Írás</option>
@@ -91,7 +91,7 @@
                     </select>
                     </td>";
                   }
-                  else if ($row3['iras']==0 && $row3['olvasas']==1) {
+                  else if ($row3['jogosultsag_iras']==0 && $row3['jogosultsag_olvasas']==1) {
                     echo "<td><select name='jogosultsagok' id='jogosultsagok'>
                       <option value='0' ></option>
                       <option value='1' >Írás</option>
@@ -114,7 +114,7 @@
           echo "</div>";
         }
         else {
-          echo '<p>You are logged out!</p>';
+          echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
       ?>
     </main>

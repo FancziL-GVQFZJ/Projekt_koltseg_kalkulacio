@@ -45,7 +45,7 @@
           <ul>
           <li><a <?php echo ($thisPage == 'Kezdooldal') ? ' class="selected"' : ''; ?> href="index.php">Kezdőlap</a></li>
           <?php if (isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
-            <li><a <?php echo ($thisPage == 'Anyaglista') ? ' class="selected"' : ''; ?> href="anyaglista.php">Villamos anyaglista</a></li>
+            <li><a <?php echo ($thisPage == 'Anyaglista') ? ' class="selected"' : ''; ?> href="sap_anyaglista.php">Villamos anyaglista</a></li>
             <li><a <?php echo ($thisPage == 'Kalkulacioslap') ? ' class="selected"' : ''; ?> href="kalkulacioslap.php">Kalkulációs lap</a></li>
           <?php } elseif (isset($_SESSION['projektId']) && $jogosultsag == 'olvasas') { ?>
             <li><a <?php echo ($thisPage == 'Kalkulacioslap') ? ' class="selected"' : ''; ?> href="kalkulacioslap.php">Kalkulációs lap</a></li>

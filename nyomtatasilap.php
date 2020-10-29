@@ -30,9 +30,9 @@
           $totalrows1 = mysqli_num_rows($checkRecord1);
           $checkRecord5 = mysqli_query($conn,"SELECT * FROM anyagkoltseg WHERE projekt_id = '$pid'");
           $totalrows5 = mysqli_num_rows($checkRecord5);
-          $checkRecord2 = mysqli_query($conn,"SELECT * FROM munkafajta WHERE project_id = '$pid'");
+          $checkRecord2 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE projekt_id = '$pid'");
           $totalrows2 = mysqli_num_rows($checkRecord2);
-          $checkRecord3 = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE project_id = '$pid'");
+          $checkRecord3 = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE projekt_id = '$pid'");
           $totalrows3 = mysqli_num_rows($checkRecord3);
           $checkRecord4 = mysqli_query($conn,"SELECT * FROM muszakitartalom WHERE projekt_id = '$pid'");
           $totalrows4 = mysqli_num_rows($checkRecord4);
@@ -64,7 +64,7 @@
 
         }
         else {
-          echo '<p>You are logged out!</p>';
+          echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
         ?>
       </div>

@@ -22,27 +22,27 @@ function printanyagkoltseg(){
 
   $fill=false;
   foreach ($conn->query($rows) as $row){
-    $sorar=$row['Mennyiseg']*$row['Egysegar'];
-    $pdf->Cell($cellaszelesseg[0],$cellamagassag,$row['Megnevezes'],1,0,'L',$fill);
-    $pdf->Cell($cellaszelesseg[1],$cellamagassag,$row['ME'],1,0,'L',$fill);
-    $pdf->Cell($cellaszelesseg[2],$cellamagassag,$row['Mennyiseg'],1,0,'C',$fill);
-    $pdf->Cell($cellaszelesseg[3],$cellamagassag,$row['Egysegar'],1,0,'C',$fill);
+    $sorar=$row['anyagkoltseg_mennyiseg']*$row['anyagkoltseg_egysegar'];
+    $pdf->Cell($cellaszelesseg[0],$cellamagassag,$row['anyagkoltseg_megnevezes'],1,0,'L',$fill);
+    $pdf->Cell($cellaszelesseg[1],$cellamagassag,$row['anyagkoltseg_mertekegyseg'],1,0,'L',$fill);
+    $pdf->Cell($cellaszelesseg[2],$cellamagassag,$row['anyagkoltseg_mennyiseg'],1,0,'C',$fill);
+    $pdf->Cell($cellaszelesseg[3],$cellamagassag,$row['anyagkoltseg_egysegar'],1,0,'C',$fill);
     $pdf->Cell($cellaszelesseg[4],$cellamagassag,$sorar,1,1,'C',$fill);
     $teljesar=$teljesar+$sorar;
   }
 
-  $query = "SELECT * FROM alkatresz
+  $query = "SELECT * FROM helyi_anyaglista
         INNER JOIN pa_kapcsolat
-          ON alkatresz.id = pa_kapcsolat.alkatresz_id
+          ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
         INNER JOIN projekt
-          ON pa_kapcsolat.projekt_id = projekt.idProjekt
-          WHERE projekt.idProjekt = '$pid'
-          ORDER BY alkatresz.id";
+          ON pa_kapcsolat.projekt_id = projekt.projekt_id
+          WHERE projekt.projekt_id = $pid
+          ORDER BY helyi_anyaglista.helyi_anyaglista_id";
 
   $sor=mysqli_query($conn, $query);
   while ($row=mysqli_fetch_array($sor))
   {
-    $sorar=$row['Egysegar']*$row['DBszam'];
+    $sorar=$row['helyi_anyaglista_egysegar']*$row['pa_dbszam'];
     $anyaglistaar=$anyaglistaar+$sorar;
   }
 

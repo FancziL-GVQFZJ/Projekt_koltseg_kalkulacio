@@ -6,7 +6,7 @@ session_start();
 $megn = $_POST['name'];
 $ora = $_POST['oraber'];
 
-$stmt = $conn->prepare("INSERT INTO munkadij (MunkaFajta, Oraber)
+$stmt = $conn->prepare("INSERT INTO munkadij (munkadij_fajta, munkadij_oraber)
                                           VALUES ('$megn','$ora')");
 $successfullyCopied = $stmt->execute();
 

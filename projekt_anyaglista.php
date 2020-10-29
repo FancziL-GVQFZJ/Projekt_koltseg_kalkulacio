@@ -11,26 +11,25 @@
     <main>
       <?php
         require 'includes/dbh.inc.php';
-        //require 'includes/nyomtatas.inc.php';
         require "PHPExcel/Classes/PHPExcel.php";
         require "PHPExcel/Classes/PHPExcel/Writer/Excel5.php";
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
           echo '<nav class="topnav">
-              <a href="Anyaglista.php">Villamos anyaglista</a>
-              <a href="belsoanyaglista.php">Belső villamos anyaglista</a>
+              <a href="sap_anyaglista.php">Villamos anyaglista</a>
+              <a href="helyi_anyaglista.php">Belső villamos anyaglista</a>
               <a style="background-color: #ddd;"href="#">Listázott anyagok</a>
               <a href="osszehasonlitas.php">Összehasonlítás</a>
           </nav>';
 
             $pid = $_SESSION['projektId'];
-            $sql = "SELECT * FROM alkatresz
+            $sql = "SELECT * FROM helyi_anyaglista
                   INNER JOIN pa_kapcsolat
-                    ON alkatresz.id = pa_kapcsolat.alkatresz_id
+                    ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
                   INNER JOIN projekt
-                    ON pa_kapcsolat.projekt_id = projekt.idProjekt
-                    WHERE projekt.idProjekt = $pid
-                    ORDER BY alkatresz.id";
+                    ON pa_kapcsolat.projekt_id = projekt.projekt_id
+                    WHERE projekt.projekt_id = $pid
+                    ORDER BY helyi_anyaglista.helyi_anyaglista_id";
 
             $sor=mysqli_query($conn, $sql);
 
@@ -42,17 +41,17 @@
               $i=1;
               while ($row=mysqli_fetch_array($sor))
               {
-                $sorid=$row['alkatresz_id'];
-                $sorar=$row['Egysegar']*$row['DBszam'];
+                $sorid=$row['helyi_anyaglista_id'];
+                $sorar=$row['helyi_anyaglista_egysegar']*$row['pa_dbszam'];
                 $teljesar=$teljesar+$sorar;?>
-                <tr id="<?php echo $row['alkatresz_id']; ?>">
-                <?php echo "<td>".$row['alkatresz_id']."</td>";
+                <tr id="<?php echo $row['helyi_anyaglista_id']; ?>">
+                <?php echo "<td>".$row['helyi_anyaglista_id']."</td>";
                 echo "<td>".$i."</td>";
-                echo "<td>".$row['Megnevezes']."</td>";
-                echo "<td>".$row['SAPSzam']."</td>";
-                echo "<td>".$row['ME']."</td>";
-                echo "<td>".$row['Egysegar']."</td>";
-                echo "<td>".$row['DBszam']."</td>";
+                echo "<td>".$row['helyi_anyaglista_megnevezes']."</td>";
+                echo "<td>".$row['helyi_anyaglista_sapszam']."</td>";
+                echo "<td>".$row['helyi_anyaglista_mertekegyseg']."</td>";
+                echo "<td>".$row['helyi_anyaglista_egysegar']."</td>";
+                echo "<td>".$row['pa_dbszam']."</td>";
                 echo "<td>".$sorar."</td>";?>
                 <td id='del'><span class='delete' data-id='<?= $sorid; ?>'>Törlés</span></td>
                 <?php echo "</tr>";
@@ -72,7 +71,7 @@
             <?php
           }
         else {
-          echo '<p>You are logged out!</p>';
+          echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
       ?>
     </main>
@@ -87,7 +86,7 @@ $(document).ready(function(){
     editButton: false,
     columns: {
     identifier: [0, 'alkatresz_id'],
-    editable: [[6, 'DBszam']]
+    editable: [[6, 'pa_dbszam']]
   },
   hideIdentifier: true,
   url: 'includes/live_edit.inc.php',

@@ -14,11 +14,11 @@ if(isset($_POST['mtsubmit'])){
 
         if ($totalrows > 0) {
           $stmt = $conn->query("UPDATE muszakitartalom SET
-                      tartalom ='$editorContent' WHERE projekt_id='$pid'");
+                      muszakitartalom_tartalom ='$editorContent' WHERE projekt_id='$pid'");
 
         }
         else {
-          $stmt = $conn->query("INSERT INTO muszakitartalom (projekt_id, tartalom)
+          $stmt = $conn->query("INSERT INTO muszakitartalom (projekt_id, muszakitartalom_tartalom)
                                               VALUES ('$pid','$editorContent')");
         }
 

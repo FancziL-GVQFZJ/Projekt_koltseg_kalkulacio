@@ -9,15 +9,15 @@ if(isset($_POST['id'])){
 
 if($id > 0){
 
-  $checkRecord = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE Id=".$id);
+  $checkRecord = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE egyebkoltseg_id = '$id'");
   $totalrows = mysqli_num_rows($checkRecord);
 
   $row=mysqli_fetch_array($checkRecord);
-  $megn=$row['Megnevezes'];
+  $megn=$row['egyebkoltseg_megnevezes'];
 
   if($totalrows > 0){
 
-    $stmt = $conn->prepare("DELETE FROM egyebkoltseg WHERE Id = ?");
+    $stmt = $conn->prepare("DELETE FROM egyebkoltseg WHERE egyebkoltseg_id = ?");
     $stmt->bind_param("i", $id);
     $successfullyCopied = $stmt->execute();
 

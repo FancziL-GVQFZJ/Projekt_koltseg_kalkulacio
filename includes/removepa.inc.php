@@ -16,14 +16,12 @@ if($id > 0){
 
     $stmt = $conn->prepare("DELETE FROM pa_kapcsolat WHERE alkatresz_id = ?");
     $stmt->bind_param("i", $id);
-
     $successfullyCopied = $stmt->execute();
 
-
     require_once 'naplo.inc.php';
-    $query = mysqli_query($conn,"SELECT * FROM belsoalkatresz WHERE Id=".$id);
+    $query = mysqli_query($conn,"SELECT * FROM helyi_anyaglista WHERE helyi_anyaglista_id=".$id);
     $row = mysqli_fetch_array($query);
-    $szoveg = ("delete alkatrészlista  ". $row['Megnevezes'] ." ");
+    $szoveg = ("delete alkatrészlista  ". $row['helyi_anyaglista_megnevezes'] ." ");
     naplozas($szoveg);
 
     if ($successfullyCopied) {

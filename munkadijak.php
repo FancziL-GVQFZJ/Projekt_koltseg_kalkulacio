@@ -21,7 +21,7 @@
               <li><a href="naplo.php">Naplo</a></li>
             </ul>
           </nav>
-          
+
           <?php
           echo "<p>Új adat felvétele</p>
           <form action='includes/addtomunkadij.inc.php' method='post'>
@@ -40,11 +40,11 @@
           while ($row=mysqli_fetch_array($dij))
           {?>
 
-            <tr id="<?php echo $row['Id']; ?>">
-            <?php echo "<td>".$row['Id']."</td>";
-            echo "<td>".$row['MunkaFajta']."</td>";
-            echo "<td>".$row["Oraber"]."</td>";
-            $sorid=$row['Id'];?>
+            <tr id="<?php echo $row['munkadij_id']; ?>">
+            <?php echo "<td>".$row['munkadij_id']."</td>";
+            echo "<td>".$row['munkadij_fajta']."</td>";
+            echo "<td>".$row["munkadij_oraber"]."</td>";
+            $sorid=$row['munkadij_id'];?>
             <td id='del'><span class='deletemdij' data-id='<?= $sorid; ?>'>Törlés</span></td>
             </tr>
             <?php
@@ -52,7 +52,7 @@
           print "</table>";
         }
         else {
-          echo '<p>You are logged out!</p>';
+          echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
         ?>
       </div>

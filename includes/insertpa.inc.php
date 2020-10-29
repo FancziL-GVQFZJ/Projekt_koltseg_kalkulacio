@@ -1,6 +1,5 @@
 <?php
 require 'dbh.inc.php';
-
 session_start();
 
 $id = 0;
@@ -8,38 +7,38 @@ $pid = $_SESSION['projektId'];
 if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);
 }
-//$id=34;
-if($id > 0){
 
+if($id > 0){
   $checkRecord = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE alkatresz_id = '$id' AND projekt_id = '$pid'");
   $totalrows = mysqli_num_rows($checkRecord);
-
 
   if($totalrows > 0){
     echo 2;
     exit;
   }else {
 
-    $checkRecord2 = mysqli_query($conn,"SELECT * FROM belsoalkatresz WHERE Id = '$id'");
+    $checkRecord2 = mysqli_query($conn,"SELECT * FROM helyi_anyaglista WHERE helyi_anyaglista_id = '$id'");
     $totalrows2 = mysqli_num_rows($checkRecord2);
 
-    if ($totalrows2 = 0) {
-      $copy = $conn->prepare("INSERT INTO belsoalkatresz (Id, Megnevezes, SAPSzam, ME, Egysegar)
-                                    SELECT id, Megnevezes, SAPSzam, ME, Egysegar
-                                    FROM alkatresz
-                                    WHERE id = '$id'");
+    if ($totalrows2 < 1) {
+      $copy = $conn->prepare("INSERT INTO helyi_anyaglista (helyi_anyaglista_id, helyi_anyaglista_megnevezes,
+                            helyi_anyaglista_sapszam, helyi_anyaglista_mertekegyseg, helyi_anyaglista_egysegar)
+                                    SELECT sap_anyaglista_id, sap_anyaglista_megnevezes, sap_anyaglista_sapszam,
+                                    sap_anyaglista_mertekegyseg, sap_anyaglista_egysegar
+                                    FROM sap_anyaglista
+                                    WHERE sap_anyaglista_id = '$id'");
       $successfullyCopied1 = $copy->execute();
     }
 
-    $stmt = $conn->prepare("INSERT INTO pa_kapcsolat (projekt_id, alkatresz_id, DBszam)
+    $stmt = $conn->prepare("INSERT INTO pa_kapcsolat (projekt_id, alkatresz_id, pa_dbszam)
                                               VALUES ('$pid', '$id', '1')");
 
     $successfullyCopied2 = $stmt->execute();
 
     require_once 'naplo.inc.php';
-    $query = mysqli_query($conn,"SELECT * FROM belsoalkatresz WHERE Id=".$id);
+    $query = mysqli_query($conn,"SELECT * FROM helyi_anyaglista WHERE helyi_anyaglista_id=".$id);
     $row = mysqli_fetch_array($query);
-    $szoveg = ("insert pa_kapcsolat alkatresz= ". $row['Megnevezes'] ." DBszam= 1");
+    $szoveg = ("insert to anyaglista= ". $row['helyi_anyaglista_megnevezes'] ." pa_dbszam= 1");
     naplozas($szoveg);
 
 

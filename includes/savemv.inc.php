@@ -6,17 +6,17 @@ $munkadijId=$_POST["mid"];
 
 if ($id>0 && $munkadijId>0) {
 
-  $stmt = $conn->prepare("UPDATE munkafajta SET munkadij_id='$munkadijId' WHERE Id = '$id'");
+  $stmt = $conn->prepare("UPDATE munkadijkoltseg SET munkadij_id='$munkadijId' WHERE munkadiijkoltseg_id = '$id'");
 
   $successfullyCopied = $stmt->execute();
 
   require_once 'naplo.inc.php';
-  $query = mysqli_query($conn,"SELECT * FROM projektmunkadij WHERE Munkadij_id='$munkadijId'");
+  $query = mysqli_query($conn,"SELECT * FROM projektmunkadij WHERE munkadij_id='$munkadijId'");
   $row = mysqli_fetch_array($query);
 
-  $query2 = mysqli_query($conn,"SELECT * FROM munkafajta WHERE Id='$id'");
+  $query2 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE munkadiijkoltseg_id='$id'");
   $row2 = mysqli_fetch_array($query2);
-  $szoveg = ("update munkafajta: ".$row2['Megnevezes']." to ".$row['pm_MunkaFajta']."");
+  $szoveg = ("update munkadijkoltseg: ".$row2['munkadijkoltseg_megnevezes']." to ".$row['pm_MunkaFajta']."");
   naplozas($szoveg);
 
   if ($successfullyCopied) {

@@ -39,24 +39,24 @@
 
             <?php
             $pid = $_SESSION['projektId'];
-            $query="SELECT * FROM egyebkoltseg WHERE parent_id IS NULL AND project_id = '$pid'";
+            $query="SELECT * FROM egyebkoltseg WHERE parent_id IS NULL AND projekt_id = '$pid'";
             $parents=mysqli_query($conn,$query);
 
             while ($row=mysqli_fetch_array($parents))
             {?>
 
-              <tr id="<?php echo $row['Id']; ?>">
-              <?php echo "<td>".$row['Id']."</td>";
+              <tr id="<?php echo $row['egyebkoltseg_id']; ?>">
+              <?php echo "<td>".$row['egyebkoltseg_id']."</td>";
               echo  "<td></td>";
-              echo "<td><b>".$row['Megnevezes']."</b></td>";
-              echo "<td>".$row["ME"]."</td>";
-              echo "<td>".$row["Mennyiseg"]."</td>";
+              echo "<td><b>".$row['egyebkoltseg_megnevezes']."</b></td>";
+              echo "<td>".$row["egyebkoltseg_mertekegyseg"]."</td>";
+              echo "<td>".$row["egyebkoltseg_mennyiseg"]."</td>";
               echo "<td></td><td></td>";
               $sorid=$row['Id'];?>
               <td id='del'><span class='deleteek' data-id='<?= $sorid; ?>'>Törlés</span></td>
               </tr>
               <?php
-              $arresz = show_children($row['Id']);
+              $arresz = show_children($row['egyebkoltseg_id']);
               $teljesar=$teljesar+$arresz;
             }
             echo  "<tr>";
@@ -68,7 +68,7 @@
           echo  "</div>";
         }
         else {
-          echo '<p>You are logged out!</p>';
+          echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
         ?>
       </div>
@@ -82,39 +82,40 @@ function show_children($parentID, $depth=1){
   $children = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE parent_id=$parentID");
 
   while ($row = mysqli_fetch_array($children)){
-    $sorid=$row['Id'];?>
-    <tr id="<?php echo $row['Id']; ?>">
-    <?php if ($row['Mennyiseg']==NULL) {
-      echo "<td>".$row['Id']."</td>";
-      echo "<td><b>".str_repeat("&nbsp;", $depth * 5).$row['Megnevezes']."</b></td>";
+    $sorid=$row['egyebkoltseg_id'];?>
+    <tr id="<?php echo $row['egyebkoltseg_id']; ?>">
+    <?php if ($row['egyebkoltseg_mennyiseg']==NULL) {
+      echo "<td>".$row['egyebkoltseg_id']."</td>";
+      echo "<td><b>".str_repeat("&nbsp;", $depth * 5).$row['egyebkoltseg_megnevezes']."</b></td>";
       echo "<td></td><td></td><td></td><td></td>";?>
       <td id='del'><span class='deleteek' data-id='<?= $sorid; ?>'>Törlés</span></td>
       <?php echo "</tr>";
-      $arresz = show_children($row['Id'], $depth+1);
+      $arresz = show_children($row['egyebkoltseg_id'], $depth+1);
       $szintar=$szintar+$arresz;
       $osszegkiiras = 1;
     }
     else {
-      $munkadij = mysqli_query($conn,"SELECT Oraber FROM munkadij
+      $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
                     INNER JOIN egyebkoltseg
-                    ON munkadij.Id = egyebkoltseg.munkadij_id
-                    WHERE egyebkoltseg.Id ='$sorid'");
+                    ON munkadij.munkadij_id = egyebkoltseg.munkadij_id
+                    WHERE egyebkoltseg.egyebkoltseg_id ='$sorid'");
       $row2=mysqli_fetch_array($munkadij);
-      echo "<td>".$row['Id']."</td>";
+      echo "<td>".$row['egyebkoltseg_id']."</td>";
       echo "<td id='mv'><select name='munkavegzo' id='munkavegzo'>";
       $mf = mysqli_query($conn, "SELECT * FROM munkadij");
 
       while ($row5 = $mf->fetch_assoc()){ ?>
-        <option value="<?=$row5['Id'] ?> " <?=$row5['Id'] == $row['munkadij_id'] ? ' selected="selected"' : '';?>> <?=$row5['MunkaFajta'] ?></option>
+        <option value="<?=$row5['munkadij_id'] ?> " <?=$row5['munkadij_id'] ==
+        $row['munkadij_id'] ? ' selected="selected"' : '';?>> <?=$row5['munkadij_fajta'] ?></option>
         <?php
       }
       echo "</select></td>";
-      echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['Megnevezes']."</td>";
-      echo "<td>".$row["ME"]."</td>";
-      echo "<td>".$row["Mennyiseg"]."</td>";
-      echo "<td>".$row2["Oraber"]."</td>";
-      if ($row['Mennyiseg']!=NULL) {
-        $sorar=$row['Mennyiseg']*$row2['Oraber'];
+      echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['egyebkoltseg_megnevezes']."</td>";
+      echo "<td>".$row["egyebkoltseg_mertekegyseg"]."</td>";
+      echo "<td>".$row["egyebkoltseg_mennyiseg"]."</td>";
+      echo "<td>".$row2["munkadij_oraber"]."</td>";
+      if ($row['egyebkoltseg_mennyiseg']!=NULL) {
+        $sorar=$row['egyebkoltseg_mennyiseg']*$row2['munkadij_oraber'];
         echo "<td>".$sorar."</td>";
         $szintar=$szintar+$sorar;
       }

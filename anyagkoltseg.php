@@ -38,18 +38,18 @@
             <?php
             $pid = $_SESSION['projektId'];
 
-            $query = "SELECT * FROM alkatresz
+            $query = "SELECT * FROM helyi_anyaglista
                   INNER JOIN pa_kapcsolat
-                    ON alkatresz.id = pa_kapcsolat.alkatresz_id
+                    ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
                   INNER JOIN projekt
-                    ON pa_kapcsolat.projekt_id = projekt.idProjekt
-                    WHERE projekt.idProjekt = '$pid'
-                    ORDER BY alkatresz.id";
+                    ON pa_kapcsolat.projekt_id = projekt.projekt_id
+                    WHERE projekt.projekt_id = '$pid'
+                    ORDER BY helyi_anyaglista.helyi_anyaglista_id";
 
             $sor=mysqli_query($conn, $query);
             while ($row=mysqli_fetch_array($sor))
             {
-              $sorar=$row['Egysegar']*$row['DBszam'];
+              $sorar=$row['helyi_anyaglista_egysegar']*$row['pa_dbszam'];
               $anyaglistaar=$anyaglistaar+$sorar;
             }
 
@@ -59,16 +59,16 @@
             while ($row=mysqli_fetch_array($sor2))
             {?>
 
-              <tr id="<?php echo $row['Id']; ?>">
-              <?php echo "<td>".$row['Id']."</td>";
-              echo "<td>".$row['Megnevezes']."</td>";
-              echo "<td>".$row["ME"]."</td>";
-              echo "<td>".$row["Mennyiseg"]."</td>";
-              echo "<td>".$row["Egysegar"]."</td>";
-              $sorar=$row["Mennyiseg"]*$row["Egysegar"];
+              <tr id="<?php echo $row['anyagkoltseg_id']; ?>">
+              <?php echo "<td>".$row['anyagkoltseg_id']."</td>";
+              echo "<td>".$row['anyagkoltseg_megnevezes']."</td>";
+              echo "<td>".$row["anyagkoltseg_mertekegyseg"]."</td>";
+              echo "<td>".$row["anyagkoltseg_mennyiseg"]."</td>";
+              echo "<td>".$row["anyagkoltseg_egysegar"]."</td>";
+              $sorar=$row["anyagkoltseg_mennyiseg"]*$row["anyagkoltseg_egysegar"];
               echo "<td>".$sorar."</td>";
               $teljesar=$teljesar+$sorar;
-              $sorid=$row['Id'];?>
+              $sorid=$row['anyagkoltseg_id'];?>
               <td id='del'><span class='deleteak' data-id='<?= $sorid; ?>'>Törlés</span></td>
               </tr>
               <?php
@@ -92,7 +92,7 @@
           echo  "</div>";
           }
         else {
-          echo '<p>You are logged out!</p>';
+          echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
         ?>
       </div>

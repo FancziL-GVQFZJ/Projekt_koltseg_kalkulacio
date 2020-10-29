@@ -13,7 +13,7 @@ function naplozas($szoveg2){
   $szoveg1 = $fid . ";" . $fnev . ";" . $pid . ";" . $pnev . ";" . $jogosultsag;
   $szoveg3 = $szoveg1 . ";" . $szoveg2;
 
-  $stmt = $conn->prepare("INSERT INTO naplo (Datum, Szoveg)
+  $stmt = $conn->prepare("INSERT INTO naplo (naplo_datum, naplo_cselekmeny)
                  VALUES (CURRENT_TIMESTAMP(), '$szoveg3')");
 
   $successfullyCopied = $stmt->execute();

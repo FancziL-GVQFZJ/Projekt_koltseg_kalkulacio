@@ -14,8 +14,8 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
             echo '<nav class="topnav">
-                <a href="Anyaglista.php">Villamos anyaglista</a>
-                <a href="belsoanyaglista.php">Belső villamos anyaglista</a>
+                <a href="sap_anyaglista.php">Villamos anyaglista</a>
+                <a href="helyi_anyaglista.php">Belső villamos anyaglista</a>
                 <a href="projekt_anyaglista.php">Listázott anyagok</a>
                 <a style="background-color: #ddd;" href="#">Összehasonlítás</a>
             </nav>
@@ -25,11 +25,11 @@
             </form>';
 
             if (isset($_POST['frissitesgomb'])) {
-              $stmt = $conn->prepare("DELETE FROM ohalkatresz");
+              $stmt = $conn->prepare("DELETE FROM sap_osszehasonlitas");
               $successfullyCopied = $stmt->execute();
 
               if ($successfullyCopied) {
-                $stmt2 = $conn->prepare("INSERT INTO ohalkatresz (SELECT * FROM alkatresz)");
+                $stmt2 = $conn->prepare("INSERT INTO sap_osszehasonlitas (SELECT * FROM sap_anyaglista)");
                 $successfullyCopied2 = $stmt2->execute();
 
                 if ($successfullyCopied2) {
@@ -44,42 +44,64 @@
               }
             }
 
-            $sql="SELECT  'alkatresz' AS `set`, a.*
-                  FROM    alkatresz a
-                  WHERE   ROW(a.id, a.Megnevezes, a.SAPSzam, a.ME, a.Egysegar) NOT IN
+            $sql1="SELECT  'sap_anyaglista' AS `set`, a.*
+                  FROM    sap_anyaglista a
+                  WHERE   ROW(a.sap_anyaglista_id, a.sap_anyaglista_megnevezes, a.sap_anyaglista_sapszam,
+                          a.sap_anyaglista_mertekegyseg, a.sap_anyaglista_egysegar) NOT IN
                           (
-                          SELECT  Id, Megnevezes, SAPSzam, ME, Egysegar
-                          FROM    ohalkatresz
-                          )
-                  UNION ALL
-                  SELECT  'ohalkatresz' AS `set`, o.*
-                  FROM    ohalkatresz o
-                  WHERE   ROW(o.Id, o.Megnevezes, o.SAPSzam, o.ME, o.Egysegar) NOT IN
+                          SELECT  sap_osszehasonlitas_id, sap_osszehasonlitas_megnevezes, sap_osszehasonlitas_sapszam,
+                          sap_osszehasonlitas_mertekegyseg, sap_osszehasonlitas_egysegar
+                          FROM    sap_osszehasonlitas
+                        )";
+                  //UNION ALL
+            $sql2="SELECT  'sap_osszehasonlitas' AS `set`, o.*
+                  FROM    sap_osszehasonlitas o
+                  WHERE   ROW(o.sap_osszehasonlitas_id, o.sap_osszehasonlitas_megnevezes, o.sap_osszehasonlitas_sapszam,
+                          o.sap_osszehasonlitas_mertekegyseg, o.sap_osszehasonlitas_egysegar) NOT IN
                           (
-                          SELECT  id, Megnevezes, SAPSzam, ME, Egysegar
-                          FROM    alkatresz
+                          SELECT  sap_anyaglista_id, sap_anyaglista_megnevezes, sap_anyaglista_sapszam,
+                          sap_anyaglista_mertekegyseg, sap_anyaglista_egysegar
+                          FROM    sap_anyaglista
                           )";
 
-            $sor=mysqli_query($conn, $sql);
-
+            $sor1=mysqli_query($conn, $sql1);
+            $sor2=mysqli_query($conn, $sql2);
+            echo "Sap anyaglistában van";
             echo "<table id='AnyaglistaTable'>";
             echo "<tr class='fejlec'>";
             echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th>";
-            while ($row=mysqli_fetch_array($sor))
+            while ($row=mysqli_fetch_array($sor1))
             {
-              $sorid=$row['id'];
+              $sorid=$row['sap_anyaglista_id'];
               echo "<tr>";
-              echo "<td>".$row['Id']."</td>";
-              echo "<td>".$row['Megnevezes']."</td>";
-              echo "<td>".$row['SAPSzam']."</td>";
-              echo "<td>".$row['ME']."</td>";
-              echo "<td>".$row['Egysegar']."</td>";
+              echo "<td>".$row['sap_anyaglista_id']."</td>";
+              echo "<td>".$row['sap_anyaglista_megnevezes']."</td>";
+              echo "<td>".$row['sap_anyaglista_sapszam']."</td>";
+              echo "<td>".$row['sap_anyaglista_mertekegyseg']."</td>";
+              echo "<td>".$row['sap_anyaglista_egysegar']."</td>";
+              echo "</tr>";
+            }
+            echo "</table>";
+
+            echo "Sap anyaglistában volt";
+            echo "<table id='AnyaglistaTable'>";
+            echo "<tr class='fejlec'>";
+            echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th>";
+            while ($row=mysqli_fetch_array($sor2))
+            {
+              $sorid=$row['sap_osszehasonlitas_id'];
+              echo "<tr>";
+              echo "<td>".$row['sap_osszehasonlitas_id']."</td>";
+              echo "<td>".$row['sap_osszehasonlitas_megnevezes']."</td>";
+              echo "<td>".$row['sap_osszehasonlitas_sapszam']."</td>";
+              echo "<td>".$row['sap_osszehasonlitas_mertekegyseg']."</td>";
+              echo "<td>".$row['sap_osszehasonlitas_egysegar']."</td>";
               echo "</tr>";
             }
             echo "</table>";
         }
         else {
-          echo '<p>You are logged out!</p>';
+          echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
       ?>
     </main>

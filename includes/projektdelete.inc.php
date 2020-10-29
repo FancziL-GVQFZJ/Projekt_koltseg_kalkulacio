@@ -8,18 +8,18 @@ if(isset($_POST['pid'])){
 }
 
 if ($projektId > 0) {
-  $checkRecord = mysqli_query($conn,"SELECT * FROM projekt WHERE idProjekt = '$projektId'");
+  $checkRecord = mysqli_query($conn,"SELECT * FROM projekt WHERE projekt_id = '$projektId'");
   $totalrows = mysqli_num_rows($checkRecord);
 
   $row=mysqli_fetch_array($checkRecord);
-  $megn=$row['projektNev'];
+  $megn=$row['projekt_nev'];
 
   if ($totalrows > 0) {
-    $stmt = $conn->prepare("DELETE FROM projekt WHERE idProjekt = ?");
+    $stmt = $conn->prepare("DELETE FROM projekt WHERE projekt_id = ?");
     $stmt->bind_param("i", $projektId);
     $successfullyCopied = $stmt->execute();
 
-    $stmt2 = $conn->prepare("DELETE FROM pf_kapcsolat WHERE projektId = ?");
+    $stmt2 = $conn->prepare("DELETE FROM pf_kapcsolat WHERE projekt_id = ?");
     $stmt2->bind_param("i", $projektId);
 
     $successfullyCopied2 = $stmt2->execute();
@@ -57,15 +57,15 @@ exit;
 //   if($id > 0)
 //   {
 //     // Check record exists
-//     $checkRecord = mysqli_query($conn,"SELECT * FROM projekt WHERE idProjekt=".$id);
+//     $checkRecord = mysqli_query($conn,"SELECT * FROM projekt WHERE projekt_id=".$id);
 //     $totalrows = mysqli_num_rows($checkRecord);
 //
 //     $row=mysqli_fetch_array($checkRecord);
-//     $megn=$row['projektNev'];
+//     $megn=$row['projekt_nev'];
 //
 //     if($totalrows > 0)
 //     {
-//       $stmt = $conn->prepare("DELETE FROM projekt WHERE idProjekt = ?");
+//       $stmt = $conn->prepare("DELETE FROM projekt WHERE projekt_id = ?");
 //       $stmt->bind_param("i", $id);
 //       $successfullyCopied = $stmt->execute();
 //

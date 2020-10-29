@@ -5,13 +5,13 @@ session_start();
 $output = '';
 if (isset($_POST["excelexport"])) {
   $pid = $_SESSION['projektId'];
-  $sql = "SELECT * FROM alkatresz
+  $sql = "SELECT * FROM helyi_anyaglista
         INNER JOIN pa_kapcsolat
-          ON alkatresz.id = pa_kapcsolat.alkatresz_id
+          ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
         INNER JOIN projekt
-          ON pa_kapcsolat.projekt_id = projekt.idProjekt
-          WHERE projekt.idProjekt = $pid
-          ORDER BY alkatresz.id";
+          ON pa_kapcsolat.projekt_id = projekt.projekt_id
+          WHERE projekt.projekt_id = '$pid'
+          ORDER BY helyi_anyaglista.helyi_anyaglista_id";
 
   $result=mysqli_query($conn, $sql);
 
@@ -36,16 +36,16 @@ if (isset($_POST["excelexport"])) {
        $output .= '
                         <tr>
                              <td>'.$i.'</td>
-                             <td>'.$row["Megnevezes"].'</td>
-                             <td>'.$row["SAPSzam"].'</td>
-                             <td>'.$row["ME"].'</td>
-                             <td>'.$row["Egysegar"].'</td>
-                             <td>'.$row["DBszam"].'</td>
-                             <td>'.$row["DBszam"]*$row["Egysegar"].'</td>
+                             <td>'.$row["helyi_anyaglista_megnevezes"].'</td>
+                             <td>'.$row["helyi_anyaglista_sapszam"].'</td>
+                             <td>'.$row["helyi_anyaglista_mertekegyseg"].'</td>
+                             <td>'.$row["helyi_anyaglista_egysegar"].'</td>
+                             <td>'.$row["pa_dbszam"].'</td>
+                             <td>'.$row["pa_dbszam"]*$row["helyi_anyaglista_egysegar"].'</td>
                         </tr>
        ';
 
-       $sorar=$row["DBszam"]*$row["Egysegar"];
+       $sorar=$row["pa_dbszam"]*$row["Egysegar"];
        $teljesar=$teljesar+$sorar;
        $i++;
       }

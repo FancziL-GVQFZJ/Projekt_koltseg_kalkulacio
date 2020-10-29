@@ -1,6 +1,5 @@
 <?php
 require 'dbh.inc.php';
-//require ('../fpdf182/fpdf.php');
 require ('../fpdf182/writehtml.php');
 
 include 'anyaglistanyomtatas.inc.php';

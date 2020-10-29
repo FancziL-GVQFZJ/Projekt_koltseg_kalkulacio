@@ -3,7 +3,7 @@
 $servername = "localhost";
 $dBUsername = "root";
 $dBPassword = "mysql";
-$dBname = "szakbazis";
+$dBname = "kalkulacio_db";
 
 $conn = mysqli_connect($servername,$dBUsername,$dBPassword,$dBname);
 

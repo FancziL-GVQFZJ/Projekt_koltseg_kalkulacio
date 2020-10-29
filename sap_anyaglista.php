@@ -6,7 +6,6 @@
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
 
-
 <div id="container">
   <div id="main">
     <main>
@@ -15,8 +14,8 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
             echo '<nav class="topnav">
-                <a href="Anyaglista.php">Villamos anyaglista</a>
-                <a style="background-color: #ddd;" href="#">Belső villamos anyaglista</a>
+                <a style="background-color: #ddd;" href="#">Villamos anyaglista</a>
+                <a href="helyi_anyaglista.php">Belső villamos anyaglista</a>
                 <a href="projekt_anyaglista.php">Listázott anyagok</a>
                 <a href="osszehasonlitas.php">Összehasonlítás</a>
             </nav>
@@ -24,31 +23,28 @@
 
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Keresés..">';
 
-            $sql="SELECT * FROM belsoalkatresz";
+            $sql="SELECT * FROM sap_anyaglista";
             $sor=mysqli_query($conn, $sql);
 
             echo "<table id='AnyaglistaTable'>";
             echo "<tr class='fejlec'>";
-            for($i=0;$i<5;$i++)
-            {
-              echo "<td>".mysqli_fetch_field_direct($sor, $i)->name."</td>";
-            }
+            echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th></th>";
             while ($row=mysqli_fetch_array($sor))
             {
-              $sorid=$row['Id'];
+              $sorid=$row['sap_anyaglista_id'];
               echo "<tr>";
-              echo "<td>".$row['Id']."</td>";
-              echo "<td>".$row['Megnevezes']."</td>";
-              echo "<td>".$row['SAPSzam']."</td>";
-              echo "<td>".$row['ME']."</td>";
-              echo "<td>".$row['Egysegar']."</td>";?>
+              echo "<td>".$row['sap_anyaglista_id']."</td>";
+              echo "<td>".$row['sap_anyaglista_megnevezes']."</td>";
+              echo "<td>".$row['sap_anyaglista_sapszam']."</td>";
+              echo "<td>".$row['sap_anyaglista_mertekegyseg']."</td>";
+              echo "<td>".$row['sap_anyaglista_egysegar']."</td>";?>
               <td id='add'><span class='addtocart' data-id='<?= $sorid; ?>'>Kiválasztás</span></td>
               <?php echo "</tr>";
             }
             echo "</table>";
         }
         else {
-          echo '<p>You are logged out!</p>';
+          echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
       ?>
     </main>
@@ -56,5 +52,5 @@
 </div>
 
 <?php
-  require "footer.php";
+    require "footer.php";
 ?>

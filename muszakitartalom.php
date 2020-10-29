@@ -28,7 +28,7 @@
           $pid = $_SESSION['projektId'];
           $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");
           $row = mysqli_fetch_array($result);
-          $leiras=$row['tartalom'];
+          $leiras=$row['muszakitartalom_tartalom'];
           ?>
 
           <form method="post" action="includes/insertmt.inc.php">
@@ -38,7 +38,7 @@
 
           <?php }
         else {
-          echo '<p>You are logged out!</p>';
+          echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
         ?>
       </div>

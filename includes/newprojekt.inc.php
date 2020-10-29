@@ -10,25 +10,26 @@
     if (($projektneve != null) && ($projektneve != "")) {
 
 
-      $stmt = $conn->prepare("INSERT INTO projekt (projektNev)
+      $stmt = $conn->prepare("INSERT INTO projekt (projekt_nev)
                                           VALUES ('$projektneve')");
       $successfullyCopied = $stmt->execute();
 
       if ($successfullyCopied) {
 
         $id = $conn -> insert_id;
-        $stmt2 = $conn->prepare("INSERT INTO pf_kapcsolat (userId, projektId)
+        $stmt2 = $conn->prepare("INSERT INTO pf_kapcsolat (felhasznalo_id, projekt_id)
                                                   VALUES ('$fid','$id')");
         $successfullyCopied2 = $stmt2->execute();
 
         if ($successfullyCopied2) {
           $dij=mysqli_query($conn,"SELECT * FROM munkadij");
           while ($row=mysqli_fetch_array($dij)){
-            $mid=$row['Id'];
-            $munkafajta=$row['MunkaFajta'];
-            $oraber=$row['Oraber'];
-            $stmt3 = $conn->prepare("INSERT INTO projektmunkadij (Munkadij_id, Projekt_id, pm_MunkaFajta, pm_Oraber)
-                                                      VALUES ('$mid','$id','$munkafajta','$oraber')");
+            $mid=$row['munkadij_id'];
+            $munkafajta=$row['munkadij_fajta'];
+            $oraber=$row['munkadij_oraber'];
+            $stmt3 = $conn->prepare("INSERT INTO projektmunkadij (projekt_id, munkadij_id,
+                                      projektmunkadij_munkafajta, projektmunkadij_oraber)
+                                                      VALUES ('$id','$mid','$munkafajta','$oraber')");
             $successfullyCopied3 = $stmt3->execute();
           }
         }
