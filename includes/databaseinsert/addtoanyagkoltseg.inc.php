@@ -1,5 +1,5 @@
 <?php
-require 'dbh.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
 session_start();
 
 $pid = $_SESSION['projektId'];
@@ -10,7 +10,7 @@ $stmt = $conn->prepare("INSERT INTO anyagkoltseg (projekt_id, anyagkoltseg_megne
                                           VALUES ('$pid','$megn','db','1','1')");
 $successfullyCopied = $stmt->execute();
 
-require_once 'naplo.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
 $szoveg = ("insert anyagkoltseg ". $megn ."");
 naplozas($szoveg);
 

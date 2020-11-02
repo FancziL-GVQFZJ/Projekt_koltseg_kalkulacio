@@ -8,7 +8,7 @@ $(document).ready(function(){
    var confirmalert = confirm("Biztosan be akarok helyezni a listába?",addcartid);
    if (confirmalert == true) {
       $.ajax({
-        url: 'includes/insertpa.inc.php',
+        url: 'includes/databaseinsert/insertpa.inc.php',
         type: 'POST',
         data: { id:addcartid },
         success: function(response){

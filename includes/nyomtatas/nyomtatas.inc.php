@@ -1,7 +1,6 @@
 <?php
-require 'dbh.inc.php';
-require ('../fpdf182/writehtml.php');
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/fpdf182/writehtml.php';
 include 'anyaglistanyomtatas.inc.php';
 include 'anyagkoltsegnyomtatas.inc.php';
 include 'munkadijkoltsegnyomtatas.inc.php';

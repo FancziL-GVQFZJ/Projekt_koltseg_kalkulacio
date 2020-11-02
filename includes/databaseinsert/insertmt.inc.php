@@ -1,5 +1,5 @@
 <?php
-require 'dbh.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
 session_start();
 
 $editorContent = '';
@@ -22,7 +22,7 @@ if(isset($_POST['mtsubmit'])){
                                               VALUES ('$pid','$editorContent')");
         }
 
-        require_once 'naplo.inc.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
         $szoveg = ("insert/update muszakitartalom");
         naplozas($szoveg);
 

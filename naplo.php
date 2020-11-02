@@ -10,7 +10,7 @@
   <div id="main">
     <main>
       <?php
-      require 'includes/dbh.inc.php';
+      require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId'])) {
           echo '<nav class="topnav">
             <ul>
@@ -37,7 +37,7 @@
             $sorid=$row['id'];
             echo "<tr>";
             echo "<td>".$row['naplo_datum']."</td>";
-            echo "<td>".$row['naplo_cselekmeny']."</td>";
+            echo "<td>".$row['naplo_esemeny']."</td>";
             echo "</tr>";
           }
           echo "</table>";

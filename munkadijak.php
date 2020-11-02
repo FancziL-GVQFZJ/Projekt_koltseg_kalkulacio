@@ -11,7 +11,7 @@
     <main>
       <div>
         <?php
-        require 'includes/dbh.inc.php';
+        require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId'])) { ?>
           <nav class="topnav">
             <ul>
@@ -24,7 +24,7 @@
 
           <?php
           echo "<p>Új adat felvétele</p>
-          <form action='includes/addtomunkadij.inc.php' method='post'>
+          <form action='includes/databaseinsert/addtomunkadij.inc.php' method='post'>
           Megnevezés: <input type='text' name='name'>
           Órabér: <input type='text' name='oraber'>
           <input type='submit'>

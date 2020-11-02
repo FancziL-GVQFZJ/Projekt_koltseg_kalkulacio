@@ -1,6 +1,6 @@
 <?php
   if (isset($_POST['newprojekt'])) {
-    require 'dbh.inc.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
     session_start();
 
 
@@ -34,7 +34,7 @@
           }
         }
 
-        require_once 'naplo.inc.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
         $szoveg = ("insert projekt ". $projektneve . "");
         naplozas($szoveg);
 

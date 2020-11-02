@@ -1,5 +1,5 @@
 <?php
-require 'dbh.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
 session_start();
 
 
@@ -10,7 +10,7 @@ $stmt = $conn->prepare("INSERT INTO munkadij (munkadij_fajta, munkadij_oraber)
                                           VALUES ('$megn','$ora')");
 $successfullyCopied = $stmt->execute();
 
-require_once 'naplo.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
 $szoveg = ("insert munkadij ". $megn ."");
 naplozas($szoveg);
 

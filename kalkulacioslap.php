@@ -11,7 +11,7 @@
     <main>
       <div>
         <?php
-        require 'includes/dbh.inc.php';
+        require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) { ?>
           <nav class="topnav">
             <ul>
@@ -242,7 +242,7 @@
 <?php
 
 function show_children($parentID, $i, $depth=1){
-  require 'includes/dbh.inc.php';
+  require 'includes/kapcsolat.inc.php';
   global $mernokmido,$muszereszmido;
   $pid = $_SESSION['projektId'];
 
@@ -302,7 +302,7 @@ function show_children($parentID, $i, $depth=1){
 }
 
 function show_children2($parentID, $depth=1){
-  require 'includes/dbh.inc.php';
+  require 'includes/kapcsolat.inc.php';
   $children = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE parent_id=$parentID");
 
   while ($row = mysqli_fetch_array($children)){

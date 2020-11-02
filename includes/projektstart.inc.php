@@ -1,5 +1,5 @@
 <?php
-require '../includes/dbh.inc.php';
+require '../includes/kapcsolat.inc.php';
 
 
 $projektId = 0;

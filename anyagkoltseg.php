@@ -11,7 +11,7 @@
     <main>
       <div>
         <?php
-        require 'includes/dbh.inc.php';
+        require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
           <nav class="topnav">
             <ul>
@@ -25,7 +25,7 @@
           </nav>
 
           <p>Új adat felvétele</p>
-          <form action='includes/addtoanyagkoltseg.inc.php' method='post'>
+          <form action='includes/databaseinsert/addtoanyagkoltseg.inc.php' method='post'>
           Megnevezés: <input type='text' name='name'>
           <input type='submit' value='Felvétel'>
           </form>
@@ -111,10 +111,9 @@
       editable: [[1, 'Megnevezes'],[2, 'ME'],[3, 'Mennyiseg'],[4, 'Egysegar']]
     },
     hideIdentifier: true,
-    url: 'includes/aklive_edit.inc.php',
+    url: 'includes/tableedit/aklive_edit.inc.php',
     onAlways: function() {location.reload()}
   });
-  //Location.reload();
 });
 </script>
 

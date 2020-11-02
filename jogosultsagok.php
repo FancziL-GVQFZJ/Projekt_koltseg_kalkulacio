@@ -11,7 +11,7 @@
     <main>
       <?php
         if (isset($_SESSION['userId'])) {
-          require 'includes/dbh.inc.php';
+          require 'includes/kapcsolat.inc.php';
           echo '<nav class="topnav">
             <ul>
               <li><a href="index.php">Projektek</a></li>

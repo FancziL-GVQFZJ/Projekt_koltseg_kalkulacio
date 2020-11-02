@@ -8,7 +8,7 @@ $(document).ready(function(){
    var confirmalert = confirm("Biztosan törölni akarod ezt a projektet?");
    if (confirmalert == true) {
       $.ajax({
-        url: 'includes/projektdelete.inc.php',
+        url: 'includes/databasedel/projektdelete.inc.php',
         type: 'POST',
         data: { pid:projektid },
         success: function(response){

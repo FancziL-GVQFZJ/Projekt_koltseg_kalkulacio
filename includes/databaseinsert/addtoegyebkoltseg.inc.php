@@ -1,7 +1,6 @@
 <?php
-require 'dbh.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
 session_start();
-
 
 $pid = $_SESSION['projektId'];
 $megn = $_POST['name'];
@@ -12,7 +11,7 @@ $sql = "SELECT * FROM egyebkoltseg
 $sor=mysqli_query($conn, $sql);
 
 $row=mysqli_fetch_array($sor);
-$szulid=$row['Id'];
+$szulid=$row['egyebkoltseg_id'];
 
 
 if (empty($szulo)) {
@@ -39,11 +38,9 @@ else {
                                               VALUES ('$pid','$szulid','$megn','óra',1,2)");
   }
 }
-
-
 $successfullyCopied = $stmt->execute();
 
-require_once 'naplo.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
 $szoveg = ("insert egyebkoltseg ". $megn ."");
 naplozas($szoveg);
 

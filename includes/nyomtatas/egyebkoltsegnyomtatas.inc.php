@@ -1,6 +1,6 @@
 <?php
 function printegyebkoltseg(){
-  require 'dbh.inc.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
   global $pdf;
   $pid = $_SESSION['projektId'];
   $cellaszelesseg=array(84,30,20,20,35);
@@ -39,7 +39,7 @@ function printegyebkoltseg(){
 
 
 function show_children2($parentID, $depth=1){
-  require 'dbh.inc.php';
+  require 'kapcsolat.inc.php';
   global $pdf;
   global $cellaszelesseg;
   global $cellamagassag;

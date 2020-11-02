@@ -10,7 +10,7 @@
   <div id="main">
     <main>
       <?php
-        require 'includes/dbh.inc.php';
+        require 'includes/kapcsolat.inc.php';
         require "PHPExcel/Classes/PHPExcel.php";
         require "PHPExcel/Classes/PHPExcel/Writer/Excel5.php";
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
@@ -89,7 +89,7 @@ $(document).ready(function(){
     editable: [[6, 'pa_dbszam']]
   },
   hideIdentifier: true,
-  url: 'includes/live_edit.inc.php',
+  url: 'includes/tableedit/live_edit.inc.php',
   onAlways: function() {location.reload()}
 });
 });

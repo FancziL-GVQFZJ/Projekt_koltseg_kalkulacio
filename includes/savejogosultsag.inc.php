@@ -1,5 +1,5 @@
 <?php
-require 'dbh.inc.php';
+require 'kapcsolat.inc.php';
 session_start();
 $id=$_POST["id"];
 $pid=$_POST["pid"];

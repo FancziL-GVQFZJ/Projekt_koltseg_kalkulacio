@@ -1,5 +1,5 @@
 <?php
-include 'dbh.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
 session_start();
 
 $id = 0;
@@ -13,7 +13,7 @@ if($id > 0){
   $totalrows = mysqli_num_rows($checkRecord);
 
   $row=mysqli_fetch_array($checkRecord);
-  $megn=$row['Megnevezes'];
+  $megn=$row['anyagkoltseg_megnevezes'];
 
   if($totalrows > 0){
 
@@ -21,7 +21,7 @@ if($id > 0){
     $stmt->bind_param("i", $id);
     $successfullyCopied = $stmt->execute();
 
-    require_once 'naplo.inc.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
     $szoveg = ("delete anyagkoltseg ". $megn ."");
     naplozas($szoveg);
 

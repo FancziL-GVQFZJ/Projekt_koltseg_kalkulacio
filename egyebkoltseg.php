@@ -11,7 +11,7 @@
     <main>
       <div>
         <?php
-        require 'includes/dbh.inc.php';
+        require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
           <nav class="topnav">
             <ul>
@@ -25,7 +25,7 @@
           </nav>
 
           <p>Új adat felvétele</p>
-          <form action='includes/addtoegyebkoltseg.inc.php' method='post'>
+          <form action='includes/databaseinsert/addtoegyebkoltseg.inc.php' method='post'>
           Megnevezés: <input type='text' name='name'>
           Szülő: <input type='text' name='szulo'>
           Cím: <input type='checkbox' name='cim' value='value1'>
@@ -52,7 +52,7 @@
               echo "<td>".$row["egyebkoltseg_mertekegyseg"]."</td>";
               echo "<td>".$row["egyebkoltseg_mennyiseg"]."</td>";
               echo "<td></td><td></td>";
-              $sorid=$row['Id'];?>
+              $sorid=$row['egyebkoltseg_id'];?>
               <td id='del'><span class='deleteek' data-id='<?= $sorid; ?>'>Törlés</span></td>
               </tr>
               <?php
@@ -78,7 +78,7 @@
 <?php
 
 function show_children($parentID, $depth=1){
-  require 'includes/dbh.inc.php';
+  require 'includes/kapcsolat.inc.php';
   $children = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE parent_id=$parentID");
 
   while ($row = mysqli_fetch_array($children)){
@@ -149,7 +149,7 @@ function show_children($parentID, $depth=1){
       editable: [[2, 'Megnevezes'],[3, 'ME'],[4, 'Mennyiseg']]
     },
     hideIdentifier: true,
-    url: 'includes/eklive_edit.inc.php',
+    url: 'includes/tableedit/eklive_edit.inc.php',
     onAlways: function() {location.reload()}
   });
   //Location.reload();

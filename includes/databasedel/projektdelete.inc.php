@@ -1,5 +1,5 @@
 <?php
-require '../includes/dbh.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
 
 
 $projektId = 0;
@@ -24,7 +24,7 @@ if ($projektId > 0) {
 
     $successfullyCopied2 = $stmt2->execute();
 
-    require_once 'naplo.inc.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
     $szoveg = ("delete projekt ". $megn ."");
     naplozas($szoveg);
     if ($successfullyCopied && $successfullyCopied2) {
@@ -50,7 +50,7 @@ exit;
 
 
 //   if (isset($_POST['projektdel'])){
-//   require 'dbh.inc.php';
+//   require 'kapcsolat.inc.php';
 //
 //   $id = mysqli_real_escape_string($conn,$_POST['projektid']);
 //

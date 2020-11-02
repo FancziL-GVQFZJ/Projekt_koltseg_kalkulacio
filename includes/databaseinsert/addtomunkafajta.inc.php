@@ -1,5 +1,5 @@
 <?php
-require 'dbh.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
 session_start();
 
 $pid = $_SESSION['projektId'];
@@ -32,7 +32,7 @@ else {
 }
 $successfullyCopied = $stmt->execute();
 
-require_once 'naplo.inc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
 $szoveg = ("insert munkadijkoltseg ". $megn ."");
 naplozas($szoveg);
 

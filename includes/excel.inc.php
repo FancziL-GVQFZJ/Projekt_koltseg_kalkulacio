@@ -1,5 +1,5 @@
 <?php
-require 'dbh.inc.php';
+require 'kapcsolat.inc.php';
 session_start();
 
 $output = '';
@@ -45,7 +45,7 @@ if (isset($_POST["excelexport"])) {
                         </tr>
        ';
 
-       $sorar=$row["pa_dbszam"]*$row["Egysegar"];
+       $sorar=$row["pa_dbszam"]*$row["helyi_anyaglista_egysegar"];
        $teljesar=$teljesar+$sorar;
        $i++;
       }

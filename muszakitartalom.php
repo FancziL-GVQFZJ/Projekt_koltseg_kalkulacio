@@ -11,7 +11,7 @@
     <main>
       <div>
         <?php
-        require 'includes/dbh.inc.php';
+        require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
           <nav class="topnav">
             <ul>
@@ -31,7 +31,7 @@
           $leiras=$row['muszakitartalom_tartalom'];
           ?>
 
-          <form method="post" action="includes/insertmt.inc.php">
+          <form method="post" action="includes/databaseinsert/insertmt.inc.php">
             <textarea id="mteditor" name="mteditor"><?php echo $leiras?></textarea>
             <input type="submit" name="mtsubmit" value="Mentés">
           </form>

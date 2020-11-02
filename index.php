@@ -11,7 +11,7 @@
     <main>
       <?php
         if (isset($_SESSION['userId'])) {
-          require 'includes/dbh.inc.php';
+          require 'includes/kapcsolat.inc.php';
           $fid = $_SESSION['userId'];
 
           echo '<nav class="topnav">
@@ -49,7 +49,7 @@
                 echo "</tr>";
               }
               echo "</table>"; ?>
-              <form name="form1" action="includes/newprojekt.inc.php" method="post">
+              <form name="form1" action="includes/databaseinsert/newprojekt.inc.php" method="post">
               <input type="hidden" name="projektnev" value="">
               <button type="submit" name="newprojekt" onclick="projektNevMegadas()">Új projekt létrehozása</button>
               </form> <?php

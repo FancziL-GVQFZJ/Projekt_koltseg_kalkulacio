@@ -1,7 +1,6 @@
 <?php
-
 function printmuszakitartalom(){
-  require 'dbh.inc.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
   global $pdf;
   $pid = $_SESSION['projektId'];
   $pdf->Cell(0 ,5,'4.Műszaki tartalom:',0,1,'L');//end of line

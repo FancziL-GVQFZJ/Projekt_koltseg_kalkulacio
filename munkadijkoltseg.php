@@ -11,7 +11,7 @@
     <main>
       <div>
         <?php
-        require 'includes/dbh.inc.php';
+        require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
           <nav class="topnav">
             <ul>
@@ -30,13 +30,13 @@
                         WHERE projekt_id ='$pid' AND munkadijkoltseg_mennyiseg IS NULL");
 
           echo '<p>Új adat felvétele</p>
-          <form action="includes/addtomunkafajta.inc.php" method="post">
+          <form action="includes/databaseinsert/addtomunkafajta.inc.php" method="post">
             Megnevezés: <input type="text" name="name" id="megnevezesid">
 
             Csoport: <select style="display: none;" name="csoport" id="csoportid" onchange="OnSelectionChange(this.value)">';
             echo "<option  value='0' selected>nincs</option>";
               while ($row4 = $csoport->fetch_assoc()){ ?>
-                <option value="<?=$row4['Id'] ?> " > <?=$row4['Megnevezes'] ?></option>  <?php
+                <option value="<?=$row4['munkadiijkoltseg_id'] ?> " > <?=$row4['munkadijkoltseg_megnevezes'] ?></option>  <?php
               }
             echo '</select>';
             echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid'>";
@@ -47,7 +47,7 @@
             if ($id>0) {
               echo 'sas';
             }
-            // require 'includes/dbh.inc.php';
+            // require 'includes/kapcsolat.inc.php';
             // $query1 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
             //               WHERE parent_id ='$id' AND Mennyiseg IS NOT NULL");
             // $resurt1 = mysqli_num_rows($query1);
@@ -133,7 +133,7 @@
 
 <?php
 function show_children($parentID, $i, $depth=1){
-  require 'includes/dbh.inc.php';
+  require 'includes/kapcsolat.inc.php';
   $pid = $_SESSION['projektId'];
   global $mernokmido,$muszereszmido;
 
@@ -219,7 +219,7 @@ function show_children($parentID, $i, $depth=1){
       editable: [[2, 'Megnevezes'],[3, 'ME'],[4, 'Mennyiseg']]
     },
     hideIdentifier: true,
-    url: 'includes/mdlive_edit.inc.php',
+    url: 'includes/tableedit/mdlive_edit.inc.php',
     onAlways: function() {location.reload()}
   });
 });
