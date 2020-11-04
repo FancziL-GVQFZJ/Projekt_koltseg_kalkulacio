@@ -1,6 +1,7 @@
 <?php
+  $thisPage1='Projektek';
   $thisPage='Kezdooldal';
-  require "header.php";
+  require "kezdolapheader.php";
   session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
@@ -13,15 +14,6 @@
         if (isset($_SESSION['userId'])) {
           require 'includes/kapcsolat.inc.php';
           $fid = $_SESSION['userId'];
-
-          echo '<nav class="topnav">
-            <ul>
-              <li><a style="background-color: #ddd;" href="#">Projektek</a></li>
-              <li><a href="jogosultsagok.php">Jogosultságok</a></li>
-              <li><a href="munkadijak.php">Munkadíjak</a></li>
-              <li><a href="naplo.php">Naplo</a></li>
-            </ul>
-          </nav>';
 
           echo "<div class='kezdolap'>";
             echo "<div class='lap'>";

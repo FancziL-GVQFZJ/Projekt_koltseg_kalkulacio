@@ -1,7 +1,8 @@
 <?php
-    $thisPage='Anyaglista';
-    require "header.php";
-    session_start();
+  $thisPage='Anyaglista';
+  $thisPage1='Osszehas';
+  require "anyaglistaheader.php";
+  session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
@@ -13,14 +14,7 @@
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
-            echo '<nav class="topnav">
-                <a href="sap_anyaglista.php">Villamos anyaglista</a>
-                <a href="helyi_anyaglista.php">Belső villamos anyaglista</a>
-                <a href="projekt_anyaglista.php">Listázott anyagok</a>
-                <a style="background-color: #ddd;" href="#">Összehasonlítás</a>
-            </nav>
-
-            <form method="post">
+            echo '<form method="post">
              <input type="submit" value="Frissítés" name="frissitesgomb">
             </form>';
 

@@ -1,6 +1,7 @@
 <?php
     $thisPage='Kalkulacioslap';
-    require "header.php";
+    $thisPage1='Nyomtatas';
+    require "kalkulacioslapheader.php";
     session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
@@ -13,16 +14,6 @@
         <?php
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) { ?>
-          <nav class="topnav">
-            <ul>
-              <li><a href="anyagkoltseg.php">Anyagköltség</a></li>
-              <li><a href="munkadijkoltseg.php">Munkadíj költség</a></li>
-              <li><a href="egyebkoltseg.php">Egyéb költség</a></li>
-              <li><a href="muszakitartalom.php">Műszaki tartalom</a></li>
-              <li><a href="kalkulacioslap.php">Kalkulációs Lap</a></li>
-              <li><a style="background-color: #ddd;" href="#">Nyomtatási Lap</a></li>
-            </ul>
-          </nav>
 
           <?php
           $pid = $_SESSION['projektId'];
@@ -37,7 +28,6 @@
           $checkRecord4 = mysqli_query($conn,"SELECT * FROM muszakitartalom WHERE projekt_id = '$pid'");
           $totalrows4 = mysqli_num_rows($checkRecord4);
           ?>
-
 
           <p>Nyomtatási adatok</p>
           <form action='includes/nyomtatas.inc.php' method='post'><br>

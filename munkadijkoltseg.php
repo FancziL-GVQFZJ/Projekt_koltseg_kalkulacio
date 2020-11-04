@@ -1,6 +1,7 @@
 <?php
     $thisPage='Kalkulacioslap';
-    require "header.php";
+    $thisPage1='Munkadij';
+    require "kalkulacioslapheader.php";
     session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
@@ -13,17 +14,7 @@
         <?php
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
-          <nav class="topnav">
-            <ul>
-              <li><a href="anyagkoltseg.php">Anyagköltség</a></li>
-              <li><a style="background-color: #ddd;" href="#">Munkadíj költség</a></li>
-              <li><a href="egyebkoltseg.php">Egyéb költség</a></li>
-              <li><a href="muszakitartalom.php">Műszaki tartalom</a></li>
-              <li><a href="kalkulacioslap.php">Kalkulációs Lap</a></li>
-              <li><a href="nyomtatasilap.php">Nyomtatási Lap</a></li>
-            </ul>
-          </nav>
-
+          
           <?php
           $pid = $_SESSION['projektId'];
           $csoport = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
@@ -43,27 +34,13 @@
             echo "<input type='submit' style='display: none;' value='Felvétel' id='felvetelid'></submit>
           </form>";
 
-          function Cimlehetosegmegadas($id) {
-            if ($id>0) {
-              echo 'sas';
-            }
-            // require 'includes/kapcsolat.inc.php';
-            // $query1 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
-            //               WHERE parent_id ='$id' AND Mennyiseg IS NOT NULL");
-            // $resurt1 = mysqli_num_rows($query1);
-            //
-            // $query2 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
-            //               WHERE Id = '$id' AND parent_id IS NOT NULL AND Mennyiseg IS NULL");
-            // $resurt2 = mysqli_num_rows($query2);
-            //
-            // if ($resurt1 < 1 || $resurt2 < 1) {
-            //
-            // }else {
-            //
-            // }
-            // echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid'>";
-
-          }
+          // $query1 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+          //               WHERE parent_id ='$id' AND Mennyiseg IS NOT NULL");
+          // $resurt1 = mysqli_num_rows($query1);
+          //
+          // $query2 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+          //               WHERE Id = '$id' AND parent_id IS NOT NULL AND Mennyiseg IS NULL");
+          // $resurt2 = mysqli_num_rows($query2);
 
 
           $mernokmido=0;

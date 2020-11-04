@@ -1,6 +1,7 @@
 <?php
     $thisPage='Kalkulacioslap';
-    require "header.php";
+    $thisPage1='Kalkulacio';
+    require "kalkulacioslapheader.php";
     session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
@@ -13,18 +14,6 @@
         <?php
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) { ?>
-          <nav class="topnav">
-            <ul>
-              <?php if ($jogosultsag == 'iras' || $jogosultsag == 'admin'){ ?>
-                <li><a href="anyagkoltseg.php">Anyagköltség</a></li>
-                <li><a href="munkadijkoltseg.php">Munkadíj költség</a></li>
-                <li><a href="egyebkoltseg.php">Egyéb költség</a></li>
-                <li><a href="muszakitartalom.php">Műszaki tartalom</a></li>
-              <?php } ?>
-              <li><a style="background-color: #ddd;" href='#'>Kalkulációs Lap</a></li>
-              <li><a href="nyomtatasilap.php">Nyomtatási Lap</a></li>
-            </ul>
-          </nav>
 
           <?php
           $pid = $_SESSION['projektId'];
@@ -343,7 +332,6 @@ function show_children2($parentID, $depth=1){
   echo  "<td colspan='3' align='right'>Összegzett ár:</td>";
   echo  "<td align='left'>$osszegar</td>";
   echo  "</tr>";
-
   return $osszegar;
 }
 ?>

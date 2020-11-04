@@ -1,6 +1,7 @@
 <?php
     $thisPage='Kalkulacioslap';
-    require "header.php";
+    $thisPage1='Egyeb';
+    require "kalkulacioslapheader.php";
     session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
@@ -13,17 +14,7 @@
         <?php
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
-          <nav class="topnav">
-            <ul>
-              <li><a href="anyagkoltseg.php">Anyagköltség</a></li>
-              <li><a href="munkadijkoltseg.php">Munkadíj költség</a></li>
-              <li><a style="background-color: #ddd;" href="#">Egyéb költség</a></li>
-              <li><a href="muszakitartalom.php">Műszaki tartalom</a></li>
-              <li><a href="kalkulacioslap.php">Kalkulációs Lap</a></li>
-              <li><a href="nyomtatasilap.php">Nyomtatási Lap</a></li>
-            </ul>
-          </nav>
-
+          
           <p>Új adat felvétele</p>
           <form action='includes/databaseinsert/addtoegyebkoltseg.inc.php' method='post'>
           Megnevezés: <input type='text' name='name'>

@@ -1,6 +1,7 @@
 <?php
+    $thisPage1='Munkadijak';
     $thisPage='Kezdooldal';
-    require "header.php";
+    require "kezdolapheader.php";
     session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
@@ -12,17 +13,8 @@
       <div>
         <?php
         require 'includes/kapcsolat.inc.php';
-        if (isset($_SESSION['userId'])) { ?>
-          <nav class="topnav">
-            <ul>
-              <li><a href="index.php">Projektek</a></li>
-              <li><a href="jogosultsagok.php">Jogosultságok</a></li>
-              <li><a style="background-color: #ddd;" href="#">Munkadíjak</a></li>
-              <li><a href="naplo.php">Naplo</a></li>
-            </ul>
-          </nav>
+        if (isset($_SESSION['userId'])) {
 
-          <?php
           echo "<p>Új adat felvétele</p>
           <form action='includes/databaseinsert/addtomunkadij.inc.php' method='post'>
           Megnevezés: <input type='text' name='name'>

@@ -1,6 +1,7 @@
 <?php
+    $thisPage1='Naplo';
     $thisPage='Kezdooldal';
-    require "header.php";
+    require "kezdolapheader.php";
     session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
@@ -12,21 +13,10 @@
       <?php
       require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId'])) {
-          echo '<nav class="topnav">
-            <ul>
-              <li><a href="index.php">Projektek</a></li>
-              <li><a href="jogosultsagok.php">Jogosultságok</a></li>
-              <li><a href="munkadijak.php">Munkadíjak</a></li>
-              <li><a style="background-color: #ddd;" href="#">Naplo</a></li>
-            </ul>
-          </nav>';
-
-          echo "<input type='date' name='dateFrom' value='date('Y-m-d')'/>";
 
           echo '<input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Keresés..">';
 
-          $sql="SELECT * FROM naplo ORDER BY naplo_datum desc ";
-
+          $sql="SELECT * FROM naplo ORDER BY naplo_datum desc";
           $sor=mysqli_query($conn, $sql);
 
           echo "<table id='AnyaglistaTable'>";

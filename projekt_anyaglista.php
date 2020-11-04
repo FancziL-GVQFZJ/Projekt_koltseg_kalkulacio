@@ -1,6 +1,7 @@
 <?php
   $thisPage='Anyaglista';
-  require "header.php";
+  $thisPage1='Projekt';
+  require "anyaglistaheader.php";
   session_start();
 ?>
 <style><?php require 'css/navbar.css';?></style>
@@ -14,13 +15,6 @@
         require "PHPExcel/Classes/PHPExcel.php";
         require "PHPExcel/Classes/PHPExcel/Writer/Excel5.php";
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
-
-          echo '<nav class="topnav">
-              <a href="sap_anyaglista.php">Villamos anyaglista</a>
-              <a href="helyi_anyaglista.php">Belső villamos anyaglista</a>
-              <a style="background-color: #ddd;"href="#">Listázott anyagok</a>
-              <a href="osszehasonlitas.php">Összehasonlítás</a>
-          </nav>';
 
             $pid = $_SESSION['projektId'];
             $sql = "SELECT * FROM helyi_anyaglista
