@@ -18,7 +18,7 @@ if($projektId > 0){
     $row=mysqli_fetch_array($checkRecord);
     $projekt_nev = $row['projekt_nev'];
     $fid = $_SESSION['userId'];
-    $fnev = $_SESSION['userUid'];
+    $fnev = $_SESSION['userName'];
 
     $_SESSION['projektId'] = $projektId;
     $_SESSION['projektNeve'] = $projekt_nev;

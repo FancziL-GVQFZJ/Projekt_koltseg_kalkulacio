@@ -10,12 +10,12 @@ $stmt = $conn->prepare("INSERT INTO munkadij (munkadij_fajta, munkadij_oraber)
                                           VALUES ('$megn','$ora')");
 $successfullyCopied = $stmt->execute();
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
 $szoveg = ("insert munkadij ". $megn ."");
 naplozas($szoveg);
 
 if ($successfullyCopied) {
-  header("Location: ../munkadijak.php");
+  header("Location: ../../munkadijak.php");
   exit;
 }
 ?>

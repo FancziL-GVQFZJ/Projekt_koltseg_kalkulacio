@@ -13,6 +13,9 @@
       <div>
         <?php
         require 'includes/kapcsolat.inc.php';
+        require 'includes/kapcsolat.inc.php';
+        require "PHPExcel/Classes/PHPExcel.php";
+        require "PHPExcel/Classes/PHPExcel/Writer/Excel5.php";
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) { ?>
 
           <?php
@@ -30,7 +33,7 @@
           ?>
 
           <p>Nyomtatási adatok</p>
-          <form action='includes/nyomtatas.inc.php' method='post'><br>
+          <form action='includes/nyomtatas/nyomtatas.inc.php' method='post'><br>
           Tárgy: <input type='text' name='name'><br>
           <?php if ($totalrows1 > 0) { ?>
             <input type='checkbox' name='Anyaglista' value='1'>Anyaglista<br>
@@ -49,9 +52,15 @@
           <?php } ?>
           <input type='submit' value='Nyomtatás'  onclick="$('form').attr('target', '_blank');">
           </form>
+          <br>
+          <br>
+          <br>
+
+          <form action="includes/excel.inc.php" method="post">
+            <input type="submit" name="excelexport" value="Anyaglista exportálása excelbe">
+          </form>
 
           <?php
-
         }
         else {
           echo '<p>Jelenleg ki van jelentkezve!</p>';

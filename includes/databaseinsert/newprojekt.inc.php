@@ -34,25 +34,25 @@
           }
         }
 
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
         $szoveg = ("insert projekt ". $projektneve . "");
         naplozas($szoveg);
 
         if ($successfullyCopied3)
         {
-          header("Location: ../index.php?sikeres_felvetel");
+          header("Location: ../../index.php?sikeres_felvetel");
           exit();
         }
         else
         {
-          header("Location: ../index.php?2tablasikertelenosszekapcsolasa");
+          header("Location: ../../index.php?2tablasikertelenosszekapcsolasa");
           exit();
         }
       }
-      header("Location: ../index.php?error=nemjovalami");
+      header("Location: ../../index.php?error=sikertelenfelvetel");
       exit();
     }
-    header("Location: ../index.php?error=adjonmegnevet");
+    header("Location: .//../index.php?error=adjonmegnevet");
     exit();
 
   }

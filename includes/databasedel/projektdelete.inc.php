@@ -24,7 +24,7 @@ if ($projektId > 0) {
 
     $successfullyCopied2 = $stmt2->execute();
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
     $szoveg = ("delete projekt ". $megn ."");
     naplozas($szoveg);
     if ($successfullyCopied && $successfullyCopied2) {

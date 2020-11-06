@@ -1,10 +1,10 @@
 <?php
 function printmunkadijkoltseg(){
-  require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
+  require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
   global $pdf;
   $pid = $_SESSION['projektId'];
-  // $cellaszelesseg=array(84,30,20,20,35);
-  // $cellamagassag=5;
+  $cellaszelesseg=array(84,30,20,20,35);
+  $cellamagassag=5;
   // $mernokmido=0;
   // $muszereszmido=0;
   global $cellaszelesseg;
@@ -59,7 +59,7 @@ function printmunkadijkoltseg(){
 }
 
 function show_children($parentID, $i, $depth=1){
-  require 'kapcsolat.inc.php';
+  require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
   global $pdf;
   global $cellaszelesseg;
   global $cellamagassag;

@@ -21,7 +21,6 @@
     <script src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/jquery-3.5.1.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/ckeditor/ckeditor.js"></script>
-    <script src="/Projekt_koltseg_kalkulacio/ckeditor/ckeditor.js"></script>
     <title>Title</title>
     <meta charset="UTF-8">
   </head>
@@ -38,7 +37,7 @@
         if (isset($_SESSION['userId'])) {
           require 'includes/kapcsolat.inc.php';
           $fid = $_SESSION['userId'];
-          $fnev = $_SESSION['userUid'];
+          $fnev = $_SESSION['userName'];
           $pid = $_SESSION['projektId'];
           $jogosultsag = $_SESSION['jogosultsag'];
           $thisPage == 'Kezdooldal';?>

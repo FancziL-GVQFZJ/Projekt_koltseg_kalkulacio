@@ -14,14 +14,34 @@
         <?php
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
-          
-          <p>Új adat felvétele</p>
+
+          <!-- <p>Új adat felvétele</p>
           <form action='includes/databaseinsert/addtoegyebkoltseg.inc.php' method='post'>
           Megnevezés: <input type='text' name='name'>
           Szülő: <input type='text' name='szulo'>
           Cím: <input type='checkbox' name='cim' value='value1'>
           <input type='submit'>
-          </form>
+          </form> -->
+
+          <?php
+          $pid = $_SESSION['projektId'];
+          $csoport = mysqli_query($conn,"SELECT * FROM egyebkoltseg
+                        WHERE projekt_id ='$pid' AND egyebkoltseg_mennyiseg IS NULL");
+
+          echo '<p>Új adat felvétele</p>
+          <form action="includes/databaseinsert/addtoegyebkoltseg.inc.php" method="post">
+            Megnevezés: <input type="text" name="name" id="megnevezesid">
+
+            Csoport: <select style="display: none;" name="csoport" id="csoportid" onchange="OnSelectionChange(this.value)">';
+            echo "<option  value='0' selected>nincs</option>";
+              while ($row4 = $csoport->fetch_assoc()){ ?>
+                <option value="<?=$row4['egyebkoltseg_id'] ?> " > <?=$row4['egyebkoltseg_megnevezes'] ?></option>  <?php
+              }
+            echo '</select>';
+            echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid'>";
+            echo "<input type='submit' style='display: none;' value='Felvétel' id='felvetelid'></submit>
+          </form>";
+          ?>
 
           <div align= "center" id="nyomtatas">
             <table id='Egyebkoltsegkalkulacio'>
@@ -70,6 +90,7 @@
 
 function show_children($parentID, $depth=1){
   require 'includes/kapcsolat.inc.php';
+  $pid = $_SESSION['projektId'];
   $children = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE parent_id=$parentID");
 
   while ($row = mysqli_fetch_array($children)){
@@ -86,27 +107,27 @@ function show_children($parentID, $depth=1){
       $osszegkiiras = 1;
     }
     else {
-      $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
+      $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
                     INNER JOIN egyebkoltseg
-                    ON munkadij.munkadij_id = egyebkoltseg.munkadij_id
-                    WHERE egyebkoltseg.egyebkoltseg_id ='$sorid'");
+                    ON projektmunkadij.munkadij_id = egyebkoltseg.munkadij_id
+                    WHERE egyebkoltseg.egyebkoltseg_id ='$sorid' AND projektmunkadij.projekt_id='$pid'");
       $row2=mysqli_fetch_array($munkadij);
+
       echo "<td>".$row['egyebkoltseg_id']."</td>";
       echo "<td id='mv'><select name='munkavegzo' id='munkavegzo'>";
-      $mf = mysqli_query($conn, "SELECT * FROM munkadij");
-
+      $mf = mysqli_query($conn, "SELECT * FROM projektmunkadij WHERE projekt_id = '$pid'");
       while ($row5 = $mf->fetch_assoc()){ ?>
         <option value="<?=$row5['munkadij_id'] ?> " <?=$row5['munkadij_id'] ==
-        $row['munkadij_id'] ? ' selected="selected"' : '';?>> <?=$row5['munkadij_fajta'] ?></option>
+        $row['munkadij_id'] ? ' selected="selected"' : '';?>> <?=$row5['projektmunkadij_munkafajta'] ?></option>
         <?php
       }
       echo "</select></td>";
       echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['egyebkoltseg_megnevezes']."</td>";
       echo "<td>".$row["egyebkoltseg_mertekegyseg"]."</td>";
       echo "<td>".$row["egyebkoltseg_mennyiseg"]."</td>";
-      echo "<td>".$row2["munkadij_oraber"]."</td>";
+      echo "<td>".$row2["projektmunkadij_oraber"]."</td>";
       if ($row['egyebkoltseg_mennyiseg']!=NULL) {
-        $sorar=$row['egyebkoltseg_mennyiseg']*$row2['munkadij_oraber'];
+        $sorar=$row['egyebkoltseg_mennyiseg']*$row2['projektmunkadij_oraber'];
         echo "<td>".$sorar."</td>";
         $szintar=$szintar+$sorar;
       }
@@ -172,6 +193,21 @@ $('td#mv').on('change', function() {
   });
   console.log(jogosultsag);
 });
+</script>
+
+<script type="text/javascript">
+$("#megnevezesid").keyup(function () {
+       if ($(this).val()) {
+          $("#csoportid").show();
+        //  $("#checkboxid").show();
+          $("#felvetelid").show();
+       }
+       else {
+          $("#csoportid").hide();
+        //  $("#checkboxid").hide();
+          $("#felvetelid").hide();
+       }
+    });
 </script>
 
 <?php

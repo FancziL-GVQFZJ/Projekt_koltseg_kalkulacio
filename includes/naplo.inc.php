@@ -5,7 +5,7 @@ session_start();
 function naplozas($szoveg2){
   require 'kapcsolat.inc.php';
   $fid = $_SESSION['userId'];
-  $fnev = $_SESSION['userUid'];
+  $fnev = $_SESSION['userName'];
   $pid = $_SESSION['projektId'];
   $pnev = $_SESSION['projektNeve'];
   $jogosultsag = $_SESSION['jogosultsag'];

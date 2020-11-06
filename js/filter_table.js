@@ -1,12 +1,10 @@
 
 function myFunction() {
-
   var input, filter, table, tr, td0, td1, td2, td3, td4, i, txtValue0, txtValue1, txtValue2, txtValue3, txtValue4;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("AnyaglistaTable");
   tr = table.getElementsByTagName("tr");
-
 
   for (i = 0; i < tr.length; i++) {
     td0 = tr[i].getElementsByTagName("td")[0];
@@ -39,18 +37,15 @@ function myFunction() {
         tr[i].style.display = "none";
       }
     }
-
   }
 }
 
 function myFunction1() {
-
   var input, filter, table, tr, td0, td1, i, txtValue0, txtValue1;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("AnyaglistaTable");
   tr = table.getElementsByTagName("tr");
-
 
   for (i = 0; i < tr.length; i++) {
     td0 = tr[i].getElementsByTagName("td")[0];
@@ -68,6 +63,5 @@ function myFunction1() {
         tr[i].style.display = "none";
       }
     }
-
   }
 }

@@ -20,7 +20,7 @@ if($id > 0){
     $stmt->bind_param("i", $id);
     $successfullyCopied = $stmt->execute();
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
     $szoveg = ("delete munkadij ". $megn ."");
     naplozas($szoveg);
 

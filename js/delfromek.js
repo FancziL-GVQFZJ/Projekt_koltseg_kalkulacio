@@ -8,7 +8,7 @@ $(document).ready(function(){
    var confirmalert = confirm("Biztosan törlöd az elemet?");
    if (confirmalert == true) {
       $.ajax({
-        url: 'includes/removeek.inc.php',
+        url: 'includes/databasedel/removeek.inc.php',
         type: 'POST',
         data: { id:deleteid },
         success: function(response){

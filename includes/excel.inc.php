@@ -60,7 +60,5 @@ if (isset($_POST["excelexport"])) {
       header('Content-Disposition: attachment; filename=download.xls');
       echo $output;
   }
-
 }
-
 ?>

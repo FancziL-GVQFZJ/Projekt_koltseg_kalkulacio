@@ -1,6 +1,6 @@
 <?php
 function printanyaglista(){
-  require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
+  require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
   global $pdf;
   $pid = $_SESSION['projektId'];
   $cellaszelesseg=array(5,89,25,10,20,15,25);

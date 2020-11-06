@@ -18,7 +18,7 @@ if($id > 0){
     $stmt->bind_param("i", $id);
     $successfullyCopied = $stmt->execute();
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
     $query = mysqli_query($conn,"SELECT * FROM helyi_anyaglista WHERE helyi_anyaglista_id=".$id);
     $row = mysqli_fetch_array($query);
     $szoveg = ("delete alkatrészlista  ". $row['helyi_anyaglista_megnevezes'] ." ");

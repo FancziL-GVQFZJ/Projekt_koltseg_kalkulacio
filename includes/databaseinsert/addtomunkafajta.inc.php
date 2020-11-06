@@ -32,16 +32,16 @@ else {
 }
 $successfullyCopied = $stmt->execute();
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
 $szoveg = ("insert munkadijkoltseg ". $megn ."");
 naplozas($szoveg);
 
 if ($successfullyCopied) {
-  header("Location: ../munkadijkoltseg.php");
+  header("Location: ../../munkadijkoltseg.php");
   exit;
 }
 else {
-  header("Location: ../munkadijkoltseg.php?sikertelenfelvetel");
+  header("Location: ../../munkadijkoltseg.php?sikertelenfelvetel");
   exit;
 }
 ?>

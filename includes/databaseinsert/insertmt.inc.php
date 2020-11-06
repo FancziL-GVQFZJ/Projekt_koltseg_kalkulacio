@@ -22,22 +22,22 @@ if(isset($_POST['mtsubmit'])){
                                               VALUES ('$pid','$editorContent')");
         }
 
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
+        require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
         $szoveg = ("insert/update muszakitartalom");
         naplozas($szoveg);
 
         if($stmt){
-          header("Location: ../muszakitartalom.php?sikeresfelvetel");
+          header("Location: ../../muszakitartalom.php?sikeresfelvetel");
           exit();
         }else{
-            header("Location: ../muszakitartalom.php?nemsikerultafelvetel");
+            header("Location: ../../muszakitartalom.php?nemsikerultafelvetel");
             exit();
         }
     }else{
-      header("Location: ../muszakitartalom.php?adjonmegszoveget");
+      header("Location: ../../muszakitartalom.php?adjonmegszoveget");
       exit();
     }
 }
-header("Location: ../muszakitartalom.php?probaljamegmegegyszer");
+header("Location: ../../muszakitartalom.php?probaljamegmegegyszer");
 exit();
 ?>

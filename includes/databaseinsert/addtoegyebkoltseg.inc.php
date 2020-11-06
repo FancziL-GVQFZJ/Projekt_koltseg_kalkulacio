@@ -40,12 +40,13 @@ else {
 }
 $successfullyCopied = $stmt->execute();
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
 $szoveg = ("insert egyebkoltseg ". $megn ."");
 naplozas($szoveg);
 
 if ($successfullyCopied) {
-  header("Location: ../egyebkoltseg.php");
+
+  header('Location: ../../egyebkoltseg.php');
   exit;
 }
 ?>

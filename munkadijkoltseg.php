@@ -14,7 +14,7 @@
         <?php
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
-          
+
           <?php
           $pid = $_SESSION['projektId'];
           $csoport = mysqli_query($conn,"SELECT * FROM munkadijkoltseg

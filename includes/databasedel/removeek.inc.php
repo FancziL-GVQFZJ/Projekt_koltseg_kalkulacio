@@ -26,7 +26,7 @@ if($id > 0){
 
     $successfullyCopied2 = $stmt2->execute();
 
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
     $szoveg = ("delete egyebkoltseg ". $megn ."");
     naplozas($szoveg);
 

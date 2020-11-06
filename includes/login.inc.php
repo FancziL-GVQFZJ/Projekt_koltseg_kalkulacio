@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_POST['login-submit'])) {
 
   require 'kapcsolat.inc.php';
@@ -31,7 +30,7 @@ if (isset($_POST['login-submit'])) {
         elseif ($pwdCheck == true) {
           session_start();
           $_SESSION['userId'] = $row['felhasznalo_id'];
-          $_SESSION['userUid'] = $row['felhasznalo_nev'];
+          $_SESSION['userName'] = $row['felhasznalo_nev'];
 
           header("Location: ../index.php?login=success");
           exit();
