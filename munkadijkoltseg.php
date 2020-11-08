@@ -149,7 +149,6 @@ function show_children($parentID, $i, $depth=1){
         <option value="<?=$row5['munkadij_id'] ?> " <?=$row5['munkadij_id'] ==
         $row['munkadij_id'] ? ' selected="selected"' : '';?>> <?=$row5['projektmunkadij_munkafajta'] ?></option>
         <?php
-
        }
       echo "</select></td>";
       if ($row2['munkadij_id']==1) {

@@ -14,7 +14,7 @@ $(document).ready(function(){
         success: function(response){
 
           if(response == 1){
-              //$(el).closest('tr').css('background','green');              
+              //$(el).closest('tr').css('background','green');
       	      alert('A projekt elindult');
               window.location.reload();
           }else if(response == 0){

@@ -28,6 +28,11 @@
             $sor=mysqli_query($conn, $sql);
 
             echo "<div align= \"center\" id=\"nyomtatas\">";
+              ?>
+              <form align="left" action="includes/excel.inc.php" method="post">
+                <input type="submit" name="excelexport" value="Az adatok exportálása Excelbe">
+              </form>
+              <?php
               echo "<table id='KosarTable'>";
               echo "<tr class='fejlec'>";
               echo "<th>id</th><th></th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
@@ -46,7 +51,7 @@
                 echo "<td>".$row['helyi_anyaglista_mertekegyseg']."</td>";
                 echo "<td>".$row['helyi_anyaglista_egysegar']."</td>";
                 echo "<td>".$row['pa_dbszam']."</td>";
-                echo "<td>".$sorar."</td>";?>
+                echo "<td>".$sorar." Ft</td>";?>
                 <td id='del'><span class='delete' data-id='<?= $sorid; ?>'>Törlés</span></td>
                 <?php echo "</tr>";
                 $i++;
@@ -54,15 +59,10 @@
               echo  "<tr>";
               echo  "<td></td>";
               echo  "<td colspan='6' align='right'>A teljes ár:</td>";
-              echo  "<td align='left'>$teljesar</td>";
+              echo  "<td align='left'>".$teljesar." Ft</td>";
               echo  "</tr>";
               echo  "</table>";
-            echo  "</div>";?>
-
-            <form action="includes/excel.inc.php" method="post">
-              <input type="submit" name="excelexport" value="Exportálás excelbe">
-            </form>
-            <?php
+            echo  "</div>";
           }
         else {
           echo '<p>Jelenleg ki van jelentkezve!</p>';

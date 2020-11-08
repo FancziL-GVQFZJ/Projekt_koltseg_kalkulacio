@@ -1,6 +1,6 @@
 <?php
   session_start();
- ?>
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,6 +12,7 @@
     <script src="/Projekt_koltseg_kalkulacio/js/delfromcart.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/delfrommd.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/delfrommdij.js"></script>
+    <script src="/Projekt_koltseg_kalkulacio/js/delfrompmdij.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/delfromek.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/delfromak.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/addtocart.js"></script>
@@ -21,7 +22,7 @@
     <script src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/jquery-3.5.1.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/ckeditor/ckeditor.js"></script>
-    <title>Title</title>
+    <title>Projekt költség kalkulációs rendszer</title>
     <meta charset="UTF-8">
   </head>
 

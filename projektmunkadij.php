@@ -1,7 +1,7 @@
 <?php
-    $thisPage1='Munkadijak';
-    $thisPage='Kezdooldal';
-    require "kezdolapheader.php";
+    $thisPage1='Munka';
+    $thisPage='Kalkulacio';
+    require "kalkulacioslapheader.php";
     session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
@@ -16,10 +16,10 @@
         if (isset($_SESSION['userId'])) {
 
           echo "<p>Új adat felvétele</p>
-          <form action='includes/databaseinsert/addtomunkadij.inc.php' method='post'>
+          <form action='includes/databaseinsert/addtopmunkadij.inc.php' method='post'>
           Megnevezés: <input type='text' name='name'>
           Órabér: <input type='text' name='oraber'>
-          <input type='submit'>
+          <input type='submit' value='Új adat felvétele'>
           </form>";
 
           echo "<table id='Munkadijak'>";
@@ -27,17 +27,17 @@
           echo "<th>Id</th><th>Munkafajta</th><th>Órabér</th>";
 
           $pid = $_SESSION['projektId'];
-          $dij=mysqli_query($conn,"SELECT * FROM munkadij");
+          $dij=mysqli_query($conn,"SELECT * FROM projektmunkadij WHERE projekt_id='$pid'");
 
           while ($row=mysqli_fetch_array($dij))
           {?>
 
-            <tr id="<?php echo $row['munkadij_id']; ?>">
-            <?php echo "<td>".$row['munkadij_id']."</td>";
-            echo "<td>".$row['munkadij_fajta']."</td>";
-            echo "<td>".$row["munkadij_oraber"]."</td>";
-            $sorid=$row['munkadij_id'];?>
-            <td id='del'><span class='deletemdij' data-id='<?= $sorid; ?>'>Törlés</span></td>
+            <tr id="<?php echo $row['projektmunkadij_id']; ?>">
+            <?php echo "<td>".$row['projektmunkadij_id']."</td>";
+            echo "<td>".$row['projektmunkadij_munkafajta']."</td>";
+            echo "<td>".$row["projektmunkadij_oraber"]."</td>";
+            $sorid=$row['projektmunkadij_id'];?>
+            <td id='del'><span class='deletepmdij' data-id='<?= $sorid; ?>'>Törlés</span></td>
             </tr>
             <?php
           }
@@ -63,7 +63,7 @@
       editable: [[1, 'MunkaFajta'],[2, 'Oraber']]
     },
     hideIdentifier: true,
-    url: 'includes/tableedit/mdijlive_edit.inc.php',
+    url: 'includes/tableedit/pmdlive_edit.inc.php',
     onAlways: function() {location.reload()}
   });
   //Location.reload();

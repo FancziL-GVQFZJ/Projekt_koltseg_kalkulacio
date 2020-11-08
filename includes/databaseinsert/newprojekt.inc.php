@@ -49,10 +49,10 @@
           exit();
         }
       }
-      header("Location: ../../index.php?error=sikertelenfelvetel");
+      header("Location: ../../index.php");
       exit();
     }
-    header("Location: .//../index.php?error=adjonmegnevet");
+    header("Location: ../../index.php?error=adjonmegnevet");
     exit();
 
   }

@@ -17,6 +17,14 @@
 
           echo "<div class='kezdolap'>";
             echo "<div class='lap'>";
+              ?>
+              <br>
+              <form name="form1" action="includes/databaseinsert/newprojekt.inc.php" method="post">
+              <input type="hidden" name="projektnev" value="">
+              <button type="submit" name="newprojekt" onclick="projektNevMegadas()">Új projekt létrehozása</button>
+              </form>
+              <br>
+              <?php
               echo '<p>Projektjeid:</p>';
 
               $sql=mysqli_query($conn,"SELECT * FROM projekt
@@ -40,15 +48,13 @@
                 <td id='del'><span class='deleteprojekt' data-id='<?= $pid; ?>'>Törlés</span></td> <?php
                 echo "</tr>";
               }
-              echo "</table>"; ?>
-              <form name="form1" action="includes/databaseinsert/newprojekt.inc.php" method="post">
-              <input type="hidden" name="projektnev" value="">
-              <button type="submit" name="newprojekt" onclick="projektNevMegadas()">Új projekt létrehozása</button>
-              </form> <?php
+              echo "</table>";
+
             echo "</div>";
 
             echo "<div class='lap'>";
-              echo '<p>Veled megosztott projektek:</p>';
+              echo "<br><br><br>";
+              echo '<p>Megosztott projektek:</p>';
 
               $sql=mysqli_query($conn,"SELECT * FROM projekt
                         INNER JOIN jogosultsag
@@ -100,7 +106,7 @@
 <script type="text/javascript">
 function projektNevMegadas(){
   var name = prompt("Add meg a nevet:");
-    if ((name != null) && (name != ""))
+    if ((name != null) && (name != " "))
     {
         document.form1.projektnev.value = name;
     }
