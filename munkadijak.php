@@ -1,8 +1,8 @@
 <?php
-    $thisPage1='Munkadijak';
-    $thisPage='Kezdooldal';
-    require "kezdolapheader.php";
-    session_start();
+  $thisPage1='Munkadijak';
+  $thisPage='Kezdooldal';
+  require "kezdolapheader.php";
+  session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>

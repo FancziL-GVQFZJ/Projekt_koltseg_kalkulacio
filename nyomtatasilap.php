@@ -1,8 +1,8 @@
 <?php
-    $thisPage='Kalkulacioslap';
-    $thisPage1='Nyomtatas';
-    require "kalkulacioslapheader.php";
-    session_start();
+  $thisPage='Kalkulacioslap';
+  $thisPage1='Nyomtatas';
+  require "kalkulacioslapheader.php";
+  session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
@@ -13,12 +13,10 @@
       <div>
         <?php
         require 'includes/kapcsolat.inc.php';
-        require 'includes/kapcsolat.inc.php';
         require "PHPExcel/Classes/PHPExcel.php";
         require "PHPExcel/Classes/PHPExcel/Writer/Excel5.php";
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) { ?>
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) {
 
-          <?php
           $pid = $_SESSION['projektId'];
           $checkRecord1 = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE projekt_id = '$pid'");
           $totalrows1 = mysqli_num_rows($checkRecord1);
@@ -55,7 +53,6 @@
           <br>
           <br>
           <br>
-
           <form action="includes/excel.inc.php" method="post">
             <input type="submit" name="excelexport" value="Anyaglista exportálása excelbe">
           </form>
@@ -70,7 +67,6 @@
     </main>
   </div>
 </div>
-
 
 <?php
     require "footer.php";

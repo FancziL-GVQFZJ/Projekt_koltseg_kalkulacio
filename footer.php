@@ -1,6 +1,9 @@
-<footer id="footer">
+<?php
+session_start();
+if (isset($_SESSION['userId'])) {?>
+  <footer id="footer">
     <a href="https://stackoverflow.com/">Stackowerflow</a> <p>Példa</p>
-</footer>
-
+  </footer>
+  <?php } ?>
 </body>
 </html>

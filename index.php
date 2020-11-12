@@ -13,7 +13,6 @@
       <?php
         if (isset($_SESSION['userId'])) {
           require 'includes/kapcsolat.inc.php';
-          $fid = $_SESSION['userId'];
 
           echo "<div class='kezdolap'>";
             echo "<div class='lap'>";
@@ -26,30 +25,33 @@
               <br>
               <?php
               echo '<p>Projektjeid:</p>';
-
+              
+              $fid = $_SESSION['userId'];
               $sql=mysqli_query($conn,"SELECT * FROM projekt
-                   INNER JOIN pf_kapcsolat
-                     ON projekt.projekt_id = pf_kapcsolat.projekt_id
-                   INNER JOIN felhasznalo
-                     ON pf_kapcsolat.felhasznalo_id = felhasznalo.felhasznalo_id
-                     WHERE felhasznalo.felhasznalo_id = $fid");
+                           INNER JOIN pf_kapcsolat
+                             ON projekt.projekt_id = pf_kapcsolat.projekt_id
+                           INNER JOIN felhasznalo
+                             ON pf_kapcsolat.felhasznalo_id = felhasznalo.felhasznalo_id
+                             WHERE felhasznalo.felhasznalo_id = $fid");
 
               echo "<table id='AnyaglistaTable'>";
               echo "<th>Id</th><th>Nev</th>";
               echo "<tr>";
+              $jpid=$_SESSION['projektId'];
               while ($row=mysqli_fetch_array($sql))
               {
                 $pid=$row['projekt_id'];
                 $pnev=$row['projekt_nev'];
                 echo "<tr>";
                 echo "<td>".$row['projekt_id']."</td>";
-                echo "<td>".$row['projekt_nev']."</td>"; ?>
-                <td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Indítás</span></td>
-                <td id='del'><span class='deleteprojekt' data-id='<?= $pid; ?>'>Törlés</span></td> <?php
+                echo "<td>".$row['projekt_nev']."</td>";
+                if ($pid != $jpid) {
+                  ?><td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Kiválasztás</span></td>
+                  <td id='del'><span class='deleteprojekt' data-id='<?= $pid; ?>'>Törlés</span></td> <?php
+                }
                 echo "</tr>";
               }
               echo "</table>";
-
             echo "</div>";
 
             echo "<div class='lap'>";
@@ -84,11 +86,15 @@
                             WHERE projekt.projekt_id = '$pid'");
                 $row1=mysqli_fetch_array($sql1);
 
+                $pid = $row['projekt_id'];
+
                 echo "<tr>";
                 echo "<td>".$row1['felhasznalo_nev']."</td>";
                 echo "<td>".$jogosultsag."</td>";
-                echo "<td>".$row['projekt_nev']."</td>"; ?>
-                <td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Indítás</span></td> <?php
+                echo "<td>".$row['projekt_nev']."</td>";
+                if ($jpid!=$pid) {
+                  ?><td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Kiválasztás</span></td> <?php
+                }
                 echo "</tr>";
               }
               echo "</table>";

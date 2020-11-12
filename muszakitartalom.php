@@ -1,8 +1,8 @@
 <?php
-    $thisPage='Kalkulacioslap';
-    $thisPage1='Muszaki';
-    require "kalkulacioslapheader.php";
-    session_start();
+  $thisPage='Kalkulacioslap';
+  $thisPage1='Muszaki';
+  require "kalkulacioslapheader.php";
+  session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
@@ -14,7 +14,7 @@
         <?php
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
-          
+
           <?php
           $pid = $_SESSION['projektId'];
           $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");

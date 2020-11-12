@@ -15,7 +15,7 @@
               <li><a <?php echo ($thisPage1 == 'Egyeb') ? ' class="selected"' : ''; ?> href="egyebkoltseg.php">Egyéb költség</a></li>
               <li><a <?php echo ($thisPage1 == 'Muszaki') ? ' class="selected"' : ''; ?> href="muszakitartalom.php">Műszaki tartalom</a></li>
             <?php } ?>
-            <li><a <?php echo ($thisPage1 == 'Kalkulacio') ? ' class="selected"' : ''; ?> href="kalkulacioslap.php">Kalkulációs lap</a></li>
+            <li><a <?php echo ($thisPage1 == 'Kalkulacio') ? ' class="selected"' : ''; ?> href="kalkulacioslap.php">Adatlap</a></li>
             <li><a <?php echo ($thisPage1 == 'Nyomtatas') ? ' class="selected"' : ''; ?> href="nyomtatasilap.php">Nyomtatási lap</a></li>
           </ul>
         <?php } ?>

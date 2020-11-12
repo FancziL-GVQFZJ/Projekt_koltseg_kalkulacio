@@ -19,14 +19,12 @@
               echo '<p>Projektjeid:</p>';
 
               $fid = $_SESSION['userId'];
-              $sql = "SELECT * FROM projekt
+              $sor=mysqli_query($conn, "SELECT * FROM projekt
                     INNER JOIN pf_kapcsolat
                       ON projekt.projekt_id = pf_kapcsolat.projekt_id
                     INNER JOIN felhasznalo
                       ON pf_kapcsolat.felhasznalo_id = felhasznalo.felhasznalo_id
-                      WHERE felhasznalo.felhasznalo_id = $fid";
-
-              $sor=mysqli_query($conn, $sql);
+                      WHERE felhasznalo.felhasznalo_id = $fid");
 
               echo "<table>";
               echo "<tr>";
@@ -55,9 +53,7 @@
                 $jpnev = $_POST["projektnev"];
                 $jpid = $_POST["projektid"];
 
-
-                $fnevek = "SELECT * FROM felhasznalo WHERE NOT felhasznalo_id ='$fid'";
-                $sor2=mysqli_query($conn, $fnevek);
+                $sor2=mysqli_query($conn, "SELECT * FROM felhasznalo WHERE NOT felhasznalo_id ='$fid'");
                 echo "<br><br>";
                 echo $jpnev." beállítása";
 

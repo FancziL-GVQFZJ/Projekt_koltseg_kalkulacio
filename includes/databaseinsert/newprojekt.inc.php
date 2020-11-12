@@ -3,7 +3,6 @@
     require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
     session_start();
 
-
     $projektneve = $_POST['projektnev'];
     $fid = $_SESSION['userId'];
 

@@ -7,7 +7,8 @@ $megn = $_POST['name'];
 
 $stmt = $conn->prepare("INSERT INTO anyagkoltseg (projekt_id, anyagkoltseg_megnevezes,
   anyagkoltseg_mertekegyseg, anyagkoltseg_mennyiseg, anyagkoltseg_egysegar)
-                                          VALUES ('$pid','$megn','db','1','1')");
+                                          VALUES (?,?,'db','1','1')");
+$stmt->bind_param("ss", $pid, $megn);
 $successfullyCopied = $stmt->execute();
 
 require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';

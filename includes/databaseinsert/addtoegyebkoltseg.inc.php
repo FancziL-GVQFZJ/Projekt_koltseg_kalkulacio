@@ -4,38 +4,34 @@ session_start();
 
 $pid = $_SESSION['projektId'];
 $megn = $_POST['name'];
-$szulo = $_POST['szulo'];
+$szulo = $_POST['csoport'];
 
-$sql = "SELECT * FROM egyebkoltseg
-        WHERE egyebkoltseg_megnevezes = '$szulo' AND egyebkoltseg_mennyiseg IS NULL";
-$sor=mysqli_query($conn, $sql);
-
-$row=mysqli_fetch_array($sor);
-$szulid=$row['egyebkoltseg_id'];
-
-
-if (empty($szulo)) {
+if ($szulo == 0) {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
                                         egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
-                                              VALUES ('$pid',NULL,'$megn','',NULL,2)");
+                                              VALUES (?,NULL,?,'',NULL,2)");
+    $stmt->bind_param("ss", $pid, $megn);
   }
   else {
     $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
                                         egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
-                                              VALUES ('$pid',NULL,'$megn','óra',1,2)");
+                                              VALUES (?,NULL,?,'óra',1,2)");
+    $stmt->bind_param("ss", $pid, $megn);
   }
 }
 else {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
                                         egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
-                                              VALUES ('$pid','$szulid','$megn','',NULL,2)");
+                                              VALUES (?,?,?,'',NULL,2)");
+    $stmt->bind_param("sss", $pid, $szulo, $megn);
   }
   else {
     $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
                                         egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
-                                              VALUES ('$pid','$szulid','$megn','óra',1,2)");
+                                              VALUES (?,?,?,'óra',1,2)");
+    $stmt->bind_param("sss", $pid, $szulo, $megn);
   }
 }
 $successfullyCopied = $stmt->execute();

@@ -18,8 +18,7 @@
 
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Keresés..">';
 
-            $sql="SELECT * FROM sap_anyaglista";
-            $sor=mysqli_query($conn, $sql);
+            $sor=mysqli_query($conn,"SELECT * FROM sap_anyaglista");
 
             echo "<table id='AnyaglistaTable'>";
             echo "<tr class='fejlec'>";

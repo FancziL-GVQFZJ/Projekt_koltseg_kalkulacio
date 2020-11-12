@@ -53,12 +53,15 @@
           <?php } ?>
           </ul>  <?php
 
+          echo '<div class="projektnev-container">';
+            if (isset($_SESSION['projektId'])) {
+              $projektneve = $_SESSION['projektNeve'];
+              echo '<p><b>Jelenlegi projekt: '.$projektneve.'('.$jogosultsag.')</b></p>';
+          }
+          echo '</div>';
+
           echo '<div class="logout-container">
             <form action="includes/logout.inc.php" method="post">';
-              if (isset($_SESSION['projektId'])) {
-                $projektneve = $_SESSION['projektNeve'];
-                echo '<p>Jelenlegi projekt: '.$projektneve.'('.$jogosultsag.')</p>';
-              }
               echo '<p>Jelenlegi felhasználó: '.$fnev.'</p>
               <button type="submit" name="logout-submit">Kijelentkezés</button>
             </form>

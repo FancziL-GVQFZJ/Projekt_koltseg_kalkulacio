@@ -1,6 +1,5 @@
 <?php
-require '../includes/kapcsolat.inc.php';
-
+require 'kapcsolat.inc.php';
 
 $projektId = 0;
 if(isset($_POST['pid'])){

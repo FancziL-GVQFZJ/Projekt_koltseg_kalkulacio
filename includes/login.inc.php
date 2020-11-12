@@ -1,6 +1,5 @@
 <?php
 if (isset($_POST['login-submit'])) {
-
   require 'kapcsolat.inc.php';
 
   $mailuid = $_POST['mailuid'];

@@ -10,24 +10,28 @@ if ($szulo == 0) {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO munkadijkoltseg (parent_id, projekt_id, munkadijkoltseg_megnevezes,
                                       munkadijkoltseg_mertekegyseg, munkadijkoltseg_mennyiseg, munkadij_id)
-                                              VALUES (NULL, '$pid','$megn','',NULL,2)");
+                                              VALUES (NULL, ?,?,'',NULL,2)");
+    $stmt->bind_param("ss", $pid, $megn);
   }
   else {
     $stmt = $conn->prepare("INSERT INTO munkadijkoltseg (parent_id, projekt_id, munkadijkoltseg_megnevezes,
                                       munkadijkoltseg_mertekegyseg, munkadijkoltseg_mennyiseg, munkadij_id)
-                                              VALUES (NULL, '$pid','$megn','óra',1,2)");
+                                              VALUES (NULL, ?,?,'óra',1,2)");
+    $stmt->bind_param("ss", $pid, $megn);
   }
 }
 else {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO munkadijkoltseg (parent_id, projekt_id, munkadijkoltseg_megnevezes,
                                       munkadijkoltseg_mertekegyseg, munkadijkoltseg_mennyiseg, munkadij_id)
-                                              VALUES ('$szulo', '$pid','$megn','',NULL,2)");
+                                              VALUES (?,?,?,'',NULL,2)");
+    $stmt->bind_param("sss", $szulo, $pid, $megn);
   }
   else {
     $stmt = $conn->prepare("INSERT INTO munkadijkoltseg (parent_id, projekt_id, munkadijkoltseg_megnevezes,
                                       munkadijkoltseg_mertekegyseg, munkadijkoltseg_mennyiseg, munkadij_id)
-                                              VALUES ('$szulo', '$pid','$megn','óra',1,2)");
+                                              VALUES (?,?,?,'óra',1,2)");
+    $stmt->bind_param("sss", $szulo, $pid, $megn);
   }
 }
 $successfullyCopied = $stmt->execute();

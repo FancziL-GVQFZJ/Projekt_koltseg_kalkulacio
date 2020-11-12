@@ -17,15 +17,13 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
             $pid = $_SESSION['projektId'];
-            $sql = "SELECT * FROM helyi_anyaglista
-                  INNER JOIN pa_kapcsolat
-                    ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
-                  INNER JOIN projekt
-                    ON pa_kapcsolat.projekt_id = projekt.projekt_id
-                    WHERE projekt.projekt_id = $pid
-                    ORDER BY helyi_anyaglista.helyi_anyaglista_id";
-
-            $sor=mysqli_query($conn, $sql);
+            $sor=mysqli_query($conn, "SELECT * FROM helyi_anyaglista
+                    INNER JOIN pa_kapcsolat
+                      ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
+                    INNER JOIN projekt
+                      ON pa_kapcsolat.projekt_id = projekt.projekt_id
+                      WHERE projekt.projekt_id = $pid
+                      ORDER BY helyi_anyaglista.helyi_anyaglista_id");
 
             echo "<div align= \"center\" id=\"nyomtatas\">";
               ?>

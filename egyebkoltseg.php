@@ -1,8 +1,8 @@
 <?php
-    $thisPage='Kalkulacioslap';
-    $thisPage1='Egyeb';
-    require "kalkulacioslapheader.php";
-    session_start();
+  $thisPage='Kalkulacioslap';
+  $thisPage1='Egyeb';
+  require "kalkulacioslapheader.php";
+  session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
@@ -13,17 +13,8 @@
       <div>
         <?php
         require 'includes/kapcsolat.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
-          <!-- <p>Új adat felvétele</p>
-          <form action='includes/databaseinsert/addtoegyebkoltseg.inc.php' method='post'>
-          Megnevezés: <input type='text' name='name'>
-          Szülő: <input type='text' name='szulo'>
-          Cím: <input type='checkbox' name='cim' value='value1'>
-          <input type='submit'>
-          </form> -->
-
-          <?php
           $pid = $_SESSION['projektId'];
           $csoport = mysqli_query($conn,"SELECT * FROM egyebkoltseg
                         WHERE projekt_id ='$pid' AND egyebkoltseg_mennyiseg IS NULL");

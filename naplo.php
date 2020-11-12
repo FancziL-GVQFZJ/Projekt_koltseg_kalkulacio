@@ -1,8 +1,8 @@
 <?php
-    $thisPage1='Naplo';
-    $thisPage='Kezdooldal';
-    require "kezdolapheader.php";
-    session_start();
+  $thisPage1='Naplo';
+  $thisPage='Kezdooldal';
+  require "kezdolapheader.php";
+  session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
@@ -16,8 +16,7 @@
 
           echo '<input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Keresés..">';
 
-          $sql="SELECT * FROM naplo ORDER BY naplo_datum desc";
-          $sor=mysqli_query($conn, $sql);
+          $sor=mysqli_query($conn, "SELECT * FROM naplo ORDER BY naplo_datum desc");
 
           echo "<table id='AnyaglistaTable'>";
           echo "<tr class='fejlec'>";

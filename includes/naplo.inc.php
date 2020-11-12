@@ -18,6 +18,4 @@ function naplozas($szoveg2){
 
   $successfullyCopied = $stmt->execute();
 }
-
-
 ?>

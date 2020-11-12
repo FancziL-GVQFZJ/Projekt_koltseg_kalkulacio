@@ -1,8 +1,8 @@
 <?php
-    $thisPage='Kalkulacioslap';
-    $thisPage1='Anyag';
-    require "kalkulacioslapheader.php";
-    session_start();
+  $thisPage='Kalkulacioslap';
+  $thisPage1='Anyag';
+  require "kalkulacioslapheader.php";
+  session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
@@ -14,7 +14,7 @@
         <?php
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
-          
+
           <p>Új adat felvétele</p>
           <form action='includes/databaseinsert/addtoanyagkoltseg.inc.php' method='post'>
           Megnevezés: <input type='text' name='name'>
@@ -28,16 +28,13 @@
 
             <?php
             $pid = $_SESSION['projektId'];
-
-            $query = "SELECT * FROM helyi_anyaglista
+            $sor=mysqli_query($conn, "SELECT * FROM helyi_anyaglista
                   INNER JOIN pa_kapcsolat
                     ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
                   INNER JOIN projekt
                     ON pa_kapcsolat.projekt_id = projekt.projekt_id
                     WHERE projekt.projekt_id = '$pid'
-                    ORDER BY helyi_anyaglista.helyi_anyaglista_id";
-
-            $sor=mysqli_query($conn, $query);
+                    ORDER BY helyi_anyaglista.helyi_anyaglista_id");
             while ($row=mysqli_fetch_array($sor))
             {
               $sorar=$row['helyi_anyaglista_egysegar']*$row['pa_dbszam'];

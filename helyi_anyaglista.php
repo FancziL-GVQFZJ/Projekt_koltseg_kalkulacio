@@ -18,8 +18,7 @@
 
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Keresés..">';
 
-            $sql="SELECT * FROM helyi_anyaglista";
-            $sor=mysqli_query($conn, $sql);
+            $sor=mysqli_query($conn,"SELECT * FROM helyi_anyaglista");
 
             echo "<table id='AnyaglistaTable'>";
             echo "<tr class='fejlec'>";

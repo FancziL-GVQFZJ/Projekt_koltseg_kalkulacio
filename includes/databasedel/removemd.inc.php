@@ -6,6 +6,7 @@ $id = 0;
 if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);
 }
+
 if($id > 0){
 
   $checkRecord = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE munkadiijkoltseg_id=".$id);

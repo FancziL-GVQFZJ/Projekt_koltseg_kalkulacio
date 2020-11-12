@@ -1,8 +1,8 @@
 <?php
-    $thisPage='Kalkulacioslap';
-    $thisPage1='Munkadij';
-    require "kalkulacioslapheader.php";
-    session_start();
+  $thisPage='Kalkulacioslap';
+  $thisPage1='Munkadij';
+  require "kalkulacioslapheader.php";
+  session_start();
 ?>
 <style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
