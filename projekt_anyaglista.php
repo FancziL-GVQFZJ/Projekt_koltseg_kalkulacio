@@ -31,7 +31,7 @@
                 <input type="submit" name="excelexport" value="Az adatok exportálása Excelbe">
               </form>
               <?php
-              echo "<table id='KosarTable'>";
+              echo "<table class='table-style' id='KosarTable'>";
               echo "<tr class='fejlec'>";
               echo "<th>id</th><th></th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
               echo "<td><p>ÁR összesen</p></td>";

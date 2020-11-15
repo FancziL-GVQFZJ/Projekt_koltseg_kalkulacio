@@ -35,7 +35,7 @@
           ?>
 
           <div align= "center" id="nyomtatas">
-            <table id='Egyebkoltsegkalkulacio'>
+            <table class='table-style' id='Egyebkoltsegkalkulacio'>
             <tr class='fejlec'>
             <th>Id</th><th>Munkavégző</th><th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>
 

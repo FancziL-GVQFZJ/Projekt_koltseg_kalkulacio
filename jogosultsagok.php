@@ -57,7 +57,7 @@
                 echo "<br><br>";
                 echo $jpnev." beállítása";
 
-                echo "<table id='table'>";
+                echo "<table class='table-style' id='table'>";
                 echo "<tr>";
                 echo "<th>Id</th><th>ProjektId</th><th>Felhasználó</th><th>Jogosultság</th>";
                 while ($row2=mysqli_fetch_array($sor2))

@@ -22,7 +22,7 @@
           <input type='submit' value='Új adat felvétele'>
           </form>";
 
-          echo "<table id='Munkadijak'>";
+          echo "<table class='table-style' id='Munkadijak'>";
           echo "<tr class='fejlec'>";
           echo "<th>Id</th><th>Munkafajta</th><th>Órabér</th>";
 

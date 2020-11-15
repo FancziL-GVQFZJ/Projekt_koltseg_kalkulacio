@@ -4,16 +4,15 @@
   require "kezdolapheader.php";
   session_start();
 ?>
-<style><?php include 'css/navbar.css';?></style>
+
 <style><?php include 'css/table.css';?></style>
 
+<?php if (isset($_SESSION['userId'])) { ?>
 <div id="container">
   <div id="main">
     <main>
       <?php
-        if (isset($_SESSION['userId'])) {
           require 'includes/kapcsolat.inc.php';
-
           echo "<div class='kezdolap'>";
             echo "<div class='lap'>";
               ?>
@@ -25,30 +24,34 @@
               <br>
               <?php
               echo '<p>Projektjeid:</p>';
-              
+
               $fid = $_SESSION['userId'];
               $sql=mysqli_query($conn,"SELECT * FROM projekt
                            INNER JOIN pf_kapcsolat
                              ON projekt.projekt_id = pf_kapcsolat.projekt_id
                            INNER JOIN felhasznalo
                              ON pf_kapcsolat.felhasznalo_id = felhasznalo.felhasznalo_id
-                             WHERE felhasznalo.felhasznalo_id = $fid");
+                             WHERE felhasznalo.felhasznalo_id = '$fid'");
 
-              echo "<table id='AnyaglistaTable'>";
-              echo "<th>Id</th><th>Nev</th>";
+              echo "<table class='table-style' id='ProjektTable'>";
+              echo "<th></th><th></th><th>Projektnév</th>";
               echo "<tr>";
               $jpid=$_SESSION['projektId'];
+              $i=1;
               while ($row=mysqli_fetch_array($sql))
               {
                 $pid=$row['projekt_id'];
-                $pnev=$row['projekt_nev'];
-                echo "<tr>";
+                $pnev=$row['projekt_nev']; ?>
+                <tr id="<?php echo $row['projekt_id']; ?>">
+                <?php
                 echo "<td>".$row['projekt_id']."</td>";
+                echo "<td>".$i."</td>";
                 echo "<td>".$row['projekt_nev']."</td>";
                 if ($pid != $jpid) {
                   ?><td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Kiválasztás</span></td>
                   <td id='del'><span class='deleteprojekt' data-id='<?= $pid; ?>'>Törlés</span></td> <?php
                 }
+                $i++;
                 echo "</tr>";
               }
               echo "</table>";
@@ -64,7 +67,7 @@
                           WHERE jogosultsag.felhasznalo_id = '$fid'");
 
 
-              echo "<table id='AnyaglistaTable'>";
+              echo "<table class='table-style'>";
               echo "<th>Tulajdonos</th><th>Jogosultságom</th><th>Projektnév</th>";
               echo "<tr>";
               while ($row=mysqli_fetch_array($sql))
@@ -100,14 +103,14 @@
               echo "</table>";
             echo "</div>";
           echo "</div>";
-        }
-        else {
-          echo '<p>Jelenleg ki van jelentkezve!</p>';
-        }
       ?>
     </main>
   </div>
 </div>
+<?php }
+else {
+  //echo '<p>Jelenleg ki van jelentkezve!</p>';
+} ?>
 
 <script type="text/javascript">
 function projektNevMegadas(){
@@ -117,6 +120,23 @@ function projektNevMegadas(){
         document.form1.projektnev.value = name;
     }
 }
+</script>
+
+<script type="text/javascript" src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#ProjektTable').Tabledit({
+    deleteButton: false,
+    editButton: false,
+    columns: {
+    identifier: [0, 'projekt_id'],
+    editable: [[2, 'projekt_nev']]
+  },
+  hideIdentifier: true,
+  url: 'includes/tableedit/pnlive_edit.inc.php',
+  onAlways: function() {location.reload()}
+});
+});
 </script>
 
 <?php

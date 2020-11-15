@@ -7,7 +7,7 @@
   margin-bottom: 12px; /* Add some space below the input */
 }
 
-#AnyaglistaTable {
+.table-style {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 95%;
@@ -15,16 +15,16 @@
   margin: 2%;
 
 }
-#AnyaglistaTable td, #AnyaglistaTable th {
-  border: 1px solid #ddd;
+.table-style td, .table-style th {
+  border: 1px solid #A9A9A9;
   padding: 8px;
 }
 
-#AnyaglistaTable tr:nth-child(even){background-color: #f2f2f2;}
+.table-style tr:nth-child(even){background-color: #f2f2f2;}
 
-#AnyaglistaTable tr:hover {background-color: #ddd;}
+.table-style tr:hover {background-color: #ddd;}
 
-#AnyaglistaTable th {
+.table-style th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
@@ -32,142 +32,7 @@
   color: black;
 }
 
-#AnyaglistaTable tr.fejlec {
-  background-color: lightgrey;
-}
-
-#KosarTable {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 95%;
-  margin: 2%;
-}
-#KosarTable td, #KosarTable th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#KosarTable tr:nth-child(even){background-color: #f2f2f2;}
-
-#KosarTable tr:hover {background-color: #ddd;}
-
-#KosarTable th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: lightgrey;
-  color: black;
-}
-
-#KosarTable tr.fejlec {
-  background-color: lightgrey;
-}
-
-#Munkadijkalkulacio {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 95%;
-  margin: 2%;
-}
-#Munkadijkalkulacio td, #Munkadijkalkulacio th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#Munkadijkalkulacio tr:nth-child(even){background-color: #f2f2f2;}
-
-#Munkadijkalkulacio tr:hover {background-color: #ddd;}
-
-#Munkadijkalkulacio th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: lightgrey;
-  color: black;
-}
-
-#Munkadijkalkulacio tr.fejlec {
-  background-color: lightgrey;
-}
-
-#Egyebkoltsegkalkulacio {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 95%;
-  margin: 2%;
-}
-#Egyebkoltsegkalkulacio td, #Egyebkoltsegkalkulacio th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#Egyebkoltsegkalkulacio tr:nth-child(even){background-color: #f2f2f2;}
-
-#Egyebkoltsegkalkulacio tr:hover {background-color: #ddd;}
-
-#Egyebkoltsegkalkulacio th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: lightgrey;
-  color: black;
-}
-
-#Egyebkoltsegkalkulacio tr.fejlec {
-  background-color: lightgrey;
-}
-
-#Munkadijak {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 95%;
-  margin: 2%;
-}
-#Munkadijak td, #Munkadijak th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#Munkadijak tr:nth-child(even){background-color: #f2f2f2;}
-
-#Munkadijak tr:hover {background-color: #ddd;}
-
-#Munkadijak th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: lightgrey;
-  color: black;
-}
-
-#Munkadijak tr.fejlec {
-  background-color: lightgrey;
-}
-
-#Anyagkoltseg {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 95%;
-  margin: 2%;
-}
-#Anyagkoltseg td, #Anyagkoltseg th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-#Anyagkoltseg tr:nth-child(even){background-color: #f2f2f2;}
-
-#Anyagkoltseg tr:hover {background-color: #ddd;}
-
-#Anyagkoltseg th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: lightgrey;
-  color: black;
-}
-
-#Anyagkoltseg tr.fejlec {
+.table-style tr.fejlec {
   background-color: lightgrey;
 }
 

@@ -30,7 +30,7 @@
 
             if ($totalrows1 > 0) {
               echo "<p style='font-size: large;'><b><u>Villamos anyaglista</u></b></p>";
-              echo "<table border=1; style='border-collapse: collapse;' id='KosarTable'>";
+              echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
               echo "<tr class='fejlec'>";
               echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
               echo "<td><p>ÁR összesen</p></td>";
@@ -65,7 +65,7 @@
 
           if ($totalrows5 >0) {
             echo "<p style='font-size: large;'><b><u>Anyagköltség</u></b></p>";
-            echo "<table border=1; style='border-collapse: collapse;' id='Anyagkoltseg'>";
+            echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
             echo "<tr class='fejlec'>";
 
             echo "<th>Anyagi megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Egységár</th><th>Összeg</th>";
@@ -123,7 +123,7 @@
             $muszereszmido=0;
 
             echo "<p style='font-size: large;'><b><u>Munkadíj költség</u></b></p>";
-            echo "<table border=1; style='border-collapse: collapse;' id='Munkadijkalkulacio'>";
+            echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
             echo "<tr class='fejlec'>";
             echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
             $query="SELECT * FROM munkadijkoltseg WHERE parent_id IS NULL AND projekt_id = '$pid'";
@@ -176,7 +176,7 @@
           if ($totalrows3 > 0) {
 
             echo "<p style='font-size: large;'><b><u>Egyéb költség</u></b></p>";
-            echo "<table border=1; style='border-collapse: collapse;' id='Egyebkoltsegkalkulacio'>";
+            echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
             echo "<tr class='fejlec'>";
             echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
             $query="SELECT * FROM egyebkoltseg WHERE parent_id IS NULL AND projekt_id = '$pid'";

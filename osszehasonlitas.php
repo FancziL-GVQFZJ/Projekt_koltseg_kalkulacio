@@ -61,7 +61,7 @@
             $sor1=mysqli_query($conn, $sql1);
             $sor2=mysqli_query($conn, $sql2);
             echo "Sap anyaglistában van";
-            echo "<table id='AnyaglistaTable'>";
+            echo "<table class='table-style'>";
             echo "<tr class='fejlec'>";
             echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th>";
             while ($row=mysqli_fetch_array($sor1))
@@ -78,7 +78,7 @@
             echo "</table>";
 
             echo "Sap anyaglistában volt";
-            echo "<table id='AnyaglistaTable'>";
+            echo "<table class='table-style'>";
             echo "<tr class='fejlec'>";
             echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th>";
             while ($row=mysqli_fetch_array($sor2))

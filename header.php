@@ -6,7 +6,7 @@
   <head>
     <link href="css/navbar.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
-    <meta name="description" content="This is an example for meta description. This will often show up in the search results.">
+    <meta name="description" content="Projekt költség kalkulációs rendszer.">
     <meta name=viewport content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/delfromcart.js"></script>
@@ -25,24 +25,21 @@
     <title>Projekt költség kalkulációs rendszer</title>
     <meta charset="UTF-8">
   </head>
-
+<div class="border">
   <body>
-  <header>
-    <nav class="topnav">
-      <a href="#">
-        <img src="img/vmlogo.png" alt="logo" class="logo">
-      </a>
-
-      <div>
-        <?php
-        if (isset($_SESSION['userId'])) {
-          require 'includes/kapcsolat.inc.php';
-          $fid = $_SESSION['userId'];
-          $fnev = $_SESSION['userName'];
-          $pid = $_SESSION['projektId'];
-          $jogosultsag = $_SESSION['jogosultsag'];
-          $thisPage == 'Kezdooldal';?>
-
+    <?php
+    if (isset($_SESSION['userId'])) {
+      require 'includes/kapcsolat.inc.php';
+      $fid = $_SESSION['userId'];
+      $fnev = $_SESSION['userName'];
+      $pid = $_SESSION['projektId'];
+      $jogosultsag = $_SESSION['jogosultsag'];
+      $thisPage == 'Kezdooldal';?>
+      <header>
+        <nav class="topnav">
+          <a href="#">
+            <img src="img/vmlogo.png" alt="logo" class="logo">
+          </a>
           <ul>
             <li><a <?php echo ($thisPage == 'Kezdooldal') ? ' class="selected"' : ''; ?> href="index.php">Kezdőlap</a></li>
           <?php if (isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
@@ -53,31 +50,37 @@
           <?php } ?>
           </ul>  <?php
 
-          echo '<div class="projektnev-container">';
-            if (isset($_SESSION['projektId'])) {
-              $projektneve = $_SESSION['projektNeve'];
-              echo '<p><b>Jelenlegi projekt: '.$projektneve.'('.$jogosultsag.')</b></p>';
+
+          if (isset($_SESSION['projektId'])) {
+            echo '<div class="projektnev-container">';
+            $projektneve = $_SESSION['projektNeve'];
+            echo '<p><b>Jelenlegi projekt: '.$projektneve.'('.$jogosultsag.')</b></p>';
+            echo '</div>';
           }
-          echo '</div>';
+
 
           echo '<div class="logout-container">
             <form action="includes/logout.inc.php" method="post">';
               echo '<p>Jelenlegi felhasználó: '.$fnev.'</p>
               <button type="submit" name="logout-submit">Kijelentkezés</button>
             </form>
-          </div>';
+          </div>';?>
+        </nav>
+      </header>
+      <?php } else { ?>
+        <div class="cim-container">
+          <p>Pojekt költség kalkulációs rendszer</p>
+        </div>
 
-        }else {
-          echo '<div class="login-container">
-            <form action="includes/login.inc.php" method="post">
-              <input type="text" name="mailuid" placeholder="Felhasználónév...">
-              <input type="password" name="pwd" placeholder="Jelszó...">
-              <button type="submit" name="login-submit">Bejelentkezés</button>
-            </form>
-          </div>';
-        } ?>
-      </div>
-    </nav>
-  </header>
+        <div class="login-container">
+          <form class="login-form" action="includes/login.inc.php" method="post">
+            <label>Felhasználónév:</label><br>
+            <input type="text" name="mailuid" placeholder="A felhasználóneved..."><br>
+            <label>Jelszó:</label><br>
+            <input type="password" name="pwd" placeholder="A jelszavad..."><br>
+            <button type="submit" name="login-submit">Bejelentkezés</button>
+          </form>
+        </div>
+      <?php } ?>
   </body>
 </html>

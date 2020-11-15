@@ -4,7 +4,6 @@
   require "kezdolapheader.php";
   session_start();
 ?>
-<style><?php include 'css/navbar.css';?></style>
 <style><?php include 'css/table.css';?></style>
 
 <div id="container">
@@ -18,7 +17,7 @@
 
           $sor=mysqli_query($conn, "SELECT * FROM naplo ORDER BY naplo_datum desc");
 
-          echo "<table id='AnyaglistaTable'>";
+          echo "<table class='table-style'>";
           echo "<tr class='fejlec'>";
           echo "<th>Dátum</th><th>Adat</th>";
           while ($row=mysqli_fetch_array($sor))

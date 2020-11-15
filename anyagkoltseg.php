@@ -21,8 +21,8 @@
           <input type='submit' value='Felvétel'>
           </form>
 
-          <div align= "center" id="nyomtatas">
-            <table id='Anyagkoltseg'>
+          <div align= "center" class='table-style' id="nyomtatas">
+            <table class='table-style' id='Anyagkoltseg'>
             <tr class='fejlec'>
             <th>Id</th><th>Anyagi megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Egységár</th><th>Összeg</th>
 

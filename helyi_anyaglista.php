@@ -20,7 +20,7 @@
 
             $sor=mysqli_query($conn,"SELECT * FROM helyi_anyaglista");
 
-            echo "<table id='AnyaglistaTable'>";
+            echo "<table class='table-style' id='AnyaglistaTable'>";
             echo "<tr class='fejlec'>";
             echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th></th>";
             while ($row=mysqli_fetch_array($sor))

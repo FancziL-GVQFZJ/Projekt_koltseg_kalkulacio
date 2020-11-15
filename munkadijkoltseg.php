@@ -47,7 +47,7 @@
           $muszereszmido=0;
 
           echo "<div align= \"center\" id=\"nyomtatas\">";
-            echo "<table id='Munkadijkalkulacio'>";
+            echo "<table class='table-style' id='Munkadijkalkulacio'>";
             echo "<tr class='fejlec'>";
             echo "<th>Id</th><th>Munkavégző</th><th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Egységár</th><th>Ár:</th>";
 
