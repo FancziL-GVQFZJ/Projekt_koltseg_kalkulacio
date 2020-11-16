@@ -90,19 +90,19 @@ function show_children($parentID, $i, $depth=1){
       $pdf->Cell($cellaszelesseg[0],$cellamagassag,str_repeat(" ", $depth * 5).$row['munkadijkoltseg_megnevezes'],1,0,'L',$fill);
       $pdf->Cell($cellaszelesseg[1],$cellamagassag,$row['munkadijkoltseg_mertekegyseg'],1,0,'C',$fill);
       $pdf->Cell($cellaszelesseg[2],$cellamagassag,$row['munkadijkoltseg_mennyiseg'],1,0,'C',$fill);
-      $pdf->Cell($cellaszelesseg[3],$cellamagassag,$row2['pm_Oraber'],1,0,'C',$fill);
+      $pdf->Cell($cellaszelesseg[3],$cellamagassag,$row2['projektmunkadij_oraber'].' Ft',1,0,'C',$fill);
       if ($row['munkadijkoltseg_mennyiseg']!=NULL) {
-        $sorar=$row['munkadijkoltseg_mennyiseg']*$row2['pm_Oraber'];
+        $sorar=$row['munkadijkoltseg_mennyiseg']*$row2['projektmunkadij_oraber'];
         $pdf->Cell($cellaszelesseg[4],$cellamagassag,$sorar.' Ft',1,1,'C',$fill);
         $osszegar=$osszegar+$sorar;
       }
       else {
         $pdf->Cell($cellaszelesseg[4],$cellamagassag,'',1,1,'C',$fill);
       }
-      if ($row2['Munkadij_id']==1) {
+      if ($row2['munkadij_id']==1) {
         $mernokmido=$mernokmido+$row['munkadijkoltseg_mennyiseg'];
       }
-      elseif ($row2['Munkadij_id']==2){
+      elseif ($row2['munkadij_id']==2){
         $muszereszmido=$muszereszmido+$row['munkadijkoltseg_mennyiseg'];
       }
     }

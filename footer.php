@@ -3,7 +3,9 @@
   if (isset($_SESSION['userId'])) {?>
     <div id="footer">
     <footer>
-      <a href="https://stackoverflow.com/">Stackowerflow</a> <p>Példa</p>
+      <div class="lap">
+        <a href="http://dunaferr.hu/">ISD Dunaferr</a>
+      </div>
     </footer>
   </div>
     <?php } ?>

@@ -16,13 +16,13 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId'])) {
 
           $pid = $_SESSION['projektId'];
-          $sor=mysqli_query($conn, "SELECT * FROM helyi_anyaglista
+          $sor=mysqli_query($conn, "SELECT * FROM sap_anyaglista
                   INNER JOIN pa_kapcsolat
-                    ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
+                    ON sap_anyaglista.sap_anyaglista_id = pa_kapcsolat.alkatresz_id
                   INNER JOIN projekt
                     ON pa_kapcsolat.projekt_id = projekt.projekt_id
-                    WHERE projekt.projekt_id = '$pid'
-                    ORDER BY helyi_anyaglista.helyi_anyaglista_id");
+                    WHERE projekt.projekt_id = $pid
+                    ORDER BY sap_anyaglista.sap_anyaglista_id");
 
           echo "<div align= \"center\" id=\"nyomtatas\">";
             $checkRecord1 = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE projekt_id = '$pid'");
@@ -32,7 +32,7 @@
               echo "<p style='font-size: large;'><b><u>Villamos anyaglista</u></b></p>";
               echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
               echo "<tr class='fejlec'>";
-              echo "<th>id</th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
+              echo "<th></th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
               echo "<td><p>ÁR összesen</p></td>";
               $i=1;
               while ($row=mysqli_fetch_array($sor))
@@ -40,13 +40,13 @@
                 $sorid=$row['alkatresz_id'];
                 echo "<tr>";
                 echo "<td>".$i."</td>";
-                echo "<td>".$row['helyi_anyaglista_megnevezes']."</td>";
-                echo "<td>".$row['helyi_anyaglista_sapszam']."</td>";
-                echo "<td>".$row['helyi_anyaglista_mertekegyseg']."</td>";
-                echo "<td>".$row['helyi_anyaglista_egysegar']."</td>";
+                echo "<td>".$row['sap_anyaglista_megnevezes']."</td>";
+                echo "<td>".$row['sap_anyaglista_id']."</td>";
+                echo "<td>".$row['sap_anyaglista_mertekegyseg']."</td>";
+                echo "<td>".$row['sap_anyaglista_egysegar']." Ft</td>";
                 echo "<td>".$row['pa_dbszam']."</td>";
-                $sorar=$row['helyi_anyaglista_egysegar']*$row['pa_dbszam'];
-                echo "<td>".$sorar."</td>";
+                $sorar=$row['sap_anyaglista_egysegar']*$row['pa_dbszam'];
+                echo "<td>".$sorar." Ft</td>";
                 $osszegar=$osszegar+$sorar;
                 echo "</tr>";
                 $i++;
@@ -55,7 +55,7 @@
               echo  "<tr>";
               echo  "<td></td>";
               echo  "<td colspan='5' align='right'>Teljes ár:</td>";
-              echo  "<td align='left'>$osszegar</td>";
+              echo  "<td align='left'>".$osszegar." Ft</td>";
               echo  "</tr>";
               echo  "</table>";
           }
@@ -71,18 +71,18 @@
             echo "<th>Anyagi megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Egységár</th><th>Összeg</th>";
             $pid = $_SESSION['projektId'];
 
-            $query = "SELECT * FROM helyi_anyaglista
+            $query = "SELECT * FROM sap_anyaglista
                   INNER JOIN pa_kapcsolat
-                    ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
+                    ON sap_anyaglista.sap_anyaglista_id = pa_kapcsolat.alkatresz_id
                   INNER JOIN projekt
                     ON pa_kapcsolat.projekt_id = projekt.projekt_id
-                    WHERE projekt.projekt_id = $pid
-                    ORDER BY helyi_anyaglista.helyi_anyaglista_id";
+                    WHERE projekt.projekt_id = '$pid'
+                    ORDER BY sap_anyaglista.sap_anyaglista_id";
 
             $sor=mysqli_query($conn, $query);
             while ($row=mysqli_fetch_array($sor))
             {
-              $sorar=$row['helyi_anyaglista_egysegar']*$row['pa_dbszam'];
+              $sorar=$row['sap_anyaglista_egysegar']*$row['pa_dbszam'];
               $anyaglistaar=$anyaglistaar+$sorar;
             }
             $query2="SELECT * FROM anyagkoltseg WHERE projekt_id = '$pid'";
@@ -94,9 +94,9 @@
               echo "<td>".$row['anyagkoltseg_megnevezes']."</td>";
               echo "<td>".$row["anyagkoltseg_mertekegyseg"]."</td>";
               echo "<td>".$row["anyagkoltseg_mennyiseg"]."</td>";
-              echo "<td>".$row["anyagkoltseg_egysegar"]."</td>";
+              echo "<td>".$row["anyagkoltseg_egysegar"]." Ft</td>";
               $sorar=$row["anyagkoltseg_mennyiseg"]*$row["anyagkoltseg_egysegar"];
-              echo "<td>".$sorar."</td>";
+              echo "<td>".$sorar." Ft</td>";
               $teljesar=$teljesar+$sorar;
               echo "</tr>";
             }
@@ -164,7 +164,7 @@
             echo  "<tr>";
             echo  "<td></td>";
             echo  "<td colspan='3' align='right'>Teljes ár:</td>";
-            echo  "<td align='left'>$teljesar</td>";
+            echo  "<td align='left'>".$teljesar." Ft</td>";
             echo  "</tr>";
             print "</table>";
           }
@@ -197,7 +197,7 @@
             echo  "<tr>";
             echo  "<td></td>";
             echo  "<td colspan='3' align='right'>Teljes ár:</td>";
-            echo  "<td align='left'>$teljesar</td>";
+            echo  "<td align='left'>".$teljesar." Ft</td>";
             echo  "</tr>";
             print "</table>";
           }
@@ -266,10 +266,10 @@ function show_children($parentID, $i, $depth=1){
       echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['munkadijkoltseg_megnevezes']."</td>";
       echo "<td>".$row["munkadijkoltseg_mertekegyseg"]."</td>";
       echo "<td>".$row["munkadijkoltseg_mennyiseg"]."</td>";
-      echo "<td>".$row2["projektmunkadij_oraber"]."</td>";
+      echo "<td>".$row2["projektmunkadij_oraber"]." Ft</td>";
       if ($row['munkadijkoltseg_mennyiseg']!=NULL) {
         $sorar=$row['munkadijkoltseg_mennyiseg']*$row2['projektmunkadij_oraber'];
-        echo "<td>".$sorar."</td>";
+        echo "<td>".$sorar." Ft</td>";
         $osszegar=$osszegar+$sorar;
       }
       else {
@@ -282,7 +282,7 @@ function show_children($parentID, $i, $depth=1){
     echo  "<tr>";
     echo  "<td></td>";
     echo  "<td colspan='3' align='right'>Összegzett ár:</td>";
-    echo  "<td align='left'>$osszegar</td>";
+    echo  "<td align='left'>".$osszegar." Ft</td>";
     echo  "</tr>";
   }
   return $osszegar;
@@ -313,10 +313,10 @@ function show_children2($parentID, $depth=1){
       echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['egyebkoltseg_megnevezes']."</td>";
       echo "<td>".$row["egyebkoltseg_mertekegyseg"]."</td>";
       echo "<td>".$row["egyebkoltseg_mennyiseg"]."</td>";
-      echo "<td>".$row2["munkadij_oraber"]."</td>";
+      echo "<td>".$row2["munkadij_oraber"]." Ft</td>";
       if ($row['egyebkoltseg_mennyiseg']!=NULL) {
         $sorar=$row['egyebkoltseg_mennyiseg']*$row2['munkadij_oraber'];
-        echo "<td>".$sorar."</td>";
+        echo "<td>".$sorar." Ft</td>";
         $osszegar=$osszegar+$sorar;
       }
       else {
@@ -328,7 +328,7 @@ function show_children2($parentID, $depth=1){
   echo  "<tr>";
   echo  "<td></td>";
   echo  "<td colspan='3' align='right'>Összegzett ár:</td>";
-  echo  "<td align='left'>$osszegar</td>";
+  echo  "<td align='left'>".$osszegar." Ft</td>";
   echo  "</tr>";
   return $osszegar;
 }

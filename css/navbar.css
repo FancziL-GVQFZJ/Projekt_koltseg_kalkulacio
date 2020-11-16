@@ -28,6 +28,8 @@ html, body{
   padding: 14px 17px;
   text-decoration: none;
   font-size: 17px;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border: 1px solid #BBBBBB;
 }
 
 .topnav p {
@@ -49,14 +51,6 @@ html, body{
   float: right;
 }
 
-.topnav input {
-  padding: 6px;
-  margin-top: 8px;
-  font-size: 17px;
-  border: none;
-  width:140px;
-}
-
 .logout-container button {
   float: left;
   padding: 6px 10px;
@@ -67,6 +61,7 @@ html, body{
   font-size: 17px;
   border: none;
   cursor: pointer;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
 .logout-container button:hover {
@@ -87,12 +82,19 @@ html, body{
   color: black;
 }
 
+.projektnev-container {
+  background-color: #C8C8C8;
+}
+
 .projektnev-container p{
-  float: none;
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 17px;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border: 1px solid #BBBBBB;
 }
 
 header {
@@ -112,9 +114,6 @@ nav ul {
 }
 
 .cim-container {
-  /* position: absolute;
-  top:10%;
-  left:50%; */
   width: 700px;
   height: 100px;
   padding: 10px;
@@ -140,6 +139,18 @@ nav ul {
   font-size: 17px;
   border:1px solid;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+.bejelentkezofelulet {
+  width: 800px;
+  height: 600px;
+  padding: 10px;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .login-form {
@@ -180,6 +191,30 @@ nav ul {
   background-color: green;
 }
 
+.button {
+  padding: 6px 10px;
+  /* margin-top: 8px; */
+  margin-right: 16px;
+  background-color: #C6C6C6;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+input[type="submit"].button:hover {
+  background-color: #A8A8A8;
+}
+
+button[type="submit"].button:hover {
+  background-color: #A8A8A8;
+}
+
+.szoveg {
+  font-size: 17px;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
 #container {
   height: 100%;
   border: 10px solid #F0F0F0;
@@ -208,4 +243,9 @@ nav ul {
 .lap {
   float: left;
   width: 50%;
+}
+
+.lap1 {
+  float: left;
+  width: 20%;
 }

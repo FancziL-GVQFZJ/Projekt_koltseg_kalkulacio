@@ -28,16 +28,16 @@
 
             <?php
             $pid = $_SESSION['projektId'];
-            $sor=mysqli_query($conn, "SELECT * FROM helyi_anyaglista
+            $sor=mysqli_query($conn, "SELECT * FROM sap_anyaglista
                   INNER JOIN pa_kapcsolat
-                    ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
+                    ON sap_anyaglista.sap_anyaglista_id = pa_kapcsolat.alkatresz_id
                   INNER JOIN projekt
                     ON pa_kapcsolat.projekt_id = projekt.projekt_id
                     WHERE projekt.projekt_id = '$pid'
-                    ORDER BY helyi_anyaglista.helyi_anyaglista_id");
+                    ORDER BY sap_anyaglista.sap_anyaglista_id");
             while ($row=mysqli_fetch_array($sor))
             {
-              $sorar=$row['helyi_anyaglista_egysegar']*$row['pa_dbszam'];
+              $sorar=$row['sap_anyaglista_egysegar']*$row['pa_dbszam'];
               $anyaglistaar=$anyaglistaar+$sorar;
             }
 
@@ -67,14 +67,14 @@
             echo  "<td>villamos szerelési anyag</td>";
             echo  "<td>db</td>";
             echo  "<td>1</td>";
-            echo  "<td align='left'>$anyaglistaar Ft</td>";
-            echo  "<td align='left'>$anyaglistaar Ft</td>";
+            echo  "<td align='left'>".$anyaglistaar."</td>";
+            echo  "<td align='left'>".$anyaglistaar."</td>";
             echo  "</tr>";
             echo  "<tr>";
             echo  "<td></td>";
             echo  "<td colspan='4' align='center'>Összesen:</td>";
             $teljesar=$teljesar+$anyaglistaar;
-            echo  "<td align='left'>$teljesar Ft</td>";
+            echo  "<td align='left'>".$teljesar." Ft</td>";
             echo  "</tr>";
             print "</table>";
           echo  "</div>";

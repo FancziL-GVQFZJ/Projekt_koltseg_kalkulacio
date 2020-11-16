@@ -64,7 +64,7 @@
             echo  "<tr>";
             echo  "<td></td>";
             echo  "<td colspan='5' align='right'>Teljes ár:</td>";
-            echo  "<td align='left'>$teljesar</td>";
+            echo  "<td align='left'>".$teljesar." Ft</td>";
             echo  "</tr>";
             print "</table>";
           echo  "</div>";
@@ -116,10 +116,10 @@ function show_children($parentID, $depth=1){
       echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['egyebkoltseg_megnevezes']."</td>";
       echo "<td>".$row["egyebkoltseg_mertekegyseg"]."</td>";
       echo "<td>".$row["egyebkoltseg_mennyiseg"]."</td>";
-      echo "<td>".$row2["projektmunkadij_oraber"]."</td>";
+      echo "<td>".$row2["projektmunkadij_oraber"]." Ft</td>";
       if ($row['egyebkoltseg_mennyiseg']!=NULL) {
         $sorar=$row['egyebkoltseg_mennyiseg']*$row2['projektmunkadij_oraber'];
-        echo "<td>".$sorar."</td>";
+        echo "<td>".$sorar." Ft</td>";
         $szintar=$szintar+$sorar;
       }
       else {
@@ -134,7 +134,7 @@ function show_children($parentID, $depth=1){
     echo  "<tr>";
     echo  "<td></td>";
     echo  "<td colspan='5' align='right'>Összegzett ár:</td>";
-    echo  "<td align='left'>$szintar</td>";
+    echo  "<td align='left'>".$szintar." Ft</td>";
     echo  "</tr>";
   }
   return $szintar;

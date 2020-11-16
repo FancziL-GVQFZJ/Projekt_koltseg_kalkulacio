@@ -13,7 +13,8 @@
       require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId'])) {
 
-          echo '<input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Keresés..">';
+          echo "<p class='szoveg'>Keresés a naplóban:</p>";
+          echo '<input type="text" id="myInput" onkeyup="myFunction2()" placeholder="Keresés..">';
 
           $sor=mysqli_query($conn, "SELECT * FROM naplo ORDER BY naplo_datum desc");
 

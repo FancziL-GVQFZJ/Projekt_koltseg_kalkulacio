@@ -17,18 +17,18 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
             $pid = $_SESSION['projektId'];
-            $sor=mysqli_query($conn, "SELECT * FROM helyi_anyaglista
+            $sor=mysqli_query($conn, "SELECT * FROM sap_anyaglista
                     INNER JOIN pa_kapcsolat
-                      ON helyi_anyaglista.helyi_anyaglista_id = pa_kapcsolat.alkatresz_id
+                      ON sap_anyaglista.sap_anyaglista_id = pa_kapcsolat.alkatresz_id
                     INNER JOIN projekt
                       ON pa_kapcsolat.projekt_id = projekt.projekt_id
                       WHERE projekt.projekt_id = $pid
-                      ORDER BY helyi_anyaglista.helyi_anyaglista_id");
+                      ORDER BY sap_anyaglista.sap_anyaglista_id");
 
             echo "<div align= \"center\" id=\"nyomtatas\">";
               ?>
               <form align="left" action="includes/excel.inc.php" method="post">
-                <input type="submit" name="excelexport" value="Az adatok exportálása Excelbe">
+                <input class="button" type="submit" name="excelexport" value="A táblázat exportálása Excelbe">
               </form>
               <?php
               echo "<table class='table-style' id='KosarTable'>";
@@ -38,16 +38,16 @@
               $i=1;
               while ($row=mysqli_fetch_array($sor))
               {
-                $sorid=$row['helyi_anyaglista_id'];
-                $sorar=$row['helyi_anyaglista_egysegar']*$row['pa_dbszam'];
+                $sorid=$row['sap_anyaglista_id'];
+                $sorar=$row['sap_anyaglista_egysegar']*$row['pa_dbszam'];
                 $teljesar=$teljesar+$sorar;?>
-                <tr id="<?php echo $row['helyi_anyaglista_id']; ?>">
-                <?php echo "<td>".$row['helyi_anyaglista_id']."</td>";
+                <tr id="<?php echo $row['sap_anyaglista_id']; ?>">
+                <?php echo "<td>".$row['sap_anyaglista_id']."</td>";
                 echo "<td>".$i."</td>";
-                echo "<td>".$row['helyi_anyaglista_megnevezes']."</td>";
-                echo "<td>".$row['helyi_anyaglista_sapszam']."</td>";
-                echo "<td>".$row['helyi_anyaglista_mertekegyseg']."</td>";
-                echo "<td>".$row['helyi_anyaglista_egysegar']."</td>";
+                echo "<td>".$row['sap_anyaglista_megnevezes']."</td>";
+                echo "<td>".$row['sap_anyaglista_id']."</td>";
+                echo "<td>".$row['sap_anyaglista_mertekegyseg']."</td>";
+                echo "<td>".$row['sap_anyaglista_egysegar']." Ft</td>";
                 echo "<td>".$row['pa_dbszam']."</td>";
                 echo "<td>".$sorar." Ft</td>";?>
                 <td id='del'><span class='delete' data-id='<?= $sorid; ?>'>Törlés</span></td>

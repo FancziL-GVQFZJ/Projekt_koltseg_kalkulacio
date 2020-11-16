@@ -16,7 +16,7 @@
 
           echo "<div class='kezdolap'>";
             echo "<div class='lap'>";
-              echo '<p>Projektjeid:</p>';
+              echo '<p class="szoveg">Projektjeid:</p>';
 
               $fid = $_SESSION['userId'];
               $sor=mysqli_query($conn, "SELECT * FROM projekt
@@ -26,7 +26,8 @@
                       ON pf_kapcsolat.felhasznalo_id = felhasznalo.felhasznalo_id
                       WHERE felhasznalo.felhasznalo_id = $fid");
 
-              echo "<table>";
+              echo "<table class='table-style'>";
+              echo "<th></th><th>Projekt neve</th>";
               echo "<tr>";
               while ($row=mysqli_fetch_array($sor))
               {
@@ -36,18 +37,19 @@
                 echo "<td>".$row['projekt_id']."</td>";
                 echo "<td>".$row['projekt_nev']."</td>";
                 ?>
-                <td>
+                <td style="text-align:center; width:100px;">
                   <form action="" method="post">
                   <input type="hidden" name="projektnev" value="<?php echo htmlentities($pnev); ?>">
                   <input type="hidden" name="projektid" value="<?php echo htmlentities($sorid); ?>">
-                  <button type="submit" name="projektjog">beállítás</button>
+                  <button class="button" type="submit" name="projektjog">Beállítás</button>
                   </form>
                 </td>
                 <?php
                 echo "</tr>";
               }
               echo "</table>";
-
+            echo "</div>";
+            echo "<div class='lap'>";
               if(isset($_REQUEST['projektjog']))
               {
                 $jpnev = $_POST["projektnev"];
@@ -55,7 +57,7 @@
 
                 $sor2=mysqli_query($conn, "SELECT * FROM felhasznalo WHERE NOT felhasznalo_id ='$fid'");
                 echo "<br><br>";
-                echo $jpnev." beállítása";
+                echo "<p class='szoveg'>".$jpnev." beállítása:</p>";
 
                 echo "<table class='table-style' id='table'>";
                 echo "<tr>";

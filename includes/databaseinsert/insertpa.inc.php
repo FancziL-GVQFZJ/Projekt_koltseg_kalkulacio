@@ -22,8 +22,8 @@ if($id > 0){
 
     if ($totalrows2 < 1) {
       $copy = $conn->prepare("INSERT INTO helyi_anyaglista (helyi_anyaglista_id, helyi_anyaglista_megnevezes,
-                            helyi_anyaglista_sapszam, helyi_anyaglista_mertekegyseg, helyi_anyaglista_egysegar)
-                                    SELECT sap_anyaglista_id, sap_anyaglista_megnevezes, sap_anyaglista_sapszam,
+                             helyi_anyaglista_mertekegyseg, helyi_anyaglista_egysegar)
+                                    SELECT sap_anyaglista_id, sap_anyaglista_megnevezes,
                                     sap_anyaglista_mertekegyseg, sap_anyaglista_egysegar
                                     FROM sap_anyaglista
                                     WHERE sap_anyaglista_id = '$id'");

@@ -15,16 +15,19 @@
     <script src="/Projekt_koltseg_kalkulacio/js/delfrompmdij.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/delfromek.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/delfromak.js"></script>
+    <script src="/Projekt_koltseg_kalkulacio/js/delfromha.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/addtocart.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/startprojekt.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/deleteprojekt.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/filter_table.js"></script>
+    <script src="/Projekt_koltseg_kalkulacio/js/filter_table1.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/jquery-3.5.1.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/ckeditor/ckeditor.js"></script>
     <title>Projekt költség kalkulációs rendszer</title>
     <meta charset="UTF-8">
   </head>
+
 <div class="border">
   <body>
     <?php
@@ -36,50 +39,51 @@
       $jogosultsag = $_SESSION['jogosultsag'];
       $thisPage == 'Kezdooldal';?>
       <header>
+        <div class="projektnev-container">
+          <?php
+          if (isset($_SESSION['projektId'])) {
+            $projektneve = $_SESSION['projektNeve'];
+            echo '<p>Jelenlegi projekt: <b style="font-size: 22px;">'.$projektneve.'</b>('.$jogosultsag.')</p>';
+          }else {
+            echo '<p><b>Projekt költség kalkulációs rendszer</b></p>';
+          }
+          ?>
+        </div>
         <nav class="topnav">
           <a href="#">
             <img src="img/vmlogo.png" alt="logo" class="logo">
           </a>
           <ul>
             <li><a <?php echo ($thisPage == 'Kezdooldal') ? ' class="selected"' : ''; ?> href="index.php">Kezdőlap</a></li>
-          <?php if (isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
             <li><a <?php echo ($thisPage == 'Anyaglista') ? ' class="selected"' : ''; ?> href="sap_anyaglista.php">Villamos anyaglista</a></li>
-            <li><a <?php echo ($thisPage == 'Kalkulacioslap') ? ' class="selected"' : ''; ?> href="kalkulacioslap.php">Kalkulációs lap</a></li>
-          <?php } elseif (isset($_SESSION['projektId']) && $jogosultsag == 'olvasas') { ?>
+          <?php if (isset($_SESSION['projektId'])) { ?>
             <li><a <?php echo ($thisPage == 'Kalkulacioslap') ? ' class="selected"' : ''; ?> href="kalkulacioslap.php">Kalkulációs lap</a></li>
           <?php } ?>
           </ul>  <?php
 
-
-          if (isset($_SESSION['projektId'])) {
-            echo '<div class="projektnev-container">';
-            $projektneve = $_SESSION['projektNeve'];
-            echo '<p><b>Jelenlegi projekt: '.$projektneve.'('.$jogosultsag.')</b></p>';
-            echo '</div>';
-          }
-
-
           echo '<div class="logout-container">
             <form action="includes/logout.inc.php" method="post">';
-              echo '<p>Jelenlegi felhasználó: '.$fnev.'</p>
+              echo '<p>Jelenlegi felhasználó: <b>'.$fnev.'</b></p>
               <button type="submit" name="logout-submit">Kijelentkezés</button>
             </form>
           </div>';?>
         </nav>
       </header>
       <?php } else { ?>
-        <div class="cim-container">
-          <p>Pojekt költség kalkulációs rendszer</p>
-        </div>
+        <div class="bejelentkezofelulet">
+          <div class="cim-container">
+            <p>Pojekt költség kalkulációs rendszer</p>
+          </div>
 
-        <div class="login-container">
-          <form class="login-form" action="includes/login.inc.php" method="post">
-            <label>Felhasználónév:</label><br>
-            <input type="text" name="mailuid" placeholder="A felhasználóneved..."><br>
-            <label>Jelszó:</label><br>
-            <input type="password" name="pwd" placeholder="A jelszavad..."><br>
-            <button type="submit" name="login-submit">Bejelentkezés</button>
-          </form>
+          <div class="login-container">
+            <form class="login-form" action="includes/login.inc.php" method="post">
+              <label>Felhasználónév:</label><br>
+              <input type="text" name="mailuid" placeholder="A felhasználóneved..."><br>
+              <label>Jelszó:</label><br>
+              <input type="password" name="pwd" placeholder="A jelszavad..."><br>
+              <button style="" type="submit" name="login-submit">Bejelentkezés</button>
+            </form>
+          </div>
         </div>
       <?php } ?>
   </body>

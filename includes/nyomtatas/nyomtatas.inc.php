@@ -1,5 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
+require '../kapcsolat.inc.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/fpdf182/writehtml.php';
 include 'anyaglistanyomtatas.inc.php';
 include 'anyagkoltsegnyomtatas.inc.php';
@@ -59,7 +59,7 @@ $cellamagassag=5;
 $mernokmido=0;
 $muszereszmido=0;
 
-$focim = 'Nyersvas keverő átépítés műszerszerelési és folyír. Munkái ';
+$focim = $_SESSION['projektNeve'];
 
 //create pdf object
 $pdf = new PDF('P', 'mm', 'A4');

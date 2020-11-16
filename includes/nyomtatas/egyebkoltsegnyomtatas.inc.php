@@ -66,7 +66,7 @@ function show_children2($parentID, $depth=1){
       $pdf->Cell($cellaszelesseg[0],$cellamagassag,str_repeat(" ", $depth * 5).$row['egyebkoltseg_megnevezes'],1,0,'L',$fill);
       $pdf->Cell($cellaszelesseg[1],$cellamagassag,$row['egyebkoltseg_mertekegyseg'],1,0,'C',$fill);
       $pdf->Cell($cellaszelesseg[2],$cellamagassag,$row['egyebkoltseg_mennyiseg'],1,0,'C',$fill);
-      $pdf->Cell($cellaszelesseg[3],$cellamagassag,$row2['munkadij_oraber'],1,0,'C',$fill);
+      $pdf->Cell($cellaszelesseg[3],$cellamagassag,$row2['munkadij_oraber'].' Ft',1,0,'C',$fill);
       if ($row['egyebkoltseg_mennyiseg']!=NULL) {
         $sorar=$row['egyebkoltseg_mennyiseg']*$row2['munkadij_oraber'];
         $pdf->Cell($cellaszelesseg[4],$cellamagassag,$sorar.' Ft',1,1,'C',$fill);

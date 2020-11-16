@@ -18,12 +18,12 @@
               ?>
               <br>
               <form name="form1" action="includes/databaseinsert/newprojekt.inc.php" method="post">
-              <input type="hidden" name="projektnev" value="">
-              <button type="submit" name="newprojekt" onclick="projektNevMegadas()">Új projekt létrehozása</button>
+                <input type="hidden" name="projektnev" value="">
+                <button class="button" type="submit" name="newprojekt" onclick="projektNevMegadas()">Új projekt létrehozása</button>
               </form>
               <br>
               <?php
-              echo '<p>Projektjeid:</p>';
+              echo '<p class="szoveg" >Projektjeid:</p>';
 
               $fid = $_SESSION['userId'];
               $sql=mysqli_query($conn,"SELECT * FROM projekt
@@ -51,6 +51,9 @@
                   ?><td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Kiválasztás</span></td>
                   <td id='del'><span class='deleteprojekt' data-id='<?= $pid; ?>'>Törlés</span></td> <?php
                 }
+                else {
+                  echo "<td style='background-color: #FF8E8E;' >Kiválasztva</td>";
+                }
                 $i++;
                 echo "</tr>";
               }
@@ -59,7 +62,7 @@
 
             echo "<div class='lap'>";
               echo "<br><br><br>";
-              echo '<p>Megosztott projektek:</p>';
+              echo '<p class="szoveg" >Megosztott projektek:</p>';
 
               $sql=mysqli_query($conn,"SELECT * FROM projekt
                         INNER JOIN jogosultsag
@@ -107,21 +110,6 @@
     </main>
   </div>
 </div>
-<?php }
-else {
-  //echo '<p>Jelenleg ki van jelentkezve!</p>';
-} ?>
-
-<script type="text/javascript">
-function projektNevMegadas(){
-  var name = prompt("Add meg a nevet:");
-    if ((name != null) && (name != " "))
-    {
-        document.form1.projektnev.value = name;
-    }
-}
-</script>
-
 <script type="text/javascript" src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -138,6 +126,22 @@ $(document).ready(function(){
 });
 });
 </script>
+<?php }
+else {
+  //echo '<p>Jelenleg ki van jelentkezve!</p>';
+} ?>
+
+<script type="text/javascript">
+function projektNevMegadas(){
+  var name = prompt("Add meg a nevet:");
+    if ((name != null) && (name != " "))
+    {
+        document.form1.projektnev.value = name;
+    }
+}
+</script>
+
+
 
 <?php
     require "footer.php";

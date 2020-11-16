@@ -13,7 +13,7 @@
       <div>
         <?php
         require 'includes/kapcsolat.inc.php';
-        if (isset($_SESSION['userId'])) {
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
           echo "<p>Új adat felvétele</p>
           <form action='includes/databaseinsert/addtopmunkadij.inc.php' method='post'>

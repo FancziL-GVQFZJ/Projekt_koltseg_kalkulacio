@@ -10,7 +10,7 @@
 <div id="container">
   <div id="main">
     <main>
-      <div>
+      <div class='lap1'>
         <?php
         require 'includes/kapcsolat.inc.php';
         require "PHPExcel/Classes/PHPExcel.php";
@@ -30,31 +30,44 @@
           $totalrows4 = mysqli_num_rows($checkRecord4);
           ?>
 
-          <p>Nyomtatási adatok</p>
+          <p class="szoveg">Nyomtatási adatok:</p>
           <form action='includes/nyomtatas/nyomtatas.inc.php' method='post'><br>
-          Tárgy: <input type='text' name='name'><br>
+          <!-- Tárgy: <input type='text' name='name'><br> -->
+          <table class='table-style'>
+          <tr class='fejlec'>
+          <th></th><th>Nyomtatvány</th>
+          <tr><td>1</td><td>
           <?php if ($totalrows1 > 0) { ?>
-            <input type='checkbox' name='Anyaglista' value='1'>Anyaglista<br>
+            <input type='checkbox' name='Anyaglista' value='1'> Anyaglista<br>
           <?php } ?>
+          </tr></td>
+          <tr><td>2</td><td>
           <?php if ($totalrows1 > 0) { ?>
-            <input type='checkbox' name='Anyagkoltseg' value='2'>Anyagköltség<br>
+            <input type='checkbox' name='Anyagkoltseg' value='2'> Anyagköltség<br>
           <?php } ?>
+          </tr></td>
+          <tr><td>3</td><td>
           <?php if ($totalrows2 > 0) { ?>
-            <input type='checkbox' name='Munkadíj' value='3'>Munkadíj költség<br>
+            <input type='checkbox' name='Munkadíj' value='3'> Munkadíj költség<br>
           <?php } ?>
+          </tr></td>
+          <tr><td>4</td><td>
           <?php if ($totalrows3 > 0) { ?>
-            <input type='checkbox' name='Egyéb' value='4'>Egyéb költség<br>
+            <input type='checkbox' name='Egyéb' value='4'> Egyéb költség<br>
           <?php } ?>
+          </tr></td>
+          <tr><td>5</td><td>
           <?php if ($totalrows4 > 0) { ?>
-            <input type='checkbox' name='Műszaki' value='5'>Műszaki tartalom<br>
+            <input type='checkbox' name='Műszaki' value='5'> Műszaki tartalom<br>
           <?php } ?>
-          <input type='submit' value='Nyomtatás'  onclick="$('form').attr('target', '_blank');">
+          </table>
+          <input class="button" type='submit' value='Nyomtatás'  onclick="$('form').attr('target', '_blank');">
           </form>
           <br>
           <br>
           <br>
           <form action="includes/excel.inc.php" method="post">
-            <input type="submit" name="excelexport" value="Anyaglista exportálása excelbe">
+            <input class="button" type="submit" name="excelexport" value="Anyaglista exportálása excelbe">
           </form>
 
           <?php
