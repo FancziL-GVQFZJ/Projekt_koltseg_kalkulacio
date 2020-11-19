@@ -71,7 +71,7 @@
 
 
               echo "<table class='table-style'>";
-              echo "<th>Tulajdonos</th><th>Jogosultságom</th><th>Projektnév</th>";
+              echo "<th>Tulajdonos</th><th>Jogosultság</th><th>Projektnév</th>";
               echo "<tr>";
               while ($row=mysqli_fetch_array($sql))
               {
