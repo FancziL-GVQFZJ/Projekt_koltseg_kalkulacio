@@ -24,7 +24,7 @@
 
           <form method="post" action="includes/databaseinsert/insertmt.inc.php">
             <textarea id="mteditor" name="mteditor"><?php echo $leiras?></textarea>
-            <input type="submit" name="mtsubmit" value="Mentés">
+            <input class="button" type="submit" name="mtsubmit" value="Mentés">
           </form>
 
           <?php }

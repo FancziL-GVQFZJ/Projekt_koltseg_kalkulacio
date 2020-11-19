@@ -25,7 +25,7 @@
             echo "<th>SAP anyagszám</th><th>Megnevezés</th><th>Mérték egység</th><th>Egységár</th>";
             while ($row=mysqli_fetch_array($sor))
             {
-              $sorid=$row['helyi_anyaglista_id'];
+              $sorid=$row['helyi_anyaglista_sapszam'];
               $sor1=mysqli_query($conn,"SELECT * FROM sap_anyaglista WHERE sap_anyaglista_id = '$sorid'");
               $row2=mysqli_fetch_array($sor1);
 

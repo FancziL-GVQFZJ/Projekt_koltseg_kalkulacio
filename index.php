@@ -51,9 +51,9 @@
                   ?><td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Kiválasztás</span></td>
                   <td id='del'><span class='deleteprojekt' data-id='<?= $pid; ?>'>Törlés</span></td> <?php
                 }
-                else {
-                  echo "<td style='background-color: #FF8E8E;' >Kiválasztva</td>";
-                }
+                else { ?>
+                  <td style='background-color: #FF8E8E;color:black;' id='add'><span class='stopprojekt' data-id='<?= $pid; ?>'>Befejezés</span></td>
+                <?php }
                 $i++;
                 echo "</tr>";
               }
@@ -100,6 +100,9 @@
                 echo "<td>".$row['projekt_nev']."</td>";
                 if ($jpid!=$pid) {
                   ?><td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Kiválasztás</span></td> <?php
+                }
+                else {
+                  echo "<td style='background-color: #FF8E8E;'>Kiválasztva</td>";
                 }
                 echo "</tr>";
               }

@@ -41,7 +41,7 @@ function myFunction2() {
   var input, filter, table, tr, td0, td1, i, txtValue0, txtValue1;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
-  table = document.getElementById("AnyaglistaTable");
+  table = document.getElementById("Naplo");
   tr = table.getElementsByTagName("tr");
 
   for (i = 0; i < tr.length; i++) {

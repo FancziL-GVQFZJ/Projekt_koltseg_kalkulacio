@@ -25,11 +25,11 @@
                     ORDER BY sap_anyaglista.sap_anyaglista_id");
 
           echo "<div align= \"center\" id=\"nyomtatas\">";
-            $checkRecord1 = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE projekt_id = '$pid'");
-            $totalrows1 = mysqli_num_rows($checkRecord1);
+            // $checkRecord1 = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE projekt_id = '$pid'");
+            // $totalrows1 = mysqli_num_rows($checkRecord1);
 
-            if ($totalrows1 > 0) {
-              echo "<p style='font-size: large;'><b><u>Villamos anyaglista</u></b></p>";
+            // if ($totalrows1 > 0) {
+              echo "<p class='szoveg' style='font-size: large;'><b><u>Villamos anyaglista</u></b></p>";
               echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
               echo "<tr class='fejlec'>";
               echo "<th></th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
@@ -54,17 +54,17 @@
               }
               echo  "<tr>";
               echo  "<td></td>";
-              echo  "<td colspan='5' align='right'>Teljes ár:</td>";
+              echo  "<td colspan='5' align='center'>Összesen:</td>";
               echo  "<td align='left'>".$osszegar." Ft</td>";
               echo  "</tr>";
               echo  "</table>";
-          }
-
-          $checkRecord5 = mysqli_query($conn,"SELECT * FROM anyagkoltseg WHERE projekt_id = '$pid'");
-          $totalrows5 = mysqli_num_rows($checkRecord5);
-
-          if ($totalrows5 >0) {
-            echo "<p style='font-size: large;'><b><u>Anyagköltség</u></b></p>";
+          // }
+          //
+          // $checkRecord5 = mysqli_query($conn,"SELECT * FROM anyagkoltseg WHERE projekt_id = '$pid'");
+          // $totalrows5 = mysqli_num_rows($checkRecord5);
+          //
+          // if ($totalrows5 >0) {
+            echo "<p class='szoveg' style='font-size: large;'><b><u>Anyagköltség</u></b></p>";
             echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
             echo "<tr class='fejlec'>";
 
@@ -110,19 +110,19 @@
             echo  "<tr>";
             echo  "<td colspan='4' align='center'>Összesen:</td>";
             $teljesar=$teljesar+$anyaglistaar;
-            echo  "<td align='left'>$teljesar Ft</td>";
+            echo  "<td align='left'>".$teljesar." Ft</td>";
             echo  "</tr>";
             print "</table>";
-          }
-
-          $checkRecord2 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE projekt_id = '$pid'");
-          $totalrows2 = mysqli_num_rows($checkRecord2);
-
-          if ($totalrows2 > 0) {
+          // }
+          //
+          // $checkRecord2 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE projekt_id = '$pid'");
+          // $totalrows2 = mysqli_num_rows($checkRecord2);
+          //
+          // if ($totalrows2 > 0) {
             $mernokmido=0;
             $muszereszmido=0;
 
-            echo "<p style='font-size: large;'><b><u>Munkadíj költség</u></b></p>";
+            echo "<p class='szoveg' style='font-size: large;'><b><u>Munkadíj költség</u></b></p>";
             echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
             echo "<tr class='fejlec'>";
             echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
@@ -162,20 +162,19 @@
             echo  "<td></td><td></td>";
             echo  "</tr>";
             echo  "<tr>";
-            echo  "<td></td>";
-            echo  "<td colspan='3' align='right'>Teljes ár:</td>";
+            echo  "<td colspan='4' align='center'>Összesen:</td>";
             echo  "<td align='left'>".$teljesar." Ft</td>";
             echo  "</tr>";
             print "</table>";
-          }
+          // }
+          //
+          //
+          // $checkRecord3 = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE projekt_id = '$pid'");
+          // $totalrows3 = mysqli_num_rows($checkRecord3);
+          //
+          // if ($totalrows3 > 0) {
 
-
-          $checkRecord3 = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE projekt_id = '$pid'");
-          $totalrows3 = mysqli_num_rows($checkRecord3);
-
-          if ($totalrows3 > 0) {
-
-            echo "<p style='font-size: large;'><b><u>Egyéb költség</u></b></p>";
+            echo "<p class='szoveg' style='font-size: large;'><b><u>Egyéb költség</u></b></p>";
             echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
             echo "<tr class='fejlec'>";
             echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
@@ -195,25 +194,24 @@
               $teljesar=$teljesar+$arresz;
             }
             echo  "<tr>";
-            echo  "<td></td>";
-            echo  "<td colspan='3' align='right'>Teljes ár:</td>";
+            echo  "<td colspan='4' align='center'>Összesen:</td>";
             echo  "<td align='left'>".$teljesar." Ft</td>";
             echo  "</tr>";
             print "</table>";
-          }
-
-          $checkRecord4 = mysqli_query($conn,"SELECT * FROM muszakitartalom WHERE projekt_id = '$pid'");
-          $totalrows4 = mysqli_num_rows($checkRecord4);
-
-          if ($totalrows4 > 0) {
+          // }
+          //
+          // $checkRecord4 = mysqli_query($conn,"SELECT * FROM muszakitartalom WHERE projekt_id = '$pid'");
+          // $totalrows4 = mysqli_num_rows($checkRecord4);
+          //
+          // if ($totalrows4 > 0) {
             $result = mysqli_query($conn,"SELECT * FROM muszakitartalom where projekt_id='$pid'");
             $row = mysqli_fetch_array($result);
             $leiras=$row['muszakitartalom_tartalom'];
-            echo "<p style='font-size: large;'><b><u>Műszaki tartalom</u></b></p>";
+            echo "<p class='szoveg' style='font-size: large;'><b><u>Műszaki tartalom</u></b></p>";
              echo '<div style="border:solid 1px #000"; id="mszt";>';
               echo htmlspecialchars_decode($leiras);
              echo "</div>";
-          }
+          // }
 
          echo "</div>";
         }
@@ -221,7 +219,6 @@
           echo '<p>Jelenleg ki van jelentkezve!</p>';
         }
         ?>
-
       </div>
     </main>
   </div>

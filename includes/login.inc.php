@@ -23,7 +23,7 @@ if (isset($_POST['login-submit'])) {
       if ($row = mysqli_fetch_assoc($results)) {
         $pwdCheck = password_verify($password, $row['felhasznalo_jelszo']);
         if ($pwdCheck == false) {
-          header("Location: ../index.php?error=wrongpwd");
+          header("Location: ../index.php?error=rosszjelszo");
           exit();
         }
         elseif ($pwdCheck == true) {
@@ -35,12 +35,12 @@ if (isset($_POST['login-submit'])) {
           exit();
         }
         else {
-          header("Location: ../index.php?error=wrongpwd");
+          header("Location: ../index.php?error=rosszjelszo");
           exit();
         }
       }
       else {
-        header("Location: ../index.php?error=nouser");
+        header("Location: ../index.php?error=nincsilyenfelhasznalo");
         exit();
       }
     }

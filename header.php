@@ -17,7 +17,9 @@
     <script src="/Projekt_koltseg_kalkulacio/js/delfromak.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/delfromha.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/addtocart.js"></script>
+    <script src="/Projekt_koltseg_kalkulacio/js/addtohelyi.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/startprojekt.js"></script>
+    <script src="/Projekt_koltseg_kalkulacio/js/stopprojekt.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/deleteprojekt.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/filter_table.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/filter_table1.js"></script>

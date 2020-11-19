@@ -29,7 +29,7 @@
   padding: 8px;
 }
 
-.table-style tr:nth-child(even){background-color: #f2f2f2;}
+.table-style tr:nth-child(even){background-color: #E6E6E6;}
 
 .table-style tr:hover {background-color: #ddd;}
 

@@ -19,9 +19,9 @@ if($id > 0){
     $successfullyCopied = $stmt->execute();
 
     require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
-    $query = mysqli_query($conn,"SELECT * FROM helyi_anyaglista WHERE helyi_anyaglista_id=".$id);
+    $query = mysqli_query($conn,"SELECT * FROM sap_anyaglista WHERE sap_anyaglista_id=".$id);
     $row = mysqli_fetch_array($query);
-    $szoveg = ("delete alkatrészlista  ". $row['helyi_anyaglista_megnevezes'] ." ");
+    $szoveg = ("delete from anyaglista  ". $row['helyi_anyaglista_megnevezes'] ." ");
     naplozas($szoveg);
 
     if ($successfullyCopied) {

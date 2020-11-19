@@ -54,7 +54,7 @@ function printmunkadijkoltseg(){
   $pdf->Cell($cellaszelesseg[3],$cellamagassag,'',1,0,'C');
   $pdf->Cell($cellaszelesseg[4],$cellamagassag,'',1,1,'C');
 
-  $pdf->Cell(154,$cellamagassag,'Összesen:',1,0,'R',$fill);
+  $pdf->Cell(154,$cellamagassag,'Összesen:',1,0,'C',$fill);
   $pdf->Cell(35,$cellamagassag,$teljesar.' Ft',1,1,'C',$fill);
 }
 

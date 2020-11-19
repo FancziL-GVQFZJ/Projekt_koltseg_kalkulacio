@@ -1,6 +1,6 @@
 <?php
   $thisPage1='Munka';
-  $thisPage='Kalkulacio';
+  $thisPage='Kalkulacioslap';
   require "kalkulacioslapheader.php";
   session_start();
 ?>

@@ -9,16 +9,16 @@ if(isset($_POST['id'])){
 
 if($id > 0){
 
-  $checkRecord = mysqli_query($conn,"SELECT * FROM helyi_anyaglista WHERE helyi_anyaglista_id=".$id);
+  $checkRecord = mysqli_query($conn,"SELECT * FROM helyi_anyaglista WHERE helyi_anyaglista_sapszam=".$id);
   $totalrows = mysqli_num_rows($checkRecord);
 
   if($totalrows > 0){
 
-    $stmt = $conn->prepare("DELETE FROM helyi_anyaglista WHERE helyi_anyaglista_id = ?");
+    $stmt = $conn->prepare("DELETE FROM helyi_anyaglista WHERE helyi_anyaglista_sapszam = ?");
     $stmt->bind_param("i", $id);
     $successfullyCopied = $stmt->execute();
 
-    require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';    
+    require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
     $row = mysqli_fetch_array($checkRecord);
     $szoveg = ("delete alkatrészlista  ". $row['helyi_anyaglista_megnevezes'] ." ");
     naplozas($szoveg);
