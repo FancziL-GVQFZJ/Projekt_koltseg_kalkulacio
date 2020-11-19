@@ -99,11 +99,12 @@
                 echo "<td>".$jogosultsag."</td>";
                 echo "<td>".$row['projekt_nev']."</td>";
                 if ($jpid!=$pid) {
-                  ?><td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Kiválasztás</span></td> <?php
+                  ?><td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Kiválasztás</span></td>
+                  <td id='del'><span class='removeprojekt' data-id='<?= $pid; ?>'>Eltávolítás</span></td> <?php
                 }
-                else {
-                  echo "<td style='background-color: #FF8E8E;'>Kiválasztva</td>";
-                }
+                else { ?>
+                  <td style='background-color: #FF8E8E;color:black;' id='add'><span class='stopprojekt' data-id='<?= $pid; ?>'>Befejezés</span></td>
+                <?php }
                 echo "</tr>";
               }
               echo "</table>";

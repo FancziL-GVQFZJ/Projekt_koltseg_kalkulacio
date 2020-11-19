@@ -21,16 +21,16 @@ if ($projektId > 0) {
 
     $stmt2 = $conn->prepare("DELETE FROM pf_kapcsolat WHERE projekt_id = ?");
     $stmt2->bind_param("i", $projektId);
+    $successfullyCopied2 = $stmt2->execute();
 
     $stmt3 = $conn->prepare("DELETE FROM projektmunkadij WHERE projekt_id = ?");
     $stmt3->bind_param("i", $projektId);
-
-    $successfullyCopied2 = $stmt2->execute();
+    $successfullyCopied3 = $stmt3->execute();
 
     require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
     $szoveg = ("delete projekt ". $megn ."");
     naplozas($szoveg);
-    if ($successfullyCopied && $successfullyCopied2) {
+    if ($successfullyCopied && $successfullyCopied2 && $successfullyCopied3) {
       echo 1;
       exit;
     }else {

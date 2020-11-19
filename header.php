@@ -21,6 +21,7 @@
     <script src="/Projekt_koltseg_kalkulacio/js/startprojekt.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/stopprojekt.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/deleteprojekt.js"></script>
+    <script src="/Projekt_koltseg_kalkulacio/js/removeprojekt.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/filter_table.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/filter_table1.js"></script>
     <script src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
