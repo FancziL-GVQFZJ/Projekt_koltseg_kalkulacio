@@ -15,12 +15,14 @@
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
-          echo "<p>Új adat felvétele</p>
+          echo "<div class='felvetel'>
+          <p>Új adat felvétele:</p>
           <form action='includes/databaseinsert/addtopmunkadij.inc.php' method='post'>
-          Megnevezés: <input type='text' name='name'>
-          Órabér: <input type='text' name='oraber'>
-          <input type='submit' value='Új adat felvétele'>
-          </form>";
+          Megnevezés: <input type='text' name='name' id='megnevezesid'><br>
+          Órabér: <input type='text' name='oraber' id='oraberid'><br><br>
+          <input class='button' type='submit' id='felvetelid' value='Az adat felvétele' onkeypress='return mask(this,event);'>
+          </form>
+        </div>";
 
           echo "<table class='table-style' id='Munkadijak'>";
           echo "<tr class='fejlec'>";
@@ -66,7 +68,23 @@
     url: 'includes/tableedit/pmdlive_edit.inc.php',
     onAlways: function() {location.reload()}
   });
-  //Location.reload();
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    var $submit = $("input[type=submit]"),
+        $inputs = $('input[type=text], input[type=text]');
+
+    function checkEmpty() {
+        return $inputs.filter(function() {
+            return !$.trim(this.value);
+        }).length === 0;
+    }
+
+    $inputs.on('blur', function() {
+        $submit.prop("disabled", !checkEmpty());
+    }).blur();
 });
 </script>
 

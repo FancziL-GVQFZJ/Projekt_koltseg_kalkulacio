@@ -261,3 +261,15 @@ button[type="submit"].button:hover {
   float: left;
   width: 20%;
 }
+
+.felvetel {
+  width: 95%;
+  height: 120px;
+  margin: auto;
+  border: 1px solid #BBBBBB;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+.felvetel input[type=text]{
+  width: 500px;
+}

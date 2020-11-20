@@ -7,7 +7,8 @@ $megn = $_POST['name'];
 $ora = $_POST['oraber'];
 
 $stmt = $conn->prepare("INSERT INTO munkadij (munkadij_fajta, munkadij_oraber)
-                                          VALUES ('$megn','$ora')");
+                                          VALUES (?,?)");
+$stmt->bind_param("ss", $megn, $ora);
 $successfullyCopied = $stmt->execute();
 
 require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';

@@ -15,11 +15,13 @@
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
 
-          <p>Új adat felvétele</p>
-          <form action='includes/databaseinsert/addtoanyagkoltseg.inc.php' method='post'>
-          Megnevezés: <input type='text' name='name'>
-          <input type='submit' value='Felvétel'>
-          </form>
+          <div class='felvetel'>
+            <p><u>Új adat felvétele:</u></p>
+            <form action='includes/databaseinsert/addtoanyagkoltseg.inc.php' method='post'>
+            Megnevezés: <input type='text' name='name'><br><br>
+            <input class='button' type='submit' value='Az adat felvétele'>
+            </form>
+          </div>
 
           <div align= "center" class='table-style' id="nyomtatas">
             <table class='table-style' id='Anyagkoltseg'>
@@ -105,6 +107,22 @@
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+    var $submit = $("input[type=submit]"),
+        $inputs = $('input[type=text]');
+
+    function checkEmpty() {
+        return $inputs.filter(function() {
+            return !$.trim(this.value);
+        }).length === 0;
+    }
+
+    $inputs.on('blur', function() {
+        $submit.prop("disabled", !checkEmpty());
+    }).blur();
+});
+</script>
 
 <?php
     require "footer.php";

@@ -13,40 +13,41 @@
       <div>
         <?php
         require 'includes/kapcsolat.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
-          <?php
           $pid = $_SESSION['projektId'];
           $csoport = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
                         WHERE projekt_id ='$pid' AND munkadijkoltseg_mennyiseg IS NULL");
 
-          echo '<p>Új adat felvétele</p>
-          <form action="includes/databaseinsert/addtomunkafajta.inc.php" method="post">
-            Megnevezés: <input type="text" name="name" id="megnevezesid">
+          echo '<div class="felvetel">
+            <p>Új adat felvétele:</p>
+            <form action="includes/databaseinsert/addtomunkafajta.inc.php" method="post">
+              Megnevezés: <input type="text" name="name" id="megnevezesid">
+              <br>
 
-            Csoport: <select style="display: none;" name="csoport" id="csoportid" onchange="OnSelectionChange(this.value)">';
-            echo "<option  value='0' selected>nincs</option>";
-              while ($row4 = $csoport->fetch_assoc()){ ?>
-                <option value="<?=$row4['munkadiijkoltseg_id'] ?> " > <?=$row4['munkadijkoltseg_megnevezes'] ?></option>  <?php
+              Csoport: <select style="display: none;" name="csoport" id="csoportidmk">';
+              echo "<option value='0' selected>nincs</option>";
+                while ($row4 = $csoport->fetch_assoc()){ ?>
+                  <option value="<?=$row4['munkadiijkoltseg_id'] ?>"> <?=$row4['munkadijkoltseg_megnevezes'] ?></option> <?php
+                }
+              echo '</select><br>';
+              $query = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+                            WHERE projekt_id ='$pid'");
+              $munkadijkezdes = mysqli_num_rows($query);
+              if ($munkadijkezdes > 1) {
+                echo "Cím: <input style='display: none;' type='checkbox' name='cim' value='pipa' id='checkboxid'>";
+              }else {
+                echo "Cím: <input style='display: none;' type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked'>";
               }
-            echo '</select>';
-            echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid'>";
-            echo "<input type='submit' style='display: none;' value='Felvétel' id='felvetelid'></submit>
-          </form>";
-
-          // $query1 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
-          //               WHERE parent_id ='$id' AND Mennyiseg IS NOT NULL");
-          // $resurt1 = mysqli_num_rows($query1);
-          //
-          // $query2 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
-          //               WHERE Id = '$id' AND parent_id IS NOT NULL AND Mennyiseg IS NULL");
-          // $resurt2 = mysqli_num_rows($query2);
-
+              echo "<br>";
+              echo "<input class='button' type='submit' style='display: none;' value='Az adat felvétele' id='felvetelid'></submit>
+            </form>
+          </div>";
 
           $mernokmido=0;
           $muszereszmido=0;
 
-          echo "<div align= \"center\" id=\"nyomtatas\">";
+          echo "<div align='center' id='nyomtatas'>";
             echo "<table class='table-style' id='Munkadijkalkulacio'>";
             echo "<tr class='fejlec'>";
             echo "<th>Id</th><th>Munkavégző</th><th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Egységár</th><th>Ár:</th>";
@@ -228,16 +229,47 @@ $('td#mv').on('change', function() {
 <script type="text/javascript">
 $("#megnevezesid").keyup(function () {
        if ($(this).val()) {
-          $("#csoportid").show();
-        //  $("#checkboxid").show();
-          $("#felvetelid").show();
+         $("#csoportidmk").show();
+         $("#checkboxid").show();
+         $("#felvetelid").show();
        }
        else {
-          $("#csoportid").hide();
-        //  $("#checkboxid").hide();
-          $("#felvetelid").hide();
+         $("#csoportidmk").hide();
+         $("#checkboxid").hide();
+         $("#felvetelid").hide();
        }
     });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#csoportidmk').change(function(){
+   var value = $('#csoportidmk').find(":selected").val();
+
+   $.ajax({
+     url: 'includes/datainsertmk.inc.php',
+     type: 'POST',
+     data: { id:value },
+     success: function(response){
+
+       if(response == 1){
+           $("#felvetelid").show();
+           $("#checkboxid").hide();
+       }else if(response == 2){
+           $("#felvetelid").show();
+           $("#checkboxid").show();
+
+       }else if(response == 0){
+           $("#felvetelid").show();
+           $("#checkboxid").show();
+
+       }else {
+         alert("Próbálja meg újra");
+       }
+     }
+   });
+ });
+});
 </script>
 
 <?php

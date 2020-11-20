@@ -12,7 +12,8 @@ $kszam=$row['max'];
 $kszam=$kszam+1;
 
 $stmt = $conn->prepare("INSERT INTO projektmunkadij (projekt_id, munkadij_id, projektmunkadij_munkafajta, projektmunkadij_oraber)
-                                          VALUES ('$pid','$kszam','$megn','$ora')");
+                                          VALUES (?,?,?,?)");
+$stmt->bind_param("ssss", $pid, $kszam, $megn, $ora);
 $successfullyCopied = $stmt->execute();
 
 require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';
