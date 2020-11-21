@@ -52,7 +52,7 @@
                   <td id='del'><span class='deleteprojekt' data-id='<?= $pid; ?>'>Törlés</span></td> <?php
                 }
                 else { ?>
-                  <td style='background-color: #FF8E8E;color:black;' id='add'><span class='stopprojekt' data-id='<?= $pid; ?>'>Befejezés</span></td>
+                  <td id='stop'><span class='stopprojekt' data-id='<?= $pid; ?>'>Befejezés</span></td>
                 <?php }
                 $i++;
                 echo "</tr>";
@@ -71,7 +71,7 @@
 
 
               echo "<table class='table-style'>";
-              echo "<th>Tulajdonos</th><th>Jogosultság</th><th>Projektnév</th>";
+              echo "<th>Tulaj</th><th>Jog</th><th>Projektnév</th>";
               echo "<tr>";
               while ($row=mysqli_fetch_array($sql))
               {
@@ -100,10 +100,10 @@
                 echo "<td>".$row['projekt_nev']."</td>";
                 if ($jpid!=$pid) {
                   ?><td id='add'><span class='startprojekt' data-id='<?= $pid; ?>'>Kiválasztás</span></td>
-                  <td id='del'><span class='removeprojekt' data-id='<?= $pid; ?>'>Eltávolítás</span></td> <?php
+                  <td id='del'><span class='removeprojekt' data-id='<?= $pid; ?>'>Törlés</span></td> <?php
                 }
                 else { ?>
-                  <td style='background-color: #FF8E8E;color:black;' id='add'><span class='stopprojekt' data-id='<?= $pid; ?>'>Befejezés</span></td>
+                  <td id='stop'><span class='stopprojekt' data-id='<?= $pid; ?>'>Befejezés</span></td>
                 <?php }
                 echo "</tr>";
               }

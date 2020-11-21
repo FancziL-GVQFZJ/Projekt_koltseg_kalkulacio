@@ -20,27 +20,29 @@
                         WHERE projekt_id ='$pid' AND munkadijkoltseg_mennyiseg IS NULL");
 
           echo '<div class="felvetel">
-            <p>Új adat felvétele:</p>
-            <form action="includes/databaseinsert/addtomunkafajta.inc.php" method="post">
-              Megnevezés: <input type="text" name="name" id="megnevezesid">
-              <br>
-              Csoport: <select name="csoport" id="csoportidmk" disabled>';
-              echo "<option value='0' selected>nincs</option>";
-                while ($row4 = $csoport->fetch_assoc()){ ?>
-                  <option value="<?=$row4['munkadiijkoltseg_id'] ?>"> <?=$row4['munkadijkoltseg_megnevezes'] ?></option> <?php
+            <div class="felvetelin">
+              <p><u>Új adat felvétele:</u></p>
+              <form action="includes/databaseinsert/addtomunkafajta.inc.php" method="post">
+                Megnevezés: <input type="text" name="name" id="megnevezesid">
+                <br>
+                Csoport: <select name="csoport" id="csoportidmk" disabled>';
+                echo "<option value='0' selected>nincs</option>";
+                  while ($row4 = $csoport->fetch_assoc()){ ?>
+                    <option value="<?=$row4['munkadiijkoltseg_id'] ?>"> <?=$row4['munkadijkoltseg_megnevezes'] ?></option> <?php
+                  }
+                echo '</select><br>';
+                $query = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+                              WHERE projekt_id ='$pid'");
+                $munkadijkezdes = mysqli_num_rows($query);
+                if ($munkadijkezdes > 1) {
+                  echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
+                }else {
+                  echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
                 }
-              echo '</select><br>';
-              $query = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
-                            WHERE projekt_id ='$pid'");
-              $munkadijkezdes = mysqli_num_rows($query);
-              if ($munkadijkezdes > 1) {
-                echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
-              }else {
-                echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
-              }
-              echo "<br>";
-              echo "<input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled></submit>
-            </form>
+                echo "<br>";
+                echo "<input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled></submit>
+              </form>
+            </div>
           </div>";
 
           $mernokmido=0;

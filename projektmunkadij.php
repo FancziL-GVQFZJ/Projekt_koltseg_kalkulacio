@@ -16,13 +16,15 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
 
           echo "<div class='felvetel'>
-          <p>Új adat felvétele:</p>
-          <form action='includes/databaseinsert/addtopmunkadij.inc.php' method='post'>
-          Megnevezés: <input type='text' name='name' id='megnevezesid'><br>
-          Órabér: <input type='text' name='oraber' id='oraberid'><br><br>
-          <input class='button' type='submit' id='felvetelid' value='Az adat felvétele' onkeypress='return mask(this,event);'>
-          </form>
-        </div>";
+            <div class='felvetelin'>
+              <p>Új adat felvétele:</p>
+              <form action='includes/databaseinsert/addtopmunkadij.inc.php' method='post'>
+              Megnevezés: <input type='text' name='name' id='megnevezesid'><br>
+              Órabér: <input type='text' name='oraber' id='oraberid'><br><br>
+              <input class='button' type='submit' id='felvetelid' value='Az adat felvétele' onkeypress='return mask(this,event);'>
+              </form>
+            </div>
+          </div>";
 
           echo "<table class='table-style' id='Munkadijak'>";
           echo "<tr class='fejlec'>";

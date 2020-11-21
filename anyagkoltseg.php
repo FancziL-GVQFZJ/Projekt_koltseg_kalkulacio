@@ -16,11 +16,13 @@
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
 
           <div class='felvetel'>
-            <p><u>Új adat felvétele:</u></p>
-            <form action='includes/databaseinsert/addtoanyagkoltseg.inc.php' method='post'>
-            Megnevezés: <input type='text' name='name' id='megnevezesid'><br><br>
-            <input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled>
+            <div class='felvetelin'>
+              <p><u>Új adat felvétele:</u></p>
+              <form action='includes/databaseinsert/addtoanyagkoltseg.inc.php' method='post'>
+              Megnevezés: <input type='text' name='name' id='megnevezesid'><br><br><br>
+              <input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled>
             </form>
+          </div>
           </div>
 
           <div align= "center" class='table-style' id="nyomtatas">

@@ -43,6 +43,9 @@
       $thisPage == 'Kezdooldal';?>
       <header>
         <div class="projektnev-container">
+          <a href="#">
+            <img src="img/vmlogo.png" alt="logo" class="logo">
+          </a>
           <?php
           if (isset($_SESSION['projektId'])) {
             $projektneve = $_SESSION['projektNeve'];
@@ -53,9 +56,6 @@
           ?>
         </div>
         <nav class="topnav">
-          <a href="#">
-            <img src="img/vmlogo.png" alt="logo" class="logo">
-          </a>
           <ul>
             <li><a <?php echo ($thisPage == 'Kezdooldal') ? ' class="selected"' : ''; ?> href="index.php">Kezdőlap</a></li>
             <li><a <?php echo ($thisPage == 'Anyaglista') ? ' class="selected"' : ''; ?> href="sap_anyaglista.php">Villamos anyaglista</a></li>
