@@ -25,7 +25,7 @@
               Megnevezés: <input type="text" name="name" id="megnevezesid">
               <br>
 
-              Csoport: <select style="display: none;" name="csoport" id="csoportidek">';
+              Csoport: <select name="csoport" id="csoportidek" disabled>';
               echo "<option  value='0' selected>nincs</option>";
                 while ($row4 = $csoport->fetch_assoc()){ ?>
                   <option value="<?=$row4['egyebkoltseg_id'] ?> " > <?=$row4['egyebkoltseg_megnevezes'] ?></option>  <?php
@@ -35,12 +35,12 @@
                             WHERE projekt_id ='$pid'");
               $munkadijkezdes = mysqli_num_rows($query);
               if ($munkadijkezdes > 1) {
-                echo "Cím: <input style='display: none;'type='checkbox' name='cim' value='pipa' id='checkboxid'>";
+                echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
               }else {
-                echo "Cím: <input style='display: none;'type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked'>";
+                echo "Cím: <input 'type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
               }
               echo "<br>";
-              echo "<input class='button' type='submit' style='display: none;' value='Felvétel' id='felvetelid'></submit>
+              echo "<input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled></submit>
             </form>
           </div>";
           ?>
@@ -206,14 +206,13 @@ $('td#mv').on('change', function() {
 <script type="text/javascript">
 $("#megnevezesid").keyup(function () {
        if ($(this).val()) {
-          $("#csoportidek").show();
-          $("#checkboxid").show();
-          $("#felvetelid").show();
+         document.getElementById("csoportidek").disabled = false;
+         document.getElementById("felvetelid").disabled = false;
        }
        else {
-          $("#csoportidek").hide();
-          $("#checkboxid").hide();
-          $("#felvetelid").hide();
+         document.getElementById("csoportidek").disabled = true;
+         document.getElementById("checkboxid").disabled = true;
+         document.getElementById("felvetelid").disabled = true;
        }
     });
 </script>
@@ -230,22 +229,32 @@ $(document).ready(function(){
      success: function(response){
 
        if(response == 1){
-           $("#felvetelid").show();
-           $("#checkboxid").hide();
+           document.getElementById("felvetelid").disabled = false;
+           document.getElementById("checkboxid").disabled = true;
+           $('#checkboxid').each(function() {
+            this.checked = false;
+          });
        }else if(response == 2){
-           $("#felvetelid").show();
-           $("#checkboxid").show();
-
+         document.getElementById("felvetelid").disabled = false;
+         document.getElementById("checkboxid").disabled = true;
+         $('#checkboxid').each(function() {
+          this.checked = true;
+        });
        }else if(response == 0){
-           $("#felvetelid").show();
-           $("#checkboxid").show();
-
+         document.getElementById("felvetelid").disabled = false;
+         document.getElementById("checkboxid").disabled = false;
        }else {
          alert("Próbálja meg újra");
        }
      }
    });
  });
+});
+</script>
+
+<script type="text/javascript">
+$("form").submit(function() {
+  $("#checkboxid").removeAttr("disabled");
 });
 </script>
 

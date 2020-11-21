@@ -17,6 +17,10 @@ naplozas($szoveg);
 
 if ($successfullyCopied) {
   header("Location: ../../anyagkoltseg.php");
-  exit;
+  exit();
+}
+else {
+  header("Location: ../../anyagkoltseg.php?nemsikerultafelvetel");
+  exit();
 }
 ?>

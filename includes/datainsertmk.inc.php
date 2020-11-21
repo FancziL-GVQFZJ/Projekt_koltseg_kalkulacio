@@ -21,10 +21,13 @@ if($id > 0){
     echo 1;
     exit;
   }else {
-    echo 2;
+    echo 0;
     exit;
   }
 
+}elseif ($id == 0) {
+  echo 2;
+  exit;
 }else{
   echo 0;
   exit;

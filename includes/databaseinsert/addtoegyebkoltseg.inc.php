@@ -10,7 +10,7 @@ if ($szulo == 0) {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
                                         egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
-                                              VALUES (?,NULL,?,'',NULL,2)");
+                                              VALUES (?,NULL,?,'',NULL,NULL)");
     $stmt->bind_param("ss", $pid, $megn);
   }
   else {
@@ -24,7 +24,7 @@ else {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,
                                         egyebkoltseg_mertekegyseg, egyebkoltseg_mennyiseg, munkadij_id)
-                                              VALUES (?,?,?,'',NULL,2)");
+                                              VALUES (?,?,?,'',NULL,NULL)");
     $stmt->bind_param("sss", $pid, $szulo, $megn);
   }
   else {

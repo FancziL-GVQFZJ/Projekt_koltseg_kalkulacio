@@ -18,8 +18,8 @@
           <div class='felvetel'>
             <p><u>Új adat felvétele:</u></p>
             <form action='includes/databaseinsert/addtoanyagkoltseg.inc.php' method='post'>
-            Megnevezés: <input type='text' name='name'><br><br>
-            <input class='button' type='submit' value='Az adat felvétele'>
+            Megnevezés: <input type='text' name='name' id='megnevezesid'><br><br>
+            <input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled>
             </form>
           </div>
 
@@ -108,20 +108,14 @@
 </script>
 
 <script type="text/javascript">
-$(document).ready(function() {
-    var $submit = $("input[type=submit]"),
-        $inputs = $('input[type=text]');
-
-    function checkEmpty() {
-        return $inputs.filter(function() {
-            return !$.trim(this.value);
-        }).length === 0;
-    }
-
-    $inputs.on('blur', function() {
-        $submit.prop("disabled", !checkEmpty());
-    }).blur();
-});
+$("#megnevezesid").keyup(function () {
+       if ($(this).val()) {
+         document.getElementById("felvetelid").disabled = false;
+       }
+       else {
+         document.getElementById("felvetelid").disabled = true;
+       }
+    });
 </script>
 
 <?php

@@ -19,8 +19,8 @@
             <p>Új adat felvétele:</p>
             <form action='includes/databaseinsert/addtomunkadij.inc.php' method='post'>
             Megnevezés: <input type='text' name='name' id='megnevezesid'><br>
-            Órabér: <input type='text' name='oraber' id='oraberid'><br><br>
-            <input class='button' type='submit' id='felvetelid' value='Az adat felvétele' onkeypress='return mask(this,event);'>
+            Órabér: <input type='text' name='oraber' id='oraberid' ><br><br>
+            <input class='button' type='submit' id='felvetelid' value='Az adat felvétele'>
             </form>
           </div>";
 
@@ -71,22 +71,6 @@
   });
 });
 </script>
-
-<!-- <script type="text/javascript">
-function mask(textbox, e) {
-
-    var charCode = (e.which) ? e.which : e.keyCode;
-    if (charCode == 46 || charCode > 31&& (charCode < 48 || charCode > 57))
-       {
-          alert("Csak számot lehet beírni");
-          return false;
-       }
-   else
-       {
-           return true;
-       }
-     }
-</script> -->
 
 <script type="text/javascript">
 $(document).ready(function() {
