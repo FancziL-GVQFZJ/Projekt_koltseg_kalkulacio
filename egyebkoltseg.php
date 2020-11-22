@@ -65,7 +65,6 @@
 
             while ($row=mysqli_fetch_array($parents))
             {?>
-
               <tr id="<?php echo $row['egyebkoltseg_id']; ?>">
               <?php echo "<td>".$row['egyebkoltseg_id']."</td>";
               echo  "<td></td>";
@@ -78,12 +77,47 @@
               </tr>
               <?php
               $arresz = show_children($row['egyebkoltseg_id'], $i);
-              $teljesar=$teljesar+$arresz;
+              $egyebkoltseg=$egyebkoltseg+$arresz;
             }
             echo  "<tr>";
             echo  "<td></td>";
-            echo  "<td colspan='5' align='right'>Teljes ár:</td>";
-            echo  "<td align='left'>".$teljesar." Ft</td>";
+            echo  "<td colspan='5' align='center'>Összesen:</td>";
+            echo  "<td align='left'>".$egyebkoltseg." Ft</td>";
+            echo  "</tr>";
+
+            $anyaglistaar=0;
+            $pid = $_SESSION['projektId'];
+            $sor=mysqli_query($conn, "SELECT * FROM sap_anyaglista
+                  INNER JOIN pa_kapcsolat
+                    ON sap_anyaglista.sap_anyaglista_id = pa_kapcsolat.alkatresz_id
+                  INNER JOIN projekt
+                    ON pa_kapcsolat.projekt_id = projekt.projekt_id
+                    WHERE projekt.projekt_id = '$pid'
+                    ORDER BY sap_anyaglista.sap_anyaglista_id");
+            while ($row=mysqli_fetch_array($sor))
+            {
+              $sorar=$row['sap_anyaglista_egysegar']*$row['pa_dbszam'];
+              $anyaglistaar=$anyaglistaar+$sorar;
+            }
+
+            $munkadijkoltseg=0;
+            $munkadij = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+                          INNER JOIN projektmunkadij
+                          ON munkadijkoltseg.munkadij_id = projektmunkadij.munkadij_id
+                          WHERE munkadijkoltseg.projekt_id='$pid'
+                          AND projektmunkadij.projekt_id='$pid'
+                          AND munkadijkoltseg.parent_id IS NOT NULL");
+            while ($row1=mysqli_fetch_array($munkadij))
+            {
+              $sorar1=$row1['munkadijkoltseg_mennyiseg']*$row1['projektmunkadij_oraber'];
+              $munkadijkoltseg=$munkadijkoltseg+$sorar1;
+            }
+
+            $mindosszesen = $anyaglistaar + $munkadijkoltseg + $egyebkoltseg;
+            echo  "<tr>";
+            echo  "<td></td>";
+            echo  "<td colspan='5' align='center'>Mindösszesen(1+2+3):</td>";
+            echo  "<td align='left'>".$mindosszesen." Ft</td>";
             echo  "</tr>";
             print "</table>";
           echo  "</div>";

@@ -17,7 +17,7 @@
 
           echo "<div class='felvetel'>
             <div class='felvetelin'>
-              <p>Új adat felvétele:</p>
+              <p><u>Új adat felvétele:</u></p>
               <form action='includes/databaseinsert/addtomunkadij.inc.php' method='post'>
               Megnevezés: <input type='text' name='name' id='megnevezesid'><br>
               Órabér: <input type='text' name='oraber' id='oraberid' ><br><br>

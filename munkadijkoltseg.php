@@ -82,20 +82,20 @@
             echo  "<td></td><td></td>";
             echo  "<td align='left'>Mérnöki munkaidő:</td>";
             echo  "<td>óra</td>";
-            echo  "<td align='left'>$mernokmido</td>";
+            echo  "<td align='left'>".$mernokmido. "</td>";
             echo  "<td></td><td></td>";
             echo  "</tr>";
             echo  "<tr>";
             echo  "<td></td><td></td>";
             echo  "<td align='left'>Szerelői minkaidő:</td>";
             echo  "<td>óra</td>";
-            echo  "<td align='left'>$muszereszmido</td>";
+            echo  "<td align='left'>".$muszereszmido."</td>";
             echo  "<td></td><td></td>";
             echo  "</tr>";
             echo  "<tr>";
             echo  "<td></td>";
             echo  "<td colspan='5' align='center'>Összesen:</td>";
-            echo  "<td align='left'>$teljesar Ft</td>";
+            echo  "<td align='left'>".$teljesar." Ft</td>";
             echo  "</tr>";
             print "</table>";
           echo  "</div>";
@@ -179,7 +179,7 @@ function show_children($parentID, $i, $depth=1){
     echo  "<tr>";
     echo  "<td></td>";
     echo  "<td colspan='5' align='right'>Összegzett ár:</td>";
-    echo  "<td align='left'>$osszegar Ft</td>";
+    echo  "<td align='left'>".$osszegar." Ft</td>";
     echo  "</tr>";
   }
   return $osszegar;
