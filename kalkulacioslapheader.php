@@ -2,7 +2,6 @@
   session_start();
   require "header.php";
  ?>
- <style><?php include 'css/navbar.css';?></style>
   <header>
     <nav class="topnav">
       <div>

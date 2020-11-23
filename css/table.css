@@ -3,16 +3,14 @@
   width: 100%;
   font-size: 16px;
   padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
   margin-bottom: 12px;
 }
 
 #myInput1 {
   background-repeat: no-repeat;
   width: 100%;
-  font-size: 16px
-  padding: 12px 20px 12px 40px
-  border: 1px solid #ddd
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
   margin-bottom: 12px;
 }
 
@@ -25,28 +23,14 @@
 }
 
 .table-style td, .table-style th {
-  border: 1px solid #A9A9A9;
   padding: 8px;
-}
-
-.table-style tr:nth-child(even) {
-  background-color: #E6E6E6;
-}
-
-.table-style tr:hover {
-  background-color: #ddd;
 }
 
 .table-style th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: lightgrey;
   color: black;
-}
-
-.table-style tr.fejlec {
-  background-color: lightgrey;
 }
 
 #del {
@@ -56,10 +40,6 @@
   width:50px;
 }
 
-#del:hover {
-  background-color: #A9A9A9;
-}
-
 #add {
   text-align: center;
   cursor: pointer;
@@ -67,19 +47,10 @@
   width:50px;
 }
 
-#add:hover {
-  background-color: #A9A9A9;
-}
-
 #stop {
   text-align: center;
   cursor: pointer;
   width:50px;
-  background-color: #FF8E8E;
-}
-
-#stop:hover {
-  background-color: #F75C5C;
 }
 
 .editbox {
@@ -89,8 +60,6 @@ display:none
 .editbox {
 font-size:14px;
 width:270px;
-background-color:#ffffcc;
-border:solid 1px #000;
 padding:4px;
 }
 

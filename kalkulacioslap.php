@@ -4,8 +4,6 @@
   require "kalkulacioslapheader.php";
   session_start();
 ?>
-<style><?php include 'css/navbar.css';?></style>
-<style><?php include 'css/table.css';?></style>
 
 <div id="container">
   <div id="main">
@@ -32,8 +30,7 @@
               echo "<p class='szoveg' style='font-size: large;'><b><u>Villamos anyaglista</u></b></p>";
               echo "<table border=1; style='border-collapse: collapse;' class='table-style'>";
               echo "<tr class='fejlec'>";
-              echo "<th></th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
-              echo "<td><p>ÁR összesen</p></td>";
+              echo "<th></th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th><th>ÁR összesen</th>";
               $i=1;
               while ($row=mysqli_fetch_array($sor))
               {

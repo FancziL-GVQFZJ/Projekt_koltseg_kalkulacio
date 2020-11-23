@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $dBUsername = "root";
-$dBPassword = "mysql";
+$dBPassword = "root";
 $dBname = "kalkulacio_db";
 
 $conn = mysqli_connect($servername,$dBUsername,$dBPassword,$dBname);

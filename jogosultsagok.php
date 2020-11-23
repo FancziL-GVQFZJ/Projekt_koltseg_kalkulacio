@@ -4,8 +4,6 @@
   require "kezdolapheader.php";
   session_start();
 ?>
-<style><?php include 'css/navbar.css';?></style>
-<style><?php include 'css/table.css';?></style>
 
 <div id="container">
   <div id="main">
@@ -24,17 +22,19 @@
                       ON projekt.projekt_id = pf_kapcsolat.projekt_id
                     INNER JOIN felhasznalo
                       ON pf_kapcsolat.felhasznalo_id = felhasznalo.felhasznalo_id
-                      WHERE felhasznalo.felhasznalo_id = $fid");
+                      WHERE felhasznalo.felhasznalo_id = $fid
+                      ORDER BY projekt.projekt_id DESC");
 
               echo "<table class='table-style'>";
               echo "<th></th><th>Projekt neve</th>";
               echo "<tr>";
+              $i=1;
               while ($row=mysqli_fetch_array($sor))
               {
                 $sorid=$row['projekt_id'];
                 $pnev=$row['projekt_nev'];
                 echo "<tr>";
-                echo "<td>".$row['projekt_id']."</td>";
+                echo "<td>".$i."</td>";
                 echo "<td>".$row['projekt_nev']."</td>";
                 ?>
                 <td style="text-align:center; width:100px;">
@@ -46,6 +46,7 @@
                 </td>
                 <?php
                 echo "</tr>";
+                $i++;
               }
               echo "</table>";
             echo "</div>";
@@ -56,12 +57,12 @@
                 $jpid = $_POST["projektid"];
 
                 $sor2=mysqli_query($conn, "SELECT * FROM felhasznalo WHERE NOT felhasznalo_id ='$fid'");
-                echo "<br><br>";
-                echo "<p class='szoveg'>".$jpnev." beállítása:</p>";
+                echo "<p class='szoveg'><u>".$jpnev." beállítása:</u></p>";
 
                 echo "<table class='table-style' id='table'>";
                 echo "<tr>";
-                echo "<th>Id</th><th>ProjektId</th><th>Felhasználó</th><th>Jogosultság</th>";
+                echo "<th></th><th>Felhasználó</th><th>Projekt id</th><th>Jogosultság</th>";
+                $i=1;
                 while ($row2=mysqli_fetch_array($sor2))
                 {
                   $fnev=$row2['felhasznalo_id'];
@@ -71,9 +72,9 @@
                                 WHERE jogosultsag.felhasznalo_id ='$fnev' AND jogosultsag.projekt_id ='$jpid'");
                   $row3=mysqli_fetch_array($jogosultsagok);
                   echo "<tr>";
-                  echo "<td>".$row2['felhasznalo_id']."</td>";
-                  echo "<td>".$jpid."</td>";
+                  echo "<td>".$i."</td>";
                   echo "<td>".$row2['felhasznalo_nev']."</td>";
+                  echo "<td>".$jpid."</td>";
                   if ($row3['jogosultsag_iras']==1 && $row3['jogosultsag_olvasas']==1) {
                     echo "<td><select name='jogosultsagok' id='jogosultsagok'>
                       <option value='0' ></option>
@@ -98,6 +99,7 @@
                     </select>
                     </td>";
                   }
+                  $i++;
                 }
                 echo "</table>";
               }

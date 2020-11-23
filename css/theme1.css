@@ -1,0 +1,152 @@
+/* Az oldal háttere */
+
+html, body{
+  background: #F0F0F0;
+}
+
+.border {
+  border: 10px solid grey;
+}
+
+.topnav {
+  background-color: #C8C8C8;
+}
+
+.topnav a {
+  border: 1px solid #BBBBBB;
+}
+
+.logout-container button {
+  background-color: #555;
+}
+
+.logout-container button:hover {
+  background-color: green;
+}
+
+.topnav a:hover {
+  background-color: #BEBEBE;
+}
+
+.topnav ul li a.selected {
+    background-color: #A8A8A8;
+}
+
+.topnav ul li a.selected:hover {
+    background-color: #BEBEBE;
+}
+
+.projektnev-container {
+  background-color: #C8C8C8;
+}
+
+.projektnev-container p{
+  border: 1px solid #BBBBBB;
+}
+
+header {
+  background: #DCDCDC;
+}
+
+.cim-container {
+  background: #D3D3D3;
+}
+
+.login-container {
+  background: #D3D3D3;
+}
+
+.login-form {
+  background: #DCDCDC;
+}
+
+.login-form button {
+  background-color: #555;
+}
+
+.login-form button:hover {
+  background-color: green;
+}
+
+.button {
+  background-color: #C6C6C6;
+}
+
+input[type="submit"].button:hover {
+  background-color: #A8A8A8;
+}
+
+button[type="submit"].button:hover {
+  background-color: #A8A8A8;
+}
+
+#container {
+  border: 10px solid #F0F0F0;
+}
+
+#footer {
+  background-color: grey;
+  color:black;
+}
+
+#footer a {
+  background-color: #555;
+  color:black;
+}
+
+#footer a:hover {
+  background-color: #696969;
+  color:black;
+}
+
+.felvetel {
+  border: 1px solid #BBBBBB;
+  background-color: #DCDCDC;
+}
+
+/* A táblák héttere */
+
+#myInput {
+  border: 1px solid #ddd;
+}
+
+#myInput1 {
+  border: 1px solid #ddd;
+}
+
+.table-style td, .table-style th {
+  border: 1px solid #A9A9A9;
+}
+
+.table-style tr:nth-child(even) {
+  background-color: #E6E6E6;
+}
+
+.table-style tr:hover {
+  background-color: #ddd;
+}
+
+.table-style th {
+  background-color: lightgrey;
+}
+
+#del:hover {
+  background-color: #A9A9A9;
+}
+
+#add:hover {
+  background-color: #A9A9A9;
+}
+
+#stop {
+  background-color: #FF8E8E;
+}
+
+#stop:hover {
+  background-color: #F75C5C;
+}
+
+.editbox {
+background-color:#ffffcc;
+border:solid 1px #000;
+}

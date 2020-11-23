@@ -5,6 +5,7 @@
 <html>
   <head>
     <link href="css/navbar.css" rel="stylesheet" type="text/css">
+    <link href="css/table.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <meta name="description" content="Projekt költség kalkulációs rendszer.">
     <meta name=viewport content="width=device-width, initial-scale=1">
@@ -39,9 +40,36 @@
       $fid = $_SESSION['userId'];
       $fnev = $_SESSION['userName'];
       $pid = $_SESSION['projektId'];
+      $tema = $_SESSION['tema'];
       $jogosultsag = $_SESSION['jogosultsag'];
       $thisPage == 'Kezdooldal';?>
       <header>
+        <div class="select">
+          <?php
+          if ($tema==1) {
+            echo '<link href="css/theme1.css" rel="stylesheet" type="text/css">
+            <style><?php require "css/theme1.css";?></style>
+            <select name="tema" id="tema" onchange="tema(this)">
+              <option value="1" selected>Világos</option>
+              <option value="2">Sötét</option>
+            </select>';
+          }elseif ($tema==2) {
+            echo '<link href="css/theme2.css" rel="stylesheet" type="text/css">
+            <style><?php require "css/theme2.css";?></style>
+            <select name="tema" id="tema" onchange="tema(this)">
+              <option value="1">Világos</option>
+              <option value="2" selected>Sötét</option>
+            </select>';
+          }else {
+            echo '<link href="css/theme1.css" rel="stylesheet" type="text/css">
+            <style><?php require "css/theme1.css";?></style>
+            <select name="tema" id="tema" onchange="tema(this)">
+              <option value="1" selected>Világos</option>
+              <option value="2">Sötét</option>
+            </select>';
+          }
+          ?>
+        </div>
         <div class="projektnev-container">
           <a href="#">
             <img src="img/vmlogo.png" alt="logo" class="logo">
@@ -74,6 +102,7 @@
       </header>
       <?php } else { ?>
         <div class="bejelentkezofelulet">
+          <link href="css/theme1.css" rel="stylesheet" type="text/css">
           <div class="cim-container">
             <p>Pojekt költség kalkulációs rendszer</p>
           </div>
@@ -91,3 +120,26 @@
       <?php } ?>
   </body>
 </html>
+
+<script type="text/javascript">
+$('#tema').on('change', function() {
+  var e = document.getElementById("tema");
+  var tema = e.value;
+  $.ajax({
+      type: "POST",
+      url: "includes/tema.inc.php",
+      data : {id:tema},
+      success: function(response)
+      {
+        if(response == 1){
+          alert('Sikeres változtatás.');
+          window.location.reload();
+        }else if(response == 0){
+            alert('Nem megfelelő id.');
+        }else{
+            alert('Sikertelen változtatás.');
+        }
+      }
+  });
+});
+</script>

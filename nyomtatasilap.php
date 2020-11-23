@@ -4,8 +4,6 @@
   require "kalkulacioslapheader.php";
   session_start();
 ?>
-<style><?php include 'css/navbar.css';?></style>
-<style><?php include 'css/table.css';?></style>
 
 <div id="container">
   <div id="main">
@@ -29,7 +27,7 @@
           // $checkRecord4 = mysqli_query($conn,"SELECT * FROM muszakitartalom WHERE projekt_id = '$pid'");
           // $totalrows4 = mysqli_num_rows($checkRecord4);
           ?>
-          
+
           <p class="szoveg">Nyomtatási adatok:</p>
           <form action='includes/nyomtatas/nyomtatas.inc.php' method='post'><br>
           <!-- Tárgy: <input type='text' name='name'><br> -->

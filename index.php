@@ -5,8 +5,6 @@
   session_start();
 ?>
 
-<style><?php include 'css/table.css';?></style>
-
 <?php if (isset($_SESSION['userId'])) { ?>
 <div id="container">
   <div id="main">
@@ -31,7 +29,8 @@
                              ON projekt.projekt_id = pf_kapcsolat.projekt_id
                            INNER JOIN felhasznalo
                              ON pf_kapcsolat.felhasznalo_id = felhasznalo.felhasznalo_id
-                             WHERE felhasznalo.felhasznalo_id = '$fid'");
+                             WHERE felhasznalo.felhasznalo_id = '$fid'
+                             ORDER BY projekt.projekt_id DESC");
 
               echo "<table class='table-style' id='ProjektTable'>";
               echo "<th></th><th></th><th>Projektnév</th>";
@@ -67,7 +66,8 @@
               $sql=mysqli_query($conn,"SELECT * FROM projekt
                         INNER JOIN jogosultsag
                           ON projekt.projekt_id = jogosultsag.projekt_id
-                          WHERE jogosultsag.felhasznalo_id = '$fid'");
+                          WHERE jogosultsag.felhasznalo_id = '$fid'                          
+                          ORDER BY projekt.projekt_id DESC");
 
 
               echo "<table class='table-style'>";
@@ -89,7 +89,7 @@
                           ON felhasznalo.felhasznalo_id = pf_kapcsolat.felhasznalo_id
                         INNER JOIN projekt
                           ON pf_kapcsolat.projekt_id = projekt.projekt_id
-                            WHERE projekt.projekt_id = '$pid'");
+                          WHERE projekt.projekt_id = '$pid'");
                 $row1=mysqli_fetch_array($sql1);
 
                 $pid = $row['projekt_id'];

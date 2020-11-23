@@ -4,7 +4,6 @@
   require "kezdolapheader.php";
   session_start();
 ?>
-<style><?php include 'css/table.css';?></style>
 
 <div id="container">
   <div id="main">

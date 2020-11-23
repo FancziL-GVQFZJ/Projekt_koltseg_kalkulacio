@@ -4,19 +4,16 @@
 }
 
 html, body{
-  background: #F0F0F0;
   height: 100%;
 }
 
 .border {
   position: relative;
-  border: 10px solid grey;
   min-height: 100vh;
 }
 
 .topnav {
   overflow: hidden;
-  background-color: #C8C8C8;
   margin-bottom: 0px;
 }
 
@@ -29,7 +26,6 @@ html, body{
   text-decoration: none;
   font-size: 17px;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border: 1px solid #BBBBBB;
 }
 
 .topnav p {
@@ -42,11 +38,6 @@ html, body{
   font-size: 17px;
 }
 
-.topnav a.active {
-  /* background-color: #202020;
-  color: white; */
-}
-
 .logout-container {
   float: right;
 }
@@ -56,7 +47,6 @@ html, body{
   padding: 6px 10px;
   margin-top: 8px;
   margin-right: 16px;
-  background-color: #555;
   color: white;
   font-size: 17px;
   border: none;
@@ -64,21 +54,8 @@ html, body{
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
-.logout-container button:hover {
-  background-color: green;
-}
-
 .topnav a:hover {
-  background-color: #BEBEBE;
   color: black;
-}
-
-.topnav ul li a.selected {
-    background-color: #A8A8A8;
-}
-
-.topnav ul li a.selected:hover {
-    background-color: #BEBEBE;
 }
 
 .logout-container a:hover {
@@ -87,28 +64,25 @@ html, body{
 }
 
 .projektnev-container {
-  background-color: #C8C8C8;
   height:55px;
+}
+
+.select {
+  float: right;
 }
 
 .projektnev-container p{
   display: block;
-  color: black;
   text-align: center;
   padding: 14px 17px;
   text-decoration: none;
   font-size: 17px;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border: 1px solid #BBBBBB;
   height:55px;
 }
 
 .projektnev-container img {
   width: 55px;
-}
-
-header {
-  background: #DCDCDC;
 }
 
 .logo {
@@ -127,7 +101,6 @@ nav ul {
   width: 700px;
   height: 100px;
   padding: 10px;
-  background: #D3D3D3;
   margin: auto;
   font-size: 40px;
   border:1px solid;
@@ -139,7 +112,6 @@ nav ul {
   width: 300px;
   height: 300px;
   padding: 10px;
-  background: #D3D3D3;
   position: absolute;
   margin: auto;
   left: 0;
@@ -167,7 +139,6 @@ nav ul {
   width: 200px;
   height: 200px;
   padding: 10px;
-  background: #DCDCDC;
   position: absolute;
   margin: auto;
   left: 0;
@@ -189,7 +160,6 @@ nav ul {
   padding: 6px 10px;
   margin-top: 8px;
   margin-right: 16px;
-  background-color: #555;
   color: white;
   font-size: 17px;
   border: none;
@@ -197,26 +167,13 @@ nav ul {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
-.login-form button:hover {
-  background-color: green;
-}
-
 .button {
   padding: 6px 10px;
   margin-right: 16px;
-  background-color: #C6C6C6;
   font-size: 17px;
   border: none;
   cursor: pointer;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-}
-
-input[type="submit"].button:hover {
-  background-color: #A8A8A8;
-}
-
-button[type="submit"].button:hover {
-  background-color: #A8A8A8;
 }
 
 .szoveg {
@@ -238,7 +195,6 @@ button[type="submit"].button:hover {
 
 #container {
   height: 100%;
-  border: 10px solid #F0F0F0;
   padding-bottom: 2.5rem;
 }
 
@@ -248,7 +204,6 @@ button[type="submit"].button:hover {
 }
 
 #footer {
-  background-color: grey;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -257,19 +212,14 @@ button[type="submit"].button:hover {
 }
 
 #footer a {
-  padding: 6px 10px;
+  padding: 4px 10px;
   margin-top: 8px;
   margin-right: 16px;
-  background-color: #555;
-  color: black;
   font-size: 17px;
   border: none;
   cursor: pointer;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-}
-
-#footer a:hover {
-  background-color: #696969;
+  height:10px;
 }
 
 .kezdolap:after {
@@ -292,11 +242,9 @@ button[type="submit"].button:hover {
   width: 95%;
   height: 150px;
   margin: auto;
-  border: 1px solid #BBBBBB;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   display: flex;
   align-items: center;
-  background-color: #DCDCDC;
 }
 
 .felvetel input[type=text]{

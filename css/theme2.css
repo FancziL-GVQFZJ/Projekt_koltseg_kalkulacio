@@ -1,0 +1,168 @@
+/* Az oldal háttere */
+
+html, body{
+  background: #EBEBEB;
+}
+
+.border {
+  border: 10px solid #EBEBEB;
+}
+
+.topnav {
+  background-color: #003940;
+}
+
+.topnav a {
+  border: 1px solid #002126;
+  color:white;
+}
+
+.logout-container  p{
+  color:white;
+}
+
+.logout-container button:hover {
+  background-color: #004470;
+}
+
+.logout-container button {
+  background-color: #004B54;
+  color: #008B99;
+}
+
+.topnav a:hover {
+  background-color: #003138;
+  color:white;
+}
+
+.topnav ul li a.selected {
+  background-color: #002429;
+}
+
+.topnav ul li a.selected:hover {
+  background-color: #003138;
+}
+
+.projektnev-container {
+  background-color: #002F36;
+  color:white;
+}
+
+.projektnev-container p{
+  border: 1px solid #002126;
+}
+
+header {
+  background: #002F36;
+}
+
+.cim-container {
+  background: #D3D3D3;
+}
+
+.login-container {
+  background: #D3D3D3;
+}
+
+.login-form {
+  background: #DCDCDC;
+}
+
+.login-form button {
+  background-color: #555;
+}
+
+.login-form button:hover {
+  background-color: green;
+}
+
+.button {
+  background-color: #00454D;
+  color:white;
+}
+
+input[type="submit"].button:hover {
+  background-color: #002F36;
+}
+
+button[type="submit"].button:hover {
+  background-color: #002F36;
+}
+
+#container {
+  border: 10px solid #EBEBEB;
+}
+
+#footer {
+  background-color: #002F36;
+}
+
+#footer a {
+  background-color: #00454D;
+  color:white;
+}
+
+#footer a:hover {
+  background-color: #00363D;
+}
+
+.felvetel {
+  border: 1px solid #BBBBBB;
+  background-color: #BDC5C6;
+}
+
+/* A táblák héttere */
+
+#myInput {
+  border: 1px solid #ddd;
+}
+
+#myInput1 {
+  border: 1px solid #ddd;
+}
+
+.table-style td, .table-style th {
+  border: 1px solid #A9A9A9;
+}
+
+.table-style tr{
+  background-color: #BDC5C6;
+}
+
+.table-style tr:nth-child(even) {
+  background-color: #C8D0D1;
+}
+
+.table-style tr:hover {
+  background-color: #B4BCBD;
+}
+
+.table-style th {
+  background-color: #00343B;
+  color:white;
+}
+
+.table-style tr.fejlec {
+  background-color: lightgrey;
+}
+
+#del:hover {
+  background-color: #AAB2B3;
+}
+
+#add:hover {
+  background-color: #AAB2B3;
+}
+
+#stop {
+  background-color: #FF8E8E;
+}
+
+#stop:hover {
+  background-color: #F75C5C;
+}
+
+.editbox {
+background-color: #BDC5C6;
+border:solid 1px #000;
+}

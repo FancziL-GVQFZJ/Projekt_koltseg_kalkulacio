@@ -4,8 +4,6 @@
   require "anyaglistaheader.php";
   session_start();
 ?>
-<style><?php require 'css/navbar.css';?></style>
-<style><?php require 'css/table.css';?></style>
 
 <div id="container">
   <div id="main">
