@@ -88,6 +88,7 @@ html, body{
 
 .projektnev-container {
   background-color: #C8C8C8;
+  height:55px;
 }
 
 .projektnev-container p{
@@ -99,6 +100,7 @@ html, body{
   font-size: 17px;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border: 1px solid #BBBBBB;
+  height:55px;
 }
 
 .projektnev-container img {

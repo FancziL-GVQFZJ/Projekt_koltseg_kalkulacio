@@ -45,9 +45,6 @@
             </div>
           </div>";
 
-          $mernokmido=0;
-          $muszereszmido=0;
-
           echo "<div align='center' id='nyomtatas'>";
             echo "<table class='table-style' id='Munkadijkalkulacio'>";
             echo "<tr class='fejlec'>";
@@ -61,7 +58,6 @@
             }else {
               $i=0;
             }
-
             while ($row=mysqli_fetch_array($parents))
             { ?>
               <tr id="<?php echo $row['munkadiijkoltseg_id']; ?>">
@@ -76,26 +72,41 @@
               <td id='del'><span class='deletemd' data-id='<?= $sorid; ?>'>Törlés</span></td>
               <?php echo "</tr>";
               $arresz = show_children($row['munkadiijkoltseg_id'], $i);
-              $teljesar=$teljesar+$arresz;
+              $munkadijkoltseg=$munkadijkoltseg+$arresz;
             }
-            echo  "<tr>";
-            echo  "<td></td><td></td>";
-            echo  "<td align='left'>Mérnöki munkaidő:</td>";
-            echo  "<td>óra</td>";
-            echo  "<td align='left'>".$mernokmido. "</td>";
-            echo  "<td></td><td></td>";
-            echo  "</tr>";
-            echo  "<tr>";
-            echo  "<td></td><td></td>";
-            echo  "<td align='left'>Szerelői minkaidő:</td>";
-            echo  "<td>óra</td>";
-            echo  "<td align='left'>".$muszereszmido."</td>";
-            echo  "<td></td><td></td>";
-            echo  "</tr>";
+
+            $munkas = mysqli_query($conn,"SELECT * FROM projektmunkadij
+                          WHERE projekt_id = '$pid'");
+            while ($row=mysqli_fetch_array($munkas))
+            {
+              $dolgozo=$row['projektmunkadij_munkafajta'];
+              $dolgozoid=$row['munkadij_id'];
+              $munkaido=0;
+              $munkadij = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+                            INNER JOIN projektmunkadij
+                            ON munkadijkoltseg.munkadij_id = projektmunkadij.munkadij_id
+                            WHERE munkadijkoltseg.projekt_id='$pid'
+                            AND projektmunkadij.projekt_id='$pid'
+                            AND munkadijkoltseg.munkadij_id='$dolgozoid'
+                            AND munkadijkoltseg.parent_id IS NOT NULL");
+              while ($row1=mysqli_fetch_array($munkadij))
+              {
+                $munkaido=$munkaido+$row1['munkadijkoltseg_mennyiseg'];
+              }
+              if ($munkaido > 0) {
+                echo  "<tr>";
+                echo  "<td></td><td></td>";
+                echo  "<td align='left'>".$dolgozo." munkaidő:</td>";
+                echo  "<td>óra</td>";
+                echo  "<td align='left'>".$munkaido. "</td>";
+                echo  "<td></td><td></td>";
+                echo  "</tr>";
+              }
+            }
             echo  "<tr>";
             echo  "<td></td>";
             echo  "<td colspan='5' align='center'>Összesen:</td>";
-            echo  "<td align='left'>".$teljesar." Ft</td>";
+            echo  "<td align='left'>".$munkadijkoltseg." Ft</td>";
             echo  "</tr>";
             print "</table>";
           echo  "</div>";
@@ -114,7 +125,6 @@
 function show_children($parentID, $i, $depth=1){
   require 'includes/kapcsolat.inc.php';
   $pid = $_SESSION['projektId'];
-  global $mernokmido,$muszereszmido;
 
   $children = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE parent_id='$parentID'");
 
@@ -153,12 +163,6 @@ function show_children($parentID, $i, $depth=1){
         <?php
        }
       echo "</select></td>";
-      if ($row2['munkadij_id']==1) {
-        $mernokmido=$mernokmido+$row['munkadijkoltseg_mennyiseg'];
-      }
-      elseif ($row2['munkadij_id']==2){
-        $muszereszmido=$muszereszmido+$row['munkadijkoltseg_mennyiseg'];
-      }
       echo "<td>".$row['munkadijkoltseg_megnevezes']."</td>";
       echo "<td>".$row["munkadijkoltseg_mertekegyseg"]."</td>";
       echo "<td>".$row["munkadijkoltseg_mennyiseg"]."</td>";
@@ -223,7 +227,6 @@ $('td#mv').on('change', function() {
         }
       }
   });
-  console.log(jogosultsag);
 });
 </script>
 

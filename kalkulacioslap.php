@@ -147,23 +147,38 @@
               </tr>
               <?php
               $arresz = show_children($row['munkadiijkoltseg_id'], $i);
-              $teljesar=$teljesar+$arresz;
+              $munkadijkoltseg=$munkadijkoltseg+$arresz;
+            }
+            $munkas = mysqli_query($conn,"SELECT * FROM projektmunkadij
+                          WHERE projekt_id = '$pid'");
+            while ($row=mysqli_fetch_array($munkas))
+            {
+              $dolgozo=$row['projektmunkadij_munkafajta'];
+              $dolgozoid=$row['munkadij_id'];
+              $munkaido=0;
+              $munkadij = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+                            INNER JOIN projektmunkadij
+                            ON munkadijkoltseg.munkadij_id = projektmunkadij.munkadij_id
+                            WHERE munkadijkoltseg.projekt_id='$pid'
+                            AND projektmunkadij.projekt_id='$pid'
+                            AND munkadijkoltseg.munkadij_id='$dolgozoid'
+                            AND munkadijkoltseg.parent_id IS NOT NULL");
+              while ($row1=mysqli_fetch_array($munkadij))
+              {
+                $munkaido=$munkaido+$row1['munkadijkoltseg_mennyiseg'];
+              }
+              if ($munkaido > 0) {
+                echo  "<tr>";
+                echo  "<td align='left'>".$dolgozo." munkaidő:</td>";
+                echo  "<td>óra</td>";
+                echo  "<td align='left'>".$munkaido. "</td>";
+                echo  "<td></td><td></td>";
+                echo  "</tr>";
+              }
             }
             echo  "<tr>";
-            echo  "<td align='left'>Mérnöki munkaidő:</td>";
-            echo  "<td>óra</td>";
-            echo  "<td align='left'>$mernokmido</td>";
-            echo  "<td></td><td></td>";
-            echo  "</tr>";
-            echo  "<tr>";
-            echo  "<td align='left'>Szerelői minkaidő:</td>";
-            echo  "<td>óra</td>";
-            echo  "<td align='left'>$muszereszmido</td>";
-            echo  "<td></td><td></td>";
-            echo  "</tr>";
-            echo  "<tr>";
             echo  "<td colspan='4' align='center'>Összesen:</td>";
-            echo  "<td align='left'>".$teljesar." Ft</td>";
+            echo  "<td align='left'>".$munkadijkoltseg." Ft</td>";
             echo  "</tr>";
             print "</table>";
           // }
@@ -180,6 +195,12 @@
             echo "<th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>";
             $query="SELECT * FROM egyebkoltseg WHERE parent_id IS NULL AND projekt_id = '$pid'";
             $parents=mysqli_query($conn,$query);
+            $totalrows = mysqli_num_rows($parents);
+            if ($totalrows > 1) {
+              $i=1;
+            }else {
+              $i=0;
+            }
 
             while ($row=mysqli_fetch_array($parents))
             {
@@ -190,12 +211,43 @@
               echo "<td></td><td></td>";
               $sorid=$row['egyebkoltseg_id'];
               echo "</tr>";
-              $arresz = show_children2($row['egyebkoltseg_id']);
-              $teljesar=$teljesar+$arresz;
+              $arresz = show_children2($row['egyebkoltseg_id'], $i);
+              $egyebkoltseg=$egyebkoltseg+$arresz;
             }
             echo  "<tr>";
             echo  "<td colspan='4' align='center'>Összesen:</td>";
-            echo  "<td align='left'>".$teljesar." Ft</td>";
+            echo  "<td align='left'>".$egyebkoltseg." Ft</td>";
+            echo  "</tr>";
+            $anyaglistaar=0;
+            $pid = $_SESSION['projektId'];
+            $sor=mysqli_query($conn, "SELECT * FROM sap_anyaglista
+                  INNER JOIN pa_kapcsolat
+                    ON sap_anyaglista.sap_anyaglista_id = pa_kapcsolat.alkatresz_id
+                  INNER JOIN projekt
+                    ON pa_kapcsolat.projekt_id = projekt.projekt_id
+                    WHERE projekt.projekt_id = '$pid'
+                    ORDER BY sap_anyaglista.sap_anyaglista_id");
+            while ($row=mysqli_fetch_array($sor))
+            {
+              $sorar=$row['sap_anyaglista_egysegar']*$row['pa_dbszam'];
+              $anyaglistaar=$anyaglistaar+$sorar;
+            }
+            $munkadijkoltseg=0;
+            $munkadij = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+                          INNER JOIN projektmunkadij
+                          ON munkadijkoltseg.munkadij_id = projektmunkadij.munkadij_id
+                          WHERE munkadijkoltseg.projekt_id='$pid'
+                          AND projektmunkadij.projekt_id='$pid'
+                          AND munkadijkoltseg.parent_id IS NOT NULL");
+            while ($row1=mysqli_fetch_array($munkadij))
+            {
+              $sorar1=$row1['munkadijkoltseg_mennyiseg']*$row1['projektmunkadij_oraber'];
+              $munkadijkoltseg=$munkadijkoltseg+$sorar1;
+            }
+            $mindosszesen = $anyaglistaar + $munkadijkoltseg + $egyebkoltseg;
+            echo  "<tr>";
+            echo  "<td colspan='4' align='center'>Mindösszesen(1+2+3):</td>";
+            echo  "<td align='left'>".$mindosszesen." Ft</td>";
             echo  "</tr>";
             print "</table>";
           // }
@@ -285,34 +337,35 @@ function show_children($parentID, $i, $depth=1){
   return $osszegar;
 }
 
-function show_children2($parentID, $depth=1){
+function show_children2($parentID, $i, $depth=1){
   require 'includes/kapcsolat.inc.php';
+  $pid = $_SESSION['projektId'];
   $children = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE parent_id=$parentID");
 
   while ($row = mysqli_fetch_array($children)){
     $sorid=$row['egyebkoltseg_id'];?>
     <tr>
     <?php if ($row['egyebkoltseg_mennyiseg']==NULL) {
-
       echo "<td><b>".str_repeat("&nbsp;", $depth * 5).$row['egyebkoltseg_megnevezes']."</b></td>";
-      echo "<td></td><td></td><td></td><td></td>";?>
+      echo "<td></td><td></td><td></td><td></td>";
+      echo "</tr>";
 
-      <?php echo "</tr>";
-      $arresz = show_children($row['egyebkoltseg_id'], $depth+1);
+
+      $arresz = show_children2($row['egyebkoltseg_id'], $depth+1);
       $osszegar=$osszegar+$arresz;
     }
     else {
-      $munkadij = mysqli_query($conn,"SELECT * FROM munkadij
+      $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
                     INNER JOIN egyebkoltseg
-                    ON munkadij.munkadij_id = egyebkoltseg.munkadij_id
-                    WHERE egyebkoltseg.egyebkoltseg_id ='$sorid'");
+                    ON projektmunkadij.munkadij_id = egyebkoltseg.munkadij_id
+                    WHERE egyebkoltseg.egyebkoltseg_id ='$sorid' AND projektmunkadij.projekt_id='$pid'");
       $row2=mysqli_fetch_array($munkadij);
       echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['egyebkoltseg_megnevezes']."</td>";
       echo "<td>".$row["egyebkoltseg_mertekegyseg"]."</td>";
       echo "<td>".$row["egyebkoltseg_mennyiseg"]."</td>";
-      echo "<td>".$row2["munkadij_oraber"]." Ft</td>";
+      echo "<td>".$row2["projektmunkadij_oraber"]." Ft</td>";
       if ($row['egyebkoltseg_mennyiseg']!=NULL) {
-        $sorar=$row['egyebkoltseg_mennyiseg']*$row2['munkadij_oraber'];
+        $sorar=$row['egyebkoltseg_mennyiseg']*$row2['projektmunkadij_oraber'];
         echo "<td>".$sorar." Ft</td>";
         $osszegar=$osszegar+$sorar;
       }

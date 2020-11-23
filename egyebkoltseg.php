@@ -171,7 +171,7 @@ function show_children($parentID, $i, $depth=1){
         <?php
       }
       echo "</select></td>";
-      echo "<td>".str_repeat("&nbsp;", $depth * 5).$row['egyebkoltseg_megnevezes']."</td>";
+      echo "<td>".$row['egyebkoltseg_megnevezes']."</td>";
       echo "<td>".$row["egyebkoltseg_mertekegyseg"]."</td>";
       echo "<td>".$row["egyebkoltseg_mennyiseg"]."</td>";
       echo "<td>".$row2["projektmunkadij_oraber"]." Ft</td>";

@@ -42,17 +42,33 @@ function printmunkadijkoltseg(){
 
   }
   $pdf->Cell(189 ,5,'',1,1);
-  $pdf->Cell($cellaszelesseg[0],$cellamagassag,'Mérnöki munkaidő',1,0,'L');
-  $pdf->Cell($cellaszelesseg[1],$cellamagassag,'óra',1,0,'C');
-  $pdf->Cell($cellaszelesseg[2],$cellamagassag,$mernokmido,1,0,'C');
-  $pdf->Cell($cellaszelesseg[3],$cellamagassag,'',1,0,'C');
-  $pdf->Cell($cellaszelesseg[4],$cellamagassag,'',1,1,'C');
 
-  $pdf->Cell($cellaszelesseg[0],$cellamagassag,'Szerelői munkaidő',1,0,'L');
-  $pdf->Cell($cellaszelesseg[1],$cellamagassag,'óra',1,0,'C');
-  $pdf->Cell($cellaszelesseg[2],$cellamagassag,$muszereszmido,1,0,'C');
-  $pdf->Cell($cellaszelesseg[3],$cellamagassag,'',1,0,'C');
-  $pdf->Cell($cellaszelesseg[4],$cellamagassag,'',1,1,'C');
+  $munkas = mysqli_query($conn,"SELECT * FROM projektmunkadij
+                WHERE projekt_id = '$pid'");
+  while ($row=mysqli_fetch_array($munkas))
+  {
+    $dolgozo=$row['projektmunkadij_munkafajta'];
+    $dolgozoid=$row['munkadij_id'];
+    $munkaido=0;
+    $munkadij = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+                  INNER JOIN projektmunkadij
+                  ON munkadijkoltseg.munkadij_id = projektmunkadij.munkadij_id
+                  WHERE munkadijkoltseg.projekt_id='$pid'
+                  AND projektmunkadij.projekt_id='$pid'
+                  AND munkadijkoltseg.munkadij_id='$dolgozoid'
+                  AND munkadijkoltseg.parent_id IS NOT NULL");
+    while ($row1=mysqli_fetch_array($munkadij))
+    {
+      $munkaido=$munkaido+$row1['munkadijkoltseg_mennyiseg'];
+    }
+    if ($munkaido > 0) {
+      $pdf->Cell($cellaszelesseg[0],$cellamagassag,$dolgozo.' munkaidő',1,0,'L');
+      $pdf->Cell($cellaszelesseg[1],$cellamagassag,'óra',1,0,'C');
+      $pdf->Cell($cellaszelesseg[2],$cellamagassag,$munkaido,1,0,'C');
+      $pdf->Cell($cellaszelesseg[3],$cellamagassag,'',1,0,'C');
+      $pdf->Cell($cellaszelesseg[4],$cellamagassag,'',1,1,'C');
+    }
+  }
 
   $pdf->Cell(154,$cellamagassag,'Összesen:',1,0,'C',$fill);
   $pdf->Cell(35,$cellamagassag,$teljesar.' Ft',1,1,'C',$fill);
@@ -63,7 +79,6 @@ function show_children($parentID, $i, $depth=1){
   global $pdf;
   global $cellaszelesseg;
   global $cellamagassag;
-  global $mernokmido,$muszereszmido;
   $pid = $_SESSION['projektId'];
   $children = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE parent_id=$parentID");
 
@@ -98,13 +113,7 @@ function show_children($parentID, $i, $depth=1){
       }
       else {
         $pdf->Cell($cellaszelesseg[4],$cellamagassag,'',1,1,'C',$fill);
-      }
-      if ($row2['munkadij_id']==1) {
-        $mernokmido=$mernokmido+$row['munkadijkoltseg_mennyiseg'];
-      }
-      elseif ($row2['munkadij_id']==2){
-        $muszereszmido=$muszereszmido+$row['munkadijkoltseg_mennyiseg'];
-      }
+      }      
     }
     }
     if ($i == 1) {
