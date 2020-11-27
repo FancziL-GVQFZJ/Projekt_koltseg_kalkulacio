@@ -9,7 +9,7 @@ if(isset($_POST['id'])){
 
 if($id > 0){
 
-  $checkRecord = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE munkadiijkoltseg_id=".$id);
+  $checkRecord = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE munkadijkoltseg_id=".$id);
   $totalrows = mysqli_num_rows($checkRecord);
 
   $row=mysqli_fetch_array($checkRecord);
@@ -17,7 +17,7 @@ if($id > 0){
 
   if($totalrows > 0){
 
-    $stmt = $conn->prepare("DELETE FROM munkadijkoltseg WHERE munkadiijkoltseg_id = ?");
+    $stmt = $conn->prepare("DELETE FROM munkadijkoltseg WHERE munkadijkoltseg_id = ?");
     $stmt->bind_param("i", $id);
     $successfullyCopied = $stmt->execute();
 

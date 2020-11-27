@@ -10,12 +10,15 @@
     <main>
       <?php
         require 'includes/kapcsolat.inc.php';
-        if (isset($_SESSION['userId'])) {
+        if (isset($_SESSION['userId'])) { ?>
 
-            echo '<form method="post">
+            <!-- frissítés gomb -->
+            <form method="post">
              <input class="button" type="submit" value="Az adatbázis frissítése" name="frissitesgomb">
             </form>';
 
+            <!-- az adattábla frissítése -->
+            <?php
             if (isset($_POST['frissitesgomb'])) {
               $stmt = $conn->prepare("DELETE FROM sap_osszehasonlitas");
               $successfullyCopied = $stmt->execute();
@@ -58,6 +61,7 @@
 
             $sor1=mysqli_query($conn, $sql1);
             $sor2=mysqli_query($conn, $sql2);
+            // SAP anyaglista táblázat
             echo "<p class='szoveg' >Sap anyaglistában van:</p>";
             echo "<table class='table-style'>";
             echo "<tr class='fejlec'>";
@@ -74,6 +78,7 @@
             }
             echo "</table>";
 
+            // helyi anyaglista táblázat
             echo "<p class='szoveg'>Helyi anyaglistában van:</p>";
             echo "<table class='table-style'>";
             echo "<tr class='fejlec'>";

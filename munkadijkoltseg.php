@@ -11,43 +11,40 @@
       <div>
         <?php
         require 'includes/kapcsolat.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
 
-          $pid = $_SESSION['projektId'];
-          $csoport = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
-                        WHERE projekt_id ='$pid' AND munkadijkoltseg_mennyiseg IS NULL");
-
-          echo '<div class="felvetel">
+          <!-- új adat felvétele -->
+          <div class="felvetel">
             <div class="felvetelin">
+              <?php $pid = $_SESSION['projektId'];
+              $csoport = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
+                            WHERE projekt_id ='$pid' AND munkadijkoltseg_mennyiseg IS NULL"); ?>
               <p><u>Új adat felvétele:</u></p>
               <form action="includes/databaseinsert/addtomunkafajta.inc.php" method="post">
-                Megnevezés: <input type="text" name="name" id="megnevezesid">
+                Megnevezés:
+                <input type="text" name="name" id="megnevezesid">
                 <br>
-                Csoport: <select name="csoport" id="csoportidmk" disabled>';
-                echo "<option value='0' selected>nincs</option>";
-                  while ($row4 = $csoport->fetch_assoc()){ ?>
-                    <option value="<?=$row4['munkadiijkoltseg_id'] ?>"> <?=$row4['munkadijkoltseg_megnevezes'] ?></option> <?php
-                  }
-                echo '</select><br>';
-                $query = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
-                              WHERE projekt_id ='$pid'");
-                $munkadijkezdes = mysqli_num_rows($query);
-                if ($munkadijkezdes > 1) {
-                  echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
-                }else {
-                  echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
-                }
-                echo "<br>";
-                echo "<input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled></submit>
+                Csoport:
+                <select name="csoport" id="csoportidmk" disabled>
+                <option value='0' selected>nincs</option>";
+                  <?php while ($row4 = $csoport->fetch_assoc()){ ?>
+                    <option value="<?=$row4['munkadijkoltseg_id'] ?>"> <?=$row4['munkadijkoltseg_megnevezes'] ?></option>
+                  <?php } ?>
+                </select><br>
+                Cím:
+                <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>
+                <br>
+                <input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled>
               </form>
             </div>
-          </div>";
+          </div>
 
-          echo "<div align='center' id='nyomtatas'>";
-            echo "<table class='table-style' id='Munkadijkalkulacio'>";
-            echo "<tr class='fejlec'>";
-            echo "<th>Id</th><th>Munkavégző</th><th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Egységár</th><th>Ár:</th>";
-
+          <!-- munkadíjköltség táblázat  -->
+          <div align='center'>
+            <table class='table-style' id='Munkadijkalkulacio'>
+            <tr class='fejlec'>
+            <th>Id</th><th>Munkavégző</th><th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Egységár</th><th>Összeg</th>
+            <?php
             $query="SELECT * FROM munkadijkoltseg WHERE parent_id IS NULL AND projekt_id = '$pid'";
             $parents=mysqli_query($conn,$query);
             $totalrows = mysqli_num_rows($parents);
@@ -58,10 +55,10 @@
             }
             while ($row=mysqli_fetch_array($parents))
             { ?>
-              <tr id="<?php echo $row['munkadiijkoltseg_id']; ?>">
+              <tr id="<?php echo $row['munkadijkoltseg_id']; ?>">
               <?php
-              $sorid=$row['munkadiijkoltseg_id'];
-              echo "<td>".$row['munkadiijkoltseg_id']."</td>";
+              $sorid=$row['munkadijkoltseg_id'];
+              echo "<td>".$row['munkadijkoltseg_id']."</td>";
               echo "<td></td>";
               echo "<td><b>".$row['munkadijkoltseg_megnevezes']."</b></td>";
               echo "<td>".$row["munkadijkoltseg_mertekegyseg"]."</td>";
@@ -69,7 +66,7 @@
               echo "<td></td><td></td>"; ?>
               <td id='del'><span class='deletemd' data-id='<?= $sorid; ?>'>Törlés</span></td>
               <?php echo "</tr>";
-              $arresz = show_children($row['munkadiijkoltseg_id'], $i);
+              $arresz = show_children($row['munkadijkoltseg_id'], $i);
               $munkadijkoltseg=$munkadijkoltseg+$arresz;
             }
 
@@ -118,7 +115,7 @@
   </div>
 </div>
 
-
+<!-- munkák kiírására szükséges function -->
 <?php
 function show_children($parentID, $i, $depth=1){
   require 'includes/kapcsolat.inc.php';
@@ -127,11 +124,11 @@ function show_children($parentID, $i, $depth=1){
   $children = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE parent_id='$parentID'");
 
   while ($row = mysqli_fetch_array($children)){
-    $sorid=$row['munkadiijkoltseg_id'];?>
-    <tr id="<?php echo $row['munkadiijkoltseg_id']; ?>">
+    $sorid=$row['munkadijkoltseg_id'];?>
+    <tr id="<?php echo $row['munkadijkoltseg_id']; ?>">
     <?php
     if ($row['munkadijkoltseg_mennyiseg']==NULL) {
-      echo "<td>".$row['munkadiijkoltseg_id']."</td>";
+      echo "<td>".$row['munkadijkoltseg_id']."</td>";
       echo "<td></td><td><b>".$row['munkadijkoltseg_megnevezes']."</b></td>";
       echo "<td></td><td></td><td></td><td></td>";?>
       <td id='del'><span class='deletemd' data-id='<?= $sorid; ?>'>Törlés</span></td> <?php
@@ -142,17 +139,17 @@ function show_children($parentID, $i, $depth=1){
       }else {
         $i=0;
       }
-      $arresz = show_children($row['munkadiijkoltseg_id'], $i, $depth+1);
+      $arresz = show_children($row['munkadijkoltseg_id'], $i, $depth+1);
       $osszegar=$osszegar+$arresz;
     }
     else {
       $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
                     INNER JOIN munkadijkoltseg
                     ON projektmunkadij.munkadij_id = munkadijkoltseg.munkadij_id
-                    WHERE munkadijkoltseg.munkadiijkoltseg_id ='$sorid' AND projektmunkadij.projekt_id='$pid'");
+                    WHERE munkadijkoltseg.munkadijkoltseg_id ='$sorid' AND projektmunkadij.projekt_id='$pid'");
       $row2=mysqli_fetch_array($munkadij);
 
-      echo "<td>".$row['munkadiijkoltseg_id']."</td>";
+      echo "<td>".$row['munkadijkoltseg_id']."</td>";
       echo "<td id='mv'><select name='munkavegzo' id='munkavegzo'>";
       $mf = mysqli_query($conn, "SELECT * FROM projektmunkadij WHERE projekt_id = '$pid'");
       while ($row5 = $mf->fetch_assoc()){ ?>
@@ -188,6 +185,7 @@ function show_children($parentID, $i, $depth=1){
 }
 ?>
 
+<!-- tableedit scriptje -->
 <script type="text/javascript" src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
@@ -205,6 +203,7 @@ function show_children($parentID, $i, $depth=1){
 });
 </script>
 
+<!-- munkavégzők változtatásához szükséges függvény -->
 <script type="text/javascript">
 $('td#mv').on('change', function() {
   var sorid = $(this).parent().find('td:first-child').text();
@@ -228,6 +227,7 @@ $('td#mv').on('change', function() {
 });
 </script>
 
+<!-- az adatbevitelt szabályozó scriptek -->
 <script type="text/javascript">
 $("#megnevezesid").keyup(function () {
        if ($(this).val()) {

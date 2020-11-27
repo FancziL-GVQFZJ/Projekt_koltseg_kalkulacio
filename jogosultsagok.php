@@ -9,8 +9,8 @@
   <div id="main">
     <main>
       <?php
-        if (isset($_SESSION['userId'])) {
-          require 'includes/kapcsolat.inc.php';
+        require 'includes/kapcsolat.inc.php';
+        if (isset($_SESSION['userId'])) {       
 
           echo "<div class='kezdolap'>";
             echo "<div class='lap'>";
@@ -53,15 +53,15 @@
             echo "<div class='lap'>";
               if(isset($_REQUEST['projektjog']))
               {
-                $jpnev = $_POST["projektnev"];
-                $jpid = $_POST["projektid"];
-
-                $sor2=mysqli_query($conn, "SELECT * FROM felhasznalo WHERE NOT felhasznalo_id ='$fid'");
                 echo "<p class='szoveg'><u>".$jpnev." beállítása:</u></p>";
 
+                // jogosultság táblázat kiírása
                 echo "<table class='table-style' id='table'>";
                 echo "<tr>";
                 echo "<th></th><th>Felhasználó</th><th>Projekt id</th><th>Jogosultság</th>";
+                $jpnev = $_POST["projektnev"];
+                $jpid = $_POST["projektid"];
+                $sor2=mysqli_query($conn, "SELECT * FROM felhasznalo WHERE NOT felhasznalo_id ='$fid'");
                 $i=1;
                 while ($row2=mysqli_fetch_array($sor2))
                 {
@@ -114,6 +114,7 @@
   </div>
 </div>
 
+<!-- jogosultság változtatása script -->
 <script type="text/javascript">
 $('td').on('change', function() {
   var sorid = $(this).parent().find('td:first-child').text();
@@ -134,7 +135,6 @@ $('td').on('change', function() {
         }
       }
   });
-  console.log(jogosultsag);
 });
 </script>
 

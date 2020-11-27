@@ -11,44 +11,38 @@
       <div>
         <?php
         require 'includes/kapcsolat.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
 
-          $pid = $_SESSION['projektId'];
-          $csoport = mysqli_query($conn,"SELECT * FROM egyebkoltseg
-                        WHERE projekt_id ='$pid' AND egyebkoltseg_mennyiseg IS NULL");
-
-          echo '<div class="felvetel">
+          <div class="felvetel">
             <div class="felvetelin">
+              <?php $pid = $_SESSION['projektId'];
+              $csoport = mysqli_query($conn,"SELECT * FROM egyebkoltseg
+                            WHERE projekt_id ='$pid' AND egyebkoltseg_mennyiseg IS NULL"); ?>
               <p><u>Új adat felvétele:</u></p>
               <form action="includes/databaseinsert/addtoegyebkoltseg.inc.php" method="post">
-                Megnevezés: <input type="text" name="name" id="megnevezesid">
+                Megnevezés:
+                <input type="text" name="name" id="megnevezesid">
                 <br>
-
-                Csoport: <select name="csoport" id="csoportidek" disabled>';
-                echo "<option  value='0' selected>nincs</option>";
-                  while ($row4 = $csoport->fetch_assoc()){ ?>
+                Csoport:
+                <select name="csoport" id="csoportidek" disabled>
+                 <option  value='0' selected>nincs</option>
+                  <?php while ($row4 = $csoport->fetch_assoc()){ ?>
                     <option value="<?=$row4['egyebkoltseg_id'] ?> " > <?=$row4['egyebkoltseg_megnevezes'] ?></option>  <?php
-                  }
-                echo '</select><br>';
-                $query = mysqli_query($conn,"SELECT * FROM egyebkoltseg
-                              WHERE projekt_id ='$pid'");
-                $munkadijkezdes = mysqli_num_rows($query);
-                if ($munkadijkezdes > 1) {
-                  echo "Cím: <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
-                }else {
-                  echo "Cím: <input 'type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>";
-                }
-                echo "<br>";
-                echo "<input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled></submit>
+                  } ?>
+                </select><br>
+                Cím:
+                <input type='checkbox' name='cim' value='pipa' id='checkboxid' checked='ckecked' disabled>
+                <br>
+                <input class='button' type='submit' value='Az adat felvétele' id='felvetelid' disabled></submit>
               </form>
             </div>
-          </div>";
-          ?>
+          </div>
 
-          <div align= "center" id="nyomtatas">
+          <!-- egyébköltség táblázat  -->
+          <div align= "center">
             <table class='table-style' id='Egyebkoltsegkalkulacio'>
             <tr class='fejlec'>
-            <th>Id</th><th>Munkavégző</th><th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Ár:</th>
+            <th>Id</th><th>Munkavégző</th><th>Megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Órabér</th><th>Összeg</th>
 
             <?php
             $pid = $_SESSION['projektId'];
@@ -60,7 +54,6 @@
             }else {
               $i=0;
             }
-
             while ($row=mysqli_fetch_array($parents))
             {?>
               <tr id="<?php echo $row['egyebkoltseg_id']; ?>">
@@ -98,6 +91,16 @@
               $anyaglistaar=$anyaglistaar+$sorar;
             }
 
+            $anyagkoltseg=0;
+            $query2="SELECT * FROM anyagkoltseg WHERE projekt_id = '$pid'";
+            $sor2=mysqli_query($conn,$query2);
+
+            while ($row=mysqli_fetch_array($sor2))
+            {
+              $sorar=$row['anyagkoltseg_egysegar']*$row['anyagkoltseg_mennyiseg'];
+              $anyagkoltseg=$anyagkoltseg+$sorar;
+            }
+
             $munkadijkoltseg=0;
             $munkadij = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
                           INNER JOIN projektmunkadij
@@ -111,7 +114,7 @@
               $munkadijkoltseg=$munkadijkoltseg+$sorar1;
             }
 
-            $mindosszesen = $anyaglistaar + $munkadijkoltseg + $egyebkoltseg;
+            $mindosszesen = $anyaglistaar + $anyagkoltseg + $munkadijkoltseg + $egyebkoltseg;
             echo  "<tr>";
             echo  "<td></td>";
             echo  "<td colspan='5' align='center'>Mindösszesen(1+2+3):</td>";
@@ -128,8 +131,9 @@
     </main>
   </div>
 </div>
-<?php
 
+<!-- munkák kiírására szükséges function -->
+<?php
 function show_children($parentID, $i, $depth=1){
   require 'includes/kapcsolat.inc.php';
   $pid = $_SESSION['projektId'];
@@ -196,6 +200,7 @@ function show_children($parentID, $i, $depth=1){
 }
 ?>
 
+<!-- tableedit scriptje -->
 <script type="text/javascript" src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
@@ -213,6 +218,7 @@ function show_children($parentID, $i, $depth=1){
 });
 </script>
 
+<!-- munkavégzők változtatásához szükséges függvény -->
 <script type="text/javascript">
 $('td#mv').on('change', function() {
   var sorid = $(this).parent().find('td:first-child').text();
@@ -237,6 +243,7 @@ $('td#mv').on('change', function() {
 });
 </script>
 
+<!-- az adatbevitelt szabályozó scriptek -->
 <script type="text/javascript">
 $("#megnevezesid").keyup(function () {
        if ($(this).val()) {

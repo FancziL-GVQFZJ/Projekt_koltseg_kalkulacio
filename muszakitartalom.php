@@ -35,6 +35,7 @@
   </div>
 </div>
 
+<!-- ckeditor bővítmény  -->
 <script type="text/javascript">
  CKEDITOR.replace('mteditor',{
    margin: "2%",

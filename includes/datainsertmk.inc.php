@@ -14,7 +14,7 @@ if($id > 0){
   $resurt1 = mysqli_num_rows($query1);
 
   $query2 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
-                WHERE munkadiijkoltseg_id = '$id' AND parent_id IS NOT NULL AND munkadijkoltseg_mennyiseg	IS NULL");
+                WHERE munkadijkoltseg_id = '$id' AND parent_id IS NOT NULL AND munkadijkoltseg_mennyiseg	IS NULL");
   $resurt2 = mysqli_num_rows($query2);
 
   if (($resurt1 > 0)||($resurt2 > 0)) {

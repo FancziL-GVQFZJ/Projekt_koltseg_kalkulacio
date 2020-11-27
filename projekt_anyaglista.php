@@ -12,27 +12,26 @@
         require 'includes/kapcsolat.inc.php';
         require "PHPExcel/Classes/PHPExcel.php";
         require "PHPExcel/Classes/PHPExcel/Writer/Excel5.php";
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
 
-            $pid = $_SESSION['projektId'];
-            $sor=mysqli_query($conn, "SELECT * FROM sap_anyaglista
-                    INNER JOIN pa_kapcsolat
-                      ON sap_anyaglista.sap_anyaglista_id = pa_kapcsolat.alkatresz_id
-                    INNER JOIN projekt
-                      ON pa_kapcsolat.projekt_id = projekt.projekt_id
-                      WHERE projekt.projekt_id = $pid
-                      ORDER BY sap_anyaglista.sap_anyaglista_id");
-
-            echo "<div align= \"center\" id=\"nyomtatas\">";
-              ?>
+            <div align='center'>
+              <!-- táblázat exportálása excelbe -->
               <form align="left" action="includes/excel.inc.php" method="post">
                 <input class="button" type="submit" name="excelexport" value="A táblázat exportálása Excelbe">
               </form>
+              <!-- listázott anyagok táblázat -->
+              <table class='table-style' id='KosarTable'>
+              <tr class='fejlec'>
+              <th>id</th><th></th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th><th>Összeg</th>
               <?php
-              echo "<table class='table-style' id='KosarTable'>";
-              echo "<tr class='fejlec'>";
-              echo "<th>id</th><th></th><th>Megnevezés</th><th>SAPSzám</th><th>Mérték egység</th><th>Egységár</th><th>Darabszám</th>";
-              echo "<td><p>ÁR összesen</p></td>";
+              $pid = $_SESSION['projektId'];
+              $sor=mysqli_query($conn, "SELECT * FROM sap_anyaglista
+                      INNER JOIN pa_kapcsolat
+                        ON sap_anyaglista.sap_anyaglista_id = pa_kapcsolat.alkatresz_id
+                      INNER JOIN projekt
+                        ON pa_kapcsolat.projekt_id = projekt.projekt_id
+                        WHERE projekt.projekt_id = $pid
+                        ORDER BY sap_anyaglista.sap_anyaglista_id");
               $i=1;
               while ($row=mysqli_fetch_array($sor))
               {
@@ -51,23 +50,23 @@
                 <td id='del'><span class='delete' data-id='<?= $sorid; ?>'>Törlés</span></td>
                 <?php echo "</tr>";
                 $i++;
-              }
-              echo  "<tr>";
-              echo  "<td></td>";
-              echo  "<td colspan='6' align='right'>A teljes ár:</td>";
-              echo  "<td align='left'>".$teljesar." Ft</td>";
-              echo  "</tr>";
-              echo  "</table>";
-            echo  "</div>";
-          }
-        else {
-          echo '<p>Jelenleg ki van jelentkezve!</p>';
-        }
-      ?>
+              } ?>
+              <tr>
+              <td></td>
+              <td colspan='6' align='center'>Összesen:</td>
+              <td align='left'><?php echo $teljesar; ?> Ft</td>
+              </tr>
+              </table>
+            </div>
+          <?php }
+        else { ?>
+          <p>Jelenleg ki van jelentkezve!</p>
+        <?php } ?>
     </main>
   </div>
 </div>
 
+<!-- tabledit script a mennyiségek változtatásához  -->
 <script type="text/javascript" src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){

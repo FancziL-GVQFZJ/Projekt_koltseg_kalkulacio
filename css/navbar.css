@@ -3,6 +3,8 @@
   padding: 0;
 }
 
+/* weboldal pozíció */
+
 html, body{
   height: 100%;
 }
@@ -11,6 +13,8 @@ html, body{
   position: relative;
   min-height: 100vh;
 }
+
+/* navigációs sáv pozícíók */
 
 .topnav {
   overflow: hidden;
@@ -108,6 +112,8 @@ nav ul {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
+/* bejelentkező felület */
+
 .login-container {
   width: 300px;
   height: 300px;
@@ -167,6 +173,8 @@ nav ul {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
+/* gomb stílus */
+
 .button {
   padding: 6px 10px;
   margin-right: 16px;
@@ -176,21 +184,11 @@ nav ul {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
+/* szövegek stílusa */
+
 .szoveg {
   font-size: 17px;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-}
-
-.footer {
-  top:15px;
-  font-size: 17px;
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  position: absolute;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 15px;
-  bottom: 0;
 }
 
 #container {
@@ -202,6 +200,8 @@ nav ul {
   overflow: auto;
   padding-bottom: 100px;
 }
+
+/* footer pozíció és stílus */
 
 #footer {
   position: absolute;
@@ -222,6 +222,20 @@ nav ul {
   height:10px;
 }
 
+.footer {
+  top:15px;
+  font-size: 17px;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 15px;
+  bottom: 0;
+}
+
+/* oldalt kettéválasztó divek */
+
 .kezdolap:after {
   display: table;
   content: '';
@@ -237,6 +251,8 @@ nav ul {
   float: left;
   width: 20%;
 }
+
+/* adatfelvétel div pozíció és stílus */
 
 .felvetel {
   width: 95%;

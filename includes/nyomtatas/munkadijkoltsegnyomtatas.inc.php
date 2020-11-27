@@ -37,7 +37,7 @@ function printmunkadijkoltseg(){
     $pdf->Cell($cellaszelesseg[2],$cellamagassag,$row['munkadijkoltseg_mennyiseg'],1,0,'C',$fill);
     $pdf->Cell($cellaszelesseg[3],$cellamagassag,'',1,0,'C',$fill);
     $pdf->Cell($cellaszelesseg[4],$cellamagassag,'',1,1,'C',$fill);
-    $arresz = show_children($row['munkadiijkoltseg_id'],$i);
+    $arresz = show_children($row['munkadijkoltseg_id'],$i);
     $teljesar=$teljesar+$arresz;
 
   }
@@ -83,7 +83,7 @@ function show_children($parentID, $i, $depth=1){
   $children = mysqli_query($conn,"SELECT * FROM munkadijkoltseg WHERE parent_id=$parentID");
 
   while ($row = mysqli_fetch_array($children)){
-    $sorid=$row['munkadiijkoltseg_id'];
+    $sorid=$row['munkadijkoltseg_id'];
 
     if ($row['munkadijkoltseg_mennyiseg']==NULL) {
       $pdf->Cell(189,$cellamagassag,str_repeat(" ", $depth * 5).$row['munkadijkoltseg_megnevezes'],1,1,'L',$fill);
@@ -93,14 +93,14 @@ function show_children($parentID, $i, $depth=1){
       }else {
         $i=0;
       }
-      $arresz = show_children($row['munkadiijkoltseg_id'], $i, $depth+1);
+      $arresz = show_children($row['munkadijkoltseg_id'], $i, $depth+1);
       $osszegar=$osszegar+$arresz;
     }
     else {
       $munkadij = mysqli_query($conn,"SELECT * FROM projektmunkadij
                     INNER JOIN munkadijkoltseg
                     ON projektmunkadij.munkadij_id = munkadijkoltseg.munkadij_id
-                    WHERE munkadijkoltseg.munkadiijkoltseg_id ='$sorid' AND projektmunkadij.projekt_id='$pid'");
+                    WHERE munkadijkoltseg.munkadijkoltseg_id ='$sorid' AND projektmunkadij.projekt_id='$pid'");
       $row2=mysqli_fetch_array($munkadij);
       $pdf->Cell($cellaszelesseg[0],$cellamagassag,str_repeat(" ", $depth * 5).$row['munkadijkoltseg_megnevezes'],1,0,'L',$fill);
       $pdf->Cell($cellaszelesseg[1],$cellamagassag,$row['munkadijkoltseg_mertekegyseg'],1,0,'C',$fill);

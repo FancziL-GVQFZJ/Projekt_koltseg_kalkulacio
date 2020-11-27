@@ -1,3 +1,6 @@
+
+/* keresőmezők stílusa */
+
 #myInput {
   background-repeat: no-repeat;
   width: 100%;
@@ -13,6 +16,8 @@
   padding: 12px 20px 12px 40px;
   margin-bottom: 12px;
 }
+
+/* tábla stílusa */
 
 .table-style {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -32,6 +37,8 @@
   text-align: left;
   color: black;
 }
+
+/* törlés, hozzáadás, megállítás gomb stílusa */
 
 #del {
   text-align: center;
@@ -62,6 +69,8 @@ font-size:14px;
 width:270px;
 padding:4px;
 }
+
+/* műszaki tartalom stílus */
 
 #mszt {
   width: 90%;

@@ -8,6 +8,8 @@ html, body{
   border: 10px solid grey;
 }
 
+/* navigációssáv stílusa */
+
 .topnav {
   background-color: #C8C8C8;
 }
@@ -52,6 +54,8 @@ header {
   background: #D3D3D3;
 }
 
+/* bejelentkező felület stílusa */
+
 .login-container {
   background: #D3D3D3;
 }
@@ -68,6 +72,8 @@ header {
   background-color: green;
 }
 
+/* gomb stílusa */
+
 .button {
   background-color: #C6C6C6;
 }
@@ -80,9 +86,13 @@ button[type="submit"].button:hover {
   background-color: #A8A8A8;
 }
 
+/* háttér színe */
+
 #container {
   border: 10px solid #F0F0F0;
 }
+
+/* footer stílusa */
 
 #footer {
   background-color: grey;
@@ -99,12 +109,14 @@ button[type="submit"].button:hover {
   color:black;
 }
 
+/* adatfelvétel div stílusa */
+
 .felvetel {
   border: 1px solid #BBBBBB;
   background-color: #DCDCDC;
 }
 
-/* A táblák héttere */
+/* A táblák és a gombok stílusa  */
 
 #myInput {
   border: 1px solid #ddd;

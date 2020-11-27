@@ -13,7 +13,7 @@ if ($input['action'] == 'edit') {
   $update_field.= "munkadijkoltseg_mennyiseg='".$input['Mennyiseg']."'";
   }
   if($update_field && $input['Id']) {
-    $sql_query = "UPDATE munkadijkoltseg SET $update_field WHERE munkadiijkoltseg_id='" . $input['Id'] . "'";
+    $sql_query = "UPDATE munkadijkoltseg SET $update_field WHERE munkadijkoltseg_id='" . $input['Id'] . "'";
     mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
 
     require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/naplo.inc.php';

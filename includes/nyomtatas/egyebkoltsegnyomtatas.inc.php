@@ -54,6 +54,16 @@ function printegyebkoltseg(){
     $anyaglistaar=$anyaglistaar+$sorar;
   }
 
+  $anyagkoltseg=0;
+  $query2="SELECT * FROM anyagkoltseg WHERE projekt_id = '$pid'";
+  $sor2=mysqli_query($conn,$query2);
+
+  while ($row=mysqli_fetch_array($sor2))
+  {
+    $sorar=$row['anyagkoltseg_egysegar']*$row['anyagkoltseg_mennyiseg'];
+    $anyagkoltseg=$anyagkoltseg+$sorar;
+  }
+
   $munkadijkoltseg=0;
   $munkadij = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
                 INNER JOIN projektmunkadij
@@ -66,7 +76,7 @@ function printegyebkoltseg(){
     $sorar1=$row1['munkadijkoltseg_mennyiseg']*$row1['projektmunkadij_oraber'];
     $munkadijkoltseg=$munkadijkoltseg+$sorar1;
   }
-  $mindosszesen = $anyaglistaar + $munkadijkoltseg + $egyebkoltseg;
+  $mindosszesen = $anyaglistaar + $anyagkoltseg + $munkadijkoltseg + $egyebkoltseg;
   $pdf->Cell(154,$cellamagassag,'Mindösszesen:(1+2+3)',1,0,'C',$fill);
   $pdf->Cell(35,$cellamagassag,$mindosszesen.' Ft',1,1,'C',$fill);
 }

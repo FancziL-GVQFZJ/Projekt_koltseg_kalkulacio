@@ -11,9 +11,9 @@
       <div>
         <?php
         require 'includes/kapcsolat.inc.php';
-        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) {
+        if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
 
-          echo "<div class='felvetel'>
+          <div class='felvetel'>
             <div class='felvetelin'>
               <p><u>Új adat felvétele:</u></p>
               <form action='includes/databaseinsert/addtopmunkadij.inc.php' method='post'>
@@ -22,18 +22,17 @@
               <input class='button' type='submit' id='felvetelid' value='Az adat felvétele' onkeypress='return mask(this,event);'>
               </form>
             </div>
-          </div>";
+          </div>
 
-          echo "<table class='table-style' id='Munkadijak'>";
-          echo "<tr class='fejlec'>";
-          echo "<th>Id</th><th>Munkafajta</th><th>Órabér</th>";
+          <table class='table-style' id='Munkadijak'>
+          <tr class='fejlec'>
+          <th>Id</th><th>Munkafajta</th><th>Órabér</th>
 
-          $pid = $_SESSION['projektId'];
+          <?php $pid = $_SESSION['projektId'];
           $dij=mysqli_query($conn,"SELECT * FROM projektmunkadij WHERE projekt_id='$pid'");
 
           while ($row=mysqli_fetch_array($dij))
-          {?>
-
+          { ?>
             <tr id="<?php echo $row['projektmunkadij_id']; ?>">
             <?php echo "<td>".$row['projektmunkadij_id']."</td>";
             echo "<td>".$row['projektmunkadij_munkafajta']."</td>";
@@ -54,6 +53,7 @@
   </div>
 </div>
 
+<!-- tableedit szkriptje -->
 <script type="text/javascript" src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
@@ -71,6 +71,7 @@
 });
 </script>
 
+<!-- adatbevitelt szabályozó szkriptek -->
 <script type="text/javascript">
 $(document).ready(function() {
     var $submit = $("input[type=submit]"),

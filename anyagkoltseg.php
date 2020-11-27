@@ -13,6 +13,7 @@
         require 'includes/kapcsolat.inc.php';
         if (isset($_SESSION['userId']) && isset($_SESSION['projektId']) && ($jogosultsag == 'iras' || $jogosultsag == 'admin')) { ?>
 
+          <!-- új adat felvétele -->
           <div class='felvetel'>
             <div class='felvetelin'>
               <p><u>Új adat felvétele:</u></p>
@@ -23,11 +24,11 @@
           </div>
           </div>
 
-          <div align= "center" class='table-style' id="nyomtatas">
+          <!-- anyagköltség táblázat -->
+          <div align='center' class='table-style'>
             <table class='table-style' id='Anyagkoltseg'>
             <tr class='fejlec'>
             <th>Id</th><th>Anyagi megnevezés</th><th>Mértékegység</th><th>Mennyiség</th><th>Egységár</th><th>Összeg</th>
-
             <?php
             $pid = $_SESSION['projektId'];
             $sor=mysqli_query($conn, "SELECT * FROM sap_anyaglista
@@ -57,39 +58,37 @@
               echo "<td>".$row["anyagkoltseg_egysegar"]."</td>";
               $sorar=$row["anyagkoltseg_mennyiseg"]*$row["anyagkoltseg_egysegar"];
               echo "<td>".$sorar."</td>";
-              $teljesar=$teljesar+$sorar;
+              $anyagkoltseg=$anyagkoltseg+$sorar;
               $sorid=$row['anyagkoltseg_id'];?>
               <td id='del'><span class='deleteak' data-id='<?= $sorid; ?>'>Törlés</span></td>
               </tr>
-              <?php
-
-            }
-            echo  "<tr>";
-            echo  "<td>0</td>";
-            echo  "<td>villamos szerelési anyag</td>";
-            echo  "<td>db</td>";
-            echo  "<td>1</td>";
-            echo  "<td align='left'>".$anyaglistaar."</td>";
-            echo  "<td align='left'>".$anyaglistaar."</td>";
-            echo  "</tr>";
-            echo  "<tr>";
-            echo  "<td></td>";
-            echo  "<td colspan='4' align='center'>Összesen:</td>";
-            $teljesar=$teljesar+$anyaglistaar;
-            echo  "<td align='left'>".$teljesar." Ft</td>";
-            echo  "</tr>";
-            print "</table>";
-          echo  "</div>";
-          }
-        else {
-          echo '<p>Jelenleg ki van jelentkezve!</p>';
-        }
-        ?>
+            <?php }
+            $anyagkoltseg=$anyagkoltseg+$anyaglistaar; ?>
+            <tr>
+            <td>0</td>
+            <td>villamos szerelési anyag</td>
+            <td>db</td>
+            <td>1</td>
+            <td align='left'><?php echo $anyaglistaar; ?></td>
+            <td align='left'><?php echo $anyaglistaar; ?> Ft</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td colspan='4' align='center'>Összesen:</td>
+            <td align='left'><?php echo $anyagkoltseg; ?> Ft</td>
+            </tr>
+            </table>
+          <div>
+          <?php }
+        else { ?>
+          <p>Jelenleg ki van jelentkezve!</p>
+        <?php } ?>
       </div>
     </main>
   </div>
 </div>
 
+<!-- tableedit script az adatok változtatásához-->
 <script type="text/javascript" src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
@@ -107,6 +106,7 @@
 });
 </script>
 
+<!-- felvétel mező gomja csak akkor elérhető ha van adat megadva -->
 <script type="text/javascript">
 $("#megnevezesid").keyup(function () {
        if ($(this).val()) {

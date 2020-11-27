@@ -13,6 +13,7 @@
           require 'includes/kapcsolat.inc.php';
           echo "<div class='kezdolap'>";
             echo "<div class='lap'>";
+              // új projekt létrehozása gomb
               ?>
               <br>
               <form name="form1" action="includes/databaseinsert/newprojekt.inc.php" method="post">
@@ -22,7 +23,10 @@
               <br>
               <?php
               echo '<p class="szoveg" >Projektjeid:</p>';
-
+              // saját projekt táblázat kiírása
+              echo "<table class='table-style' id='ProjektTable'>";
+              echo "<th></th><th></th><th>Projektnév</th>";
+              echo "<tr>";
               $fid = $_SESSION['userId'];
               $sql=mysqli_query($conn,"SELECT * FROM projekt
                            INNER JOIN pf_kapcsolat
@@ -31,10 +35,6 @@
                              ON pf_kapcsolat.felhasznalo_id = felhasznalo.felhasznalo_id
                              WHERE felhasznalo.felhasznalo_id = '$fid'
                              ORDER BY projekt.projekt_id DESC");
-
-              echo "<table class='table-style' id='ProjektTable'>";
-              echo "<th></th><th></th><th>Projektnév</th>";
-              echo "<tr>";
               $jpid=$_SESSION['projektId'];
               $i=1;
               while ($row=mysqli_fetch_array($sql))
@@ -62,17 +62,15 @@
             echo "<div class='lap'>";
               echo "<br><br><br>";
               echo '<p class="szoveg" >Megosztott projektek:</p>';
-
-              $sql=mysqli_query($conn,"SELECT * FROM projekt
-                        INNER JOIN jogosultsag
-                          ON projekt.projekt_id = jogosultsag.projekt_id
-                          WHERE jogosultsag.felhasznalo_id = '$fid'                          
-                          ORDER BY projekt.projekt_id DESC");
-
-
+              // megosztott projekt táblázat kiírása
               echo "<table class='table-style'>";
               echo "<th>Tulaj</th><th>Jog</th><th>Projektnév</th>";
               echo "<tr>";
+              $sql=mysqli_query($conn,"SELECT * FROM projekt
+                        INNER JOIN jogosultsag
+                          ON projekt.projekt_id = jogosultsag.projekt_id
+                          WHERE jogosultsag.felhasznalo_id = '$fid'
+                          ORDER BY projekt.projekt_id DESC");
               while ($row=mysqli_fetch_array($sql))
               {
                 $pid=$row['projekt_id'];
@@ -114,6 +112,8 @@
     </main>
   </div>
 </div>
+
+<!-- tableedit scriptje -->
 <script type="text/javascript" src="/Projekt_koltseg_kalkulacio/js/jquery.tabledit.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -135,6 +135,7 @@ else {
   //echo '<p>Jelenleg ki van jelentkezve!</p>';
 } ?>
 
+<!-- projekt név megadása -->
 <script type="text/javascript">
 function projektNevMegadas(){
   var name = prompt("Add meg a nevet:");
@@ -144,8 +145,6 @@ function projektNevMegadas(){
     }
 }
 </script>
-
-
 
 <?php
     require "footer.php";
