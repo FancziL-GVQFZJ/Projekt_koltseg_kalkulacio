@@ -4,8 +4,9 @@ session_start();
 $id=$_POST["id"];
 $munkadijId=$_POST["mid"];
 
-if ($id>0 && $munkadijId>0) {
+//egyébköltség táblázatban állítja be a munkavégzőt
 
+if ($id>0 && $munkadijId>0) {
   $stmt = $conn->prepare("UPDATE egyebkoltseg SET munkadij_id='$munkadijId' WHERE egyebkoltseg_id = '$id'");
   $successfullyCopied = $stmt->execute();
 

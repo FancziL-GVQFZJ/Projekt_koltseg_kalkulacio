@@ -7,6 +7,8 @@ if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);
 }
 
+// a projektmunkadíjakat törli
+
 if($id > 0){
   $pid = $_SESSION['projektId'];
   $checkRecord = mysqli_query($conn,"SELECT * FROM projektmunkadij WHERE projektmunkadij_id='$id'");

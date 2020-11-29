@@ -2,6 +2,8 @@
 if (isset($_POST['bejelentkezes'])) {
   require 'kapcsolat.inc.php';
 
+  // a megadott adatok ellenőrzése után bejelentkezést enged a rendszerbe
+
   $fnev = $_POST['felhasznalo'];
   $jszo = $_POST['jelszo'];
 

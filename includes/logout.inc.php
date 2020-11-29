@@ -1,4 +1,5 @@
 <?php
+//kijelentkezés a rendszerből
 session_start();
 session_unset();
 session_destroy();

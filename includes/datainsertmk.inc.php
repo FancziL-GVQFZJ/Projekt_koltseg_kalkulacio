@@ -8,6 +8,8 @@ if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);
 }
 
+// a munkadíjköltség hozzáadásakor kiválasztott csoport alapján kér le adatot
+
 if($id > 0){
   $query1 = mysqli_query($conn,"SELECT * FROM munkadijkoltseg
                 WHERE parent_id ='$id' AND projekt_id='$pid' AND munkadijkoltseg_mennyiseg IS NOT NULL");

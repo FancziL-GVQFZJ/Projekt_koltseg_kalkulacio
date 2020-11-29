@@ -1,6 +1,8 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
 $input = filter_input_array(INPUT_POST);
+
+//a projekt nevét lehet megváltoztatni
 if ($input['action'] == 'edit') {
   $update_field='';
   if(isset($input['projekt_nev'])) {

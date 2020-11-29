@@ -6,8 +6,9 @@ if(isset($_POST['pid'])){
    $projektId = mysqli_real_escape_string($conn,$_POST['pid']);
 }
 
-if($projektId > 0){
+//a kiválasztott projektet indítja
 
+if($projektId > 0){
   $checkRecord = mysqli_query($conn,"SELECT * FROM projekt WHERE projekt_id = '$projektId'");
   $totalrows = mysqli_num_rows($checkRecord);
 

@@ -34,15 +34,16 @@
           $dij=mysqli_query($conn,"SELECT * FROM munkadij");
           while ($row=mysqli_fetch_array($dij))
           {?>
-
             <tr id="<?php echo $row['munkadij_id']; ?>">
             <?php echo "<td>".$row['munkadij_id']."</td>";
             echo "<td>".$row['munkadij_fajta']."</td>";
             echo "<td>".$row["munkadij_oraber"]."</td>";
-            $sorid=$row['munkadij_id'];?>
-            <td id='del'><span class='deletemdij' data-id='<?= $sorid; ?>'>Törlés</span></td>
-            </tr>
-            <?php
+            $sorid=$row['munkadij_id'];
+            if (($sorid == 1) || ($sorid == 2)) {
+            } else { ?>
+              <td id='del'><span class='deletemdij' data-id='<?= $sorid; ?>'>Törlés</span></td>
+            <?php }
+            echo "</tr>";
           }
           print "</table>";
         }

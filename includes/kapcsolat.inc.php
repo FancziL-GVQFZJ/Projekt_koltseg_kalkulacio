@@ -1,4 +1,6 @@
 <?php
+
+//létrehozza a kapcsolatot az adatbázissal
 $servername = "localhost";
 $dBUsername = "root";
 $dBPassword = "mysql";

@@ -6,6 +6,8 @@ $pid = $_SESSION['projektId'];
 $megn = $_POST['name'];
 $szulo = $_POST['csoport'];
 
+// egyébköltséghez ad hozzá
+
 if ($szulo == 0) {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO egyebkoltseg (projekt_id, parent_id, egyebkoltseg_megnevezes,

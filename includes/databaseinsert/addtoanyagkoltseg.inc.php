@@ -5,6 +5,8 @@ session_start();
 $pid = $_SESSION['projektId'];
 $megn = $_POST['name'];
 
+// anyagköltséghez ad hozzá
+
 $stmt = $conn->prepare("INSERT INTO anyagkoltseg (projekt_id, anyagkoltseg_megnevezes,
   anyagkoltseg_mertekegyseg, anyagkoltseg_mennyiseg, anyagkoltseg_egysegar)
                                           VALUES (?,?,'db','1','1')");

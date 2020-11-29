@@ -5,6 +5,8 @@ $id=$_POST["id"];
 $pid=$_POST["pid"];
 $jog=$_POST["jog"];
 
+//a jogosultságokat állítja be
+
 if ($jog>0) {
   $checkRecord = mysqli_query($conn,"SELECT * FROM jogosultsag WHERE felhasznalo_id = '$id' AND projekt_id = '$pid'");
   $totalrows = mysqli_num_rows($checkRecord);

@@ -2,6 +2,8 @@
 require 'kapcsolat.inc.php';
 session_start();
 
+//a témát változtatja
+
 $id = 0;
 if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);

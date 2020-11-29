@@ -6,6 +6,8 @@ $pid = $_SESSION['projektId'];
 $megn = $_POST['name'];
 $ora = $_POST['oraber'];
 
+// projektmunkadíjhoz ad hozzá
+
 if(is_numeric($ora) && $ora > 0 && $ora == round($ora, 0)){
   $dij=mysqli_query($conn,"SELECT MAX(munkadij_id) AS max FROM projektmunkadij WHERE projekt_id='$pid'");
   $row=mysqli_fetch_array($dij);

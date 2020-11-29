@@ -37,10 +37,12 @@
             <?php echo "<td>".$row['projektmunkadij_id']."</td>";
             echo "<td>".$row['projektmunkadij_munkafajta']."</td>";
             echo "<td>".$row["projektmunkadij_oraber"]."</td>";
-            $sorid=$row['projektmunkadij_id'];?>
-            <td id='del'><span class='deletepmdij' data-id='<?= $sorid; ?>'>Törlés</span></td>
-            </tr>
-            <?php
+            $sorid=$row['projektmunkadij_id'];
+            if (($sorid == 1) || ($sorid == 2)) {
+            } else { ?>
+              <td id='del'><span class='deletepmdij' data-id='<?= $sorid; ?>'>Törlés</span></td>
+            <?php }
+            echo "</tr>";
           }
           print "</table>";
         }

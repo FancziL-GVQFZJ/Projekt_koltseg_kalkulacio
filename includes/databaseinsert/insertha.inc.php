@@ -8,6 +8,8 @@ if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);
 }
 
+// helyi anyaglistához ad hozzá az SAP anyaglistából
+
 if($id > 0){
   $checkRecord = mysqli_query($conn,"SELECT * FROM helyi_anyaglista WHERE helyi_anyaglista_id = '$id'");
   $totalrows = mysqli_num_rows($checkRecord);

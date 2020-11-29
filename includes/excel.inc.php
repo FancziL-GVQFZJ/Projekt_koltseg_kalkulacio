@@ -2,6 +2,8 @@
 require 'kapcsolat.inc.php';
 session_start();
 
+// a listázott anyagokat importálja excelbe
+
 $output = '';
 if (isset($_POST["excelexport"])) {
   $pid = $_SESSION['projektId'];

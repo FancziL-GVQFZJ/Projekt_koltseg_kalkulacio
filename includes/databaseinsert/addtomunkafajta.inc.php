@@ -6,6 +6,8 @@ $pid = $_SESSION['projektId'];
 $megn = $_POST['name'];
 $szulo = $_POST['csoport'];
 
+// munkadijköltséghez ad hozzá
+
 if ($szulo == 0) {
   if (isset($_POST['cim'])) {
     $stmt = $conn->prepare("INSERT INTO munkadijkoltseg (parent_id, projekt_id, munkadijkoltseg_megnevezes,

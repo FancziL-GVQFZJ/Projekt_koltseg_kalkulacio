@@ -6,6 +6,9 @@ function printanyaglista(){
   $cellaszelesseg=array(5,89,25,10,20,15,25);
   $cellamagassag=5;
 
+  //üres sor
+  //$pdf->Cell(59 ,5,'',0,1);//end of line
+
   $pdf->Cell(0 ,5,'Anyaglista:',0,1,'L');
 
   $pdf->SetFont('Arial','',10);
@@ -16,7 +19,9 @@ function printanyaglista(){
             ON pa_kapcsolat.projekt_id = projekt.projekt_id
             WHERE projekt.projekt_id = $pid
             ORDER BY sap_anyaglista.sap_anyaglista_id");
-  // Header starts ///
+
+
+  // táblázat fejléce
   $pdf->Cell($cellaszelesseg[0],$cellamagassag,'',1,0,'C');
   $pdf->Cell($cellaszelesseg[1],$cellamagassag,'Megnevezés',1,0,'C');
   $pdf->Cell($cellaszelesseg[2],$cellamagassag,'SAP szám',1,0,'C');
@@ -27,7 +32,7 @@ function printanyaglista(){
 
   $fill=false;
 
-  /// each record is one row  ///
+  //táblázatban szereplő adatok
   $i=0;
   foreach ($conn->query($rows) as $row) {
   $i++;
@@ -41,7 +46,7 @@ function printanyaglista(){
   $pdf->Cell($cellaszelesseg[6],$cellamagassag,$sorar.' Ft',1,1,'C',$fill);
   $osszegar=$osszegar+$sorar;
   }
-  /// end of records ///
+
   $pdf->Cell(164,$cellamagassag,'Összesen',1,0,'C',$fill);
   $pdf->Cell(25,$cellamagassag,$osszegar.' Ft',1,1,'C',$fill);
 }

@@ -4,10 +4,10 @@ session_start();
 $id=$_POST["id"];
 $munkadijId=$_POST["mid"];
 
+//munkadíjköltség táblázatban állítja be a munkavégzőt
+
 if ($id>0 && $munkadijId>0) {
-
   $stmt = $conn->prepare("UPDATE munkadijkoltseg SET munkadij_id='$munkadijId' WHERE munkadijkoltseg_id = '$id'");
-
   $successfullyCopied = $stmt->execute();
 
   require_once 'naplo.inc.php';

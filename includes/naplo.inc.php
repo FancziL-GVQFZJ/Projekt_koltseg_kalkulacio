@@ -2,6 +2,8 @@
 require 'kapcsolat.inc.php';
 session_start();
 
+//minden adatbázis művelet után ez a fájl intézi a naplózást
+
 function naplozas($szoveg2){
   require 'kapcsolat.inc.php';
   $fid = $_SESSION['userId'];

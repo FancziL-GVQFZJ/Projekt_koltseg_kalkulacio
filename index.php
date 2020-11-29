@@ -146,6 +146,7 @@ function projektNevMegadas(){
 }
 </script>
 
+
 <?php
     require "footer.php";
 ?>

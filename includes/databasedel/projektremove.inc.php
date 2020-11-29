@@ -8,6 +8,8 @@ if(isset($_POST['pid'])){
 }
 $fid = $_SESSION['userId'];
 
+// a megosztott projekt törlése a listából (csak a rám vonatkozó jogosultságot törli)
+
 if ($projektId > 0) {
   $checkRecord = mysqli_query($conn,"SELECT * FROM jogosultsag WHERE felhasznalo_id = '$fid' AND projekt_id = '$projektId'");
   $totalrows = mysqli_num_rows($checkRecord);

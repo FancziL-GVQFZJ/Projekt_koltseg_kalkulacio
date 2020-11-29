@@ -7,8 +7,9 @@ if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);
 }
 
-if($id > 0){
+// az egyébköltségből töröl
 
+if($id > 0){
   $checkRecord = mysqli_query($conn,"SELECT * FROM egyebkoltseg WHERE egyebkoltseg_id = '$id'");
   $totalrows = mysqli_num_rows($checkRecord);
 

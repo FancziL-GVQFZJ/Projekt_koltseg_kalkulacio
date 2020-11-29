@@ -6,9 +6,8 @@
     $projektneve = $_POST['projektnev'];
     $fid = $_SESSION['userId'];
 
+    //az új projekteket menti az adatbázisba
     if (($projektneve != null) && ($projektneve != "")) {
-
-
       $stmt = $conn->prepare("INSERT INTO projekt (projekt_nev)
                                           VALUES ('$projektneve')");
       $successfullyCopied = $stmt->execute();

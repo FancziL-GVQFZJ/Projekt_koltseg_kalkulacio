@@ -18,6 +18,7 @@ class PDF extends PDF_HTML
     parent::Cell( $w, $h, iconv( 'UTF-8', 'ISO-8859-2', $t ), $b, $l, $a, $f, $y );
   }
 
+  // nyomtatványok fejléce
   function Header()
   {
     // Arial bold 15
@@ -30,10 +31,9 @@ class PDF extends PDF_HTML
     $this->Ln(20);
   }
 
-// Page footer
+  // nyomtatványol alja
   function Footer()
   {
-      // Position at 1.5 cm from bottom
       $this->SetY(-20);
 
       $this->Cell(9 ,5,'',0,0);
@@ -44,7 +44,6 @@ class PDF extends PDF_HTML
       $this->Cell(80 ,5,'Üzemvezető',0,0);
       $this->Cell(20 ,5,'',0,0);
       $this->Cell(60 ,5,'IT Főmérnök',0,1);
-
 
       // Arial italic 8
       //$this->SetFont('Arial','I',8);
@@ -61,67 +60,60 @@ $muszereszmido=0;
 
 $focim = $_SESSION['projektNeve'];
 
-//create pdf object
+//új objektum létrehozása
 $pdf = new PDF('P', 'mm', 'A4');
-//add new page
+//új oldal hozzáadása
 $pdf->AddPage();
 
-//set font to arial, bold, 14pt
-$pdf->SetFont('Arial','B',14);
-
-//Cell(width , height , text , border , end line , [align] )
-//$pdf->Cell(0,5,'KALKULÁCIÓS ADATLAP',0,1,'C');
-
-//make a dummy empty cell as a vertical spacer
-//$pdf->Cell(189 ,5,'',0,1);//end of line
-
-//set font to arial, regular, 12pt
+//betőméret, stílus arial, regular, 12pt
 $pdf->SetFont('Arial','',10);
 
-$pdf->Cell(0 ,5,'Tárgy:',0,1,'L');//end of line
+$pdf->Cell(0 ,5,'Tárgy:',0,1,'L');
 
 $pdf->SetFont('Arial','',12);
 
-$pdf->Cell(0 ,5,$focim,0,1,'C');//end of line
+$pdf->Cell(0 ,5,$focim,0,1,'C');
 
 $pdf->SetFont('Arial','',10);
 
-$pdf->Cell(189 ,5,'',0,1);//end of line
+$pdf->Cell(189 ,5,'',0,1);
 
 $pdf->Cell(0 ,5,'Vállalkozó: IT Ig. Műszerszerelő és Mérlegkarbantartó üzem:',0,1,'L');//end of line
 
 $pdf->SetFont('Arial','',10);
 
+//a nyomtatási lapon bepipáltakat teszi a nyomtatványra
+
 if (isset($_POST['Anyaglista'])) {
   printanyaglista();
-  $pdf->Cell(189 ,5,'',0,1);//end of line
+  $pdf->Cell(189 ,5,'',0,1);
 }
 
 if (isset($_POST['Anyagkoltseg'])) {
   printanyagkoltseg();
-  $pdf->Cell(189 ,5,'',0,1);//end of line
+  $pdf->Cell(189 ,5,'',0,1);
 }
 
 if (isset($_POST['Munkadíj'])) {
   printmunkadijkoltseg();
-  $pdf->Cell(189 ,5,'',0,1);//end of line
+  $pdf->Cell(189 ,5,'',0,1);
 }
 
 if (isset($_POST['Egyéb'])) {
   printegyebkoltseg();
-  $pdf->Cell(189 ,5,'',0,1);//end of line
+  $pdf->Cell(189 ,5,'',0,1);
 }
 $pdf->SetFont('Arial','',10);
 
 if (isset($_POST['Műszaki'])) {
   printmuszakitartalom();
 }
-$pdf->Cell(189 ,5,'',0,1);//end of line
+$pdf->Cell(189 ,5,'',0,1);
 
 $ma = date("Y.m.d");
-$pdf->Cell(0 ,5,$ma,0,1,'L');//end of line
+$pdf->Cell(0 ,5,$ma,0,1,'L');
 
-//a lap tetejétől ekkor távolságban kezdődik
+//a lap tetejétől ekkor távolságban kezdődik a footer
 $pdf->SetY(260);
 
 $pdf->Output();

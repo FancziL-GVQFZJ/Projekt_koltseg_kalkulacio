@@ -5,6 +5,8 @@ session_start();
 $editorContent = '';
 $pid = $_SESSION['projektId'];
 
+// műszaki tartalmat menti el
+
 if(isset($_POST['mtsubmit'])){
     $editorContent = $_POST['mteditor'];
 

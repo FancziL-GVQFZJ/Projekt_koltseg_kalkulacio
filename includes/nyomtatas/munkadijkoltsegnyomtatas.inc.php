@@ -5,11 +5,9 @@ function printmunkadijkoltseg(){
   $pid = $_SESSION['projektId'];
   $cellaszelesseg=array(84,30,20,20,35);
   $cellamagassag=5;
-  // $mernokmido=0;
-  // $muszereszmido=0;
-  global $cellaszelesseg;
-  global $cellamagassag;
-  global $mernokmido,$muszereszmido;
+
+  //üres sor
+  //$pdf->Cell(59 ,5,'',0,1);//end of line
 
   $pdf->Cell(0 ,5,'2.Munkadíj költség:',0,1,'L');
 
@@ -22,14 +20,14 @@ function printmunkadijkoltseg(){
   }else {
     $i=0;
   }
-  // Header starts ///
-
+  // táblázat fejléce
   $pdf->Cell($cellaszelesseg[0],$cellamagassag,'Megnevezés',1,0,'C');
   $pdf->Cell($cellaszelesseg[1],$cellamagassag,'ME',1,0,'C');
   $pdf->Cell($cellaszelesseg[2],$cellamagassag,'Mennyiség',1,0,'C');
   $pdf->Cell($cellaszelesseg[3],$cellamagassag,'Órabér',1,0,'C');
   $pdf->Cell($cellaszelesseg[4],$cellamagassag,'Összeg',1,1,'C');
 
+  //táblázatban szereplő adatok
   $fill=false;
   foreach ($conn->query($rows) as $row){
     $pdf->Cell($cellaszelesseg[0],$cellamagassag,$row['munkadijkoltseg_megnevezes'],1,0,'L',$fill);
@@ -43,6 +41,7 @@ function printmunkadijkoltseg(){
   }
   $pdf->Cell(189 ,5,'',1,1);
 
+  //munkaidők kiírása
   $munkas = mysqli_query($conn,"SELECT * FROM projektmunkadij
                 WHERE projekt_id = '$pid'");
   while ($row=mysqli_fetch_array($munkas))
@@ -74,6 +73,7 @@ function printmunkadijkoltseg(){
   $pdf->Cell(35,$cellamagassag,$teljesar.' Ft',1,1,'C',$fill);
 }
 
+// functionnal a munkafajták kiírása
 function show_children($parentID, $i, $depth=1){
   require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
   global $pdf;
@@ -113,7 +113,7 @@ function show_children($parentID, $i, $depth=1){
       }
       else {
         $pdf->Cell($cellaszelesseg[4],$cellamagassag,'',1,1,'C',$fill);
-      }      
+      }
     }
     }
     if ($i == 1) {

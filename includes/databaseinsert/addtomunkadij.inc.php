@@ -5,6 +5,8 @@ session_start();
 $megn = $_POST['name'];
 $ora = $_POST['oraber'];
 
+// munkadijakhoz ad hozzá
+
 if(is_numeric($ora) && $ora > 0 && $ora == round($ora, 0)){
   $stmt = $conn->prepare("INSERT INTO munkadij (munkadij_fajta, munkadij_oraber)
                                             VALUES (?,?)");

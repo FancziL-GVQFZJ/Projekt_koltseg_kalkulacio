@@ -6,19 +6,22 @@ function printanyagkoltseg(){
   $cellaszelesseg=array(84,30,20,20,35);
   $cellamagassag=5;
 
-  $pdf->Cell(0 ,5,'1.Anyagköltség:',0,1,'L');
+  //üres sor
   //$pdf->Cell(59 ,5,'',0,1);//end of line
+
+  $pdf->Cell(0 ,5,'1.Anyagköltség:',0,1,'L');
 
   $pdf->SetFont('Arial','',10);
   $rows=("SELECT * FROM anyagkoltseg WHERE projekt_id = '$pid'");
-  // Header starts ///
 
+  // táblázat fejléce
   $pdf->Cell($cellaszelesseg[0],$cellamagassag,'Anyagi megnevezés',1,0,'C');
   $pdf->Cell($cellaszelesseg[1],$cellamagassag,'ME',1,0,'C');
   $pdf->Cell($cellaszelesseg[2],$cellamagassag,'Mennyiség',1,0,'C');
   $pdf->Cell($cellaszelesseg[3],$cellamagassag,'Egységár',1,0,'C');
   $pdf->Cell($cellaszelesseg[4],$cellamagassag,'Összeg',1,1,'C');
 
+  //táblázatban szereplő adatok
   $fill=false;
   foreach ($conn->query($rows) as $row){
     $sorar=$row['anyagkoltseg_mennyiseg']*$row['anyagkoltseg_egysegar'];

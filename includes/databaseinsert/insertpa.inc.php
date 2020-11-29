@@ -8,6 +8,8 @@ if(isset($_POST['id'])){
    $id = mysqli_real_escape_string($conn,$_POST['id']);
 }
 
+// listázott anyagokhoz ad hozzá a helyi vagy az SAP anyaglistából 
+
 if($id > 0){
   $checkRecord = mysqli_query($conn,"SELECT * FROM pa_kapcsolat WHERE alkatresz_id = '$id' AND projekt_id = '$pid'");
   $totalrows = mysqli_num_rows($checkRecord);

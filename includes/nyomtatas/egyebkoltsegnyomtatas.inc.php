@@ -6,8 +6,10 @@ function printegyebkoltseg(){
   $cellaszelesseg=array(84,30,20,20,35);
   $cellamagassag=5;
 
-  $pdf->Cell(0 ,5,'3.Egyéb költség:',0,1,'L');
+  //üres sor
   //$pdf->Cell(59 ,5,'',0,1);//end of line
+
+  $pdf->Cell(0 ,5,'3.Egyéb költség:',0,1,'L');
 
   $pdf->SetFont('Arial','',10);
   $rows=("SELECT * FROM egyebkoltseg WHERE parent_id IS NULL AND projekt_id = '$pid'");
@@ -18,14 +20,14 @@ function printegyebkoltseg(){
   }else {
     $i=0;
   }
-  // Header starts ///
-
+  // táblázat fejléce
   $pdf->Cell($cellaszelesseg[0],$cellamagassag,'Megnevezés',1,0,'C');
   $pdf->Cell($cellaszelesseg[1],$cellamagassag,'ME',1,0,'C');
   $pdf->Cell($cellaszelesseg[2],$cellamagassag,'Mennyiség',1,0,'C');
   $pdf->Cell($cellaszelesseg[3],$cellamagassag,'Órabér',1,0,'C');
   $pdf->Cell($cellaszelesseg[4],$cellamagassag,'Összeg',1,1,'C');
 
+  //táblázatban szereplő adatok
   $fill=false;
   foreach ($conn->query($rows) as $row){
     $pdf->Cell($cellaszelesseg[0],$cellamagassag,$row['egyebkoltseg_megnevezes'],1,0,'L',$fill);
@@ -39,6 +41,8 @@ function printegyebkoltseg(){
   $pdf->Cell(154,$cellamagassag,'Összesen:',1,0,'C',$fill);
   $pdf->Cell(35,$cellamagassag,$egyebkoltseg.' Ft',1,1,'C',$fill);
 
+
+  //mindösszesen kiszámítása
   $anyaglistaar=0;
   $pid = $_SESSION['projektId'];
   $sor=mysqli_query($conn, "SELECT * FROM sap_anyaglista
@@ -81,6 +85,8 @@ function printegyebkoltseg(){
   $pdf->Cell(35,$cellamagassag,$mindosszesen.' Ft',1,1,'C',$fill);
 }
 
+
+// functionnal a munkafajták kiírása
 function show_children2($parentID, $i, $depth=1){
   require $_SERVER['DOCUMENT_ROOT'] . '/Projekt_koltseg_kalkulacio/includes/kapcsolat.inc.php';
   $pid = $_SESSION['projektId'];
