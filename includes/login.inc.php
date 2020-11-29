@@ -1,29 +1,32 @@
 <?php
-if (isset($_POST['login-submit'])) {
+if (isset($_POST['bejelentkezes'])) {
   require 'kapcsolat.inc.php';
 
-  $mailuid = $_POST['mailuid'];
-  $password = $_POST['pwd'];
+  $fnev = $_POST['felhasznalo'];
+  $jszo = $_POST['jelszo'];
 
-  if (empty($mailuid) || empty($password)) {
-    header("Location: ../index.php?error=emptyfields");
+  if (empty($fnev) || empty($jszo)) {
+    header("Location: ../index.php?error=ures_valamelyik_mezo");
     exit();
   }
   else {
     $sql = "SELECT * FROM felhasznalo WHERE felhasznalo_nev=?";
     $stmt = mysqli_stmt_init($conn);
+
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-      header("Location: ../index.php?error=sqlerror");
+      header("Location: ../index.php?nemsikerult_a_csatlakozas");
       exit();
     }
     else {
-      mysqli_stmt_bind_param($stmt, "s", $mailuid);
+      mysqli_stmt_bind_param($stmt, "s", $fnev);
       mysqli_stmt_execute($stmt);
       $results = mysqli_stmt_get_result($stmt);
+
       if ($row = mysqli_fetch_assoc($results)) {
-        $pwdCheck = password_verify($password, $row['felhasznalo_jelszo']);
+        $pwdCheck = password_verify($jszo, $row['felhasznalo_jelszo']);
+
         if ($pwdCheck == false) {
-          header("Location: ../index.php?error=rosszjelszo");
+          header("Location: ../index.php?hibas_jelszo");
           exit();
         }
         elseif ($pwdCheck == true) {
@@ -31,16 +34,16 @@ if (isset($_POST['login-submit'])) {
           $_SESSION['userId'] = $row['felhasznalo_id'];
           $_SESSION['userName'] = $row['felhasznalo_nev'];
 
-          header("Location: ../index.php?login=success");
+          header("Location: ../index.php?sikeres_bejelentkezes");
           exit();
         }
         else {
-          header("Location: ../index.php?error=rosszjelszo");
+          header("Location: ../index.php?hibas_jelszo");
           exit();
         }
       }
       else {
-        header("Location: ../index.php?error=nincsilyenfelhasznalo");
+        header("Location: ../index.php?error=nincs_ilyen_felhasznalo");
         exit();
       }
     }

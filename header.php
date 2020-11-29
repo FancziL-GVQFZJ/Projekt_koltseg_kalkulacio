@@ -113,10 +113,10 @@
           <div class="login-container">
             <form class="login-form" action="includes/login.inc.php" method="post">
               <label>Felhasználónév:</label><br>
-              <input type="text" name="mailuid" placeholder="A felhasználóneved..."><br>
+              <input type="text" name="felhasznalo" placeholder="A felhasználóneved..."><br>
               <label>Jelszó:</label><br>
-              <input type="password" name="pwd" placeholder="A jelszavad..."><br>
-              <button style="" type="submit" name="login-submit">Bejelentkezés</button>
+              <input type="password" name="jelszo" placeholder="A jelszavad..."><br>
+              <button style="" type="submit" name="bejelentkezes">Bejelentkezés</button>
             </form>
           </div>
         </div>
